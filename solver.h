@@ -3,10 +3,13 @@
 #include <list>
 #include <unordered_map>
 #include <memory>
+#include <chrono>
 
 #include "BoardHasher.h"
 #include "MoveDiscovery.h"
 #include "MoveValidation.h"
+
+#define TIMING_ON 1
 
 
 template <int BlockCount>
@@ -55,25 +58,77 @@ public:
 
     MovesFromStart solve()
     {
+#ifdef TIMING_ON
+        auto globalTime = std::chrono::high_resolution_clock::now();
+        auto pickMoveTime = std::chrono::high_resolution_clock::duration{};
+        auto solutionCheckTime = std::chrono::high_resolution_clock::duration{};
+        auto hashTime = std::chrono::high_resolution_clock::duration{};
+        auto lookupTime = std::chrono::high_resolution_clock::duration{};
+        auto gatherMovesTime = std::chrono::high_resolution_clock::duration{};
+        auto insertMovesTime = std::chrono::high_resolution_clock::duration{};
+#endif // TIMING_ON
+
+
         while (!m_possibleMoves.empty())
         {
+#ifdef TIMING_ON
+            auto start_time = std::chrono::high_resolution_clock::now();
+#endif // TIMING_ON
+
             auto firstMove = begin(m_possibleMoves);
             auto stateAfterMove = (*firstMove)();
 
             // Note: invalidates firstMove
             m_possibleMoves.pop_front();
 
+#ifdef TIMING_ON
+            auto end_time = std::chrono::high_resolution_clock::now();
+            pickMoveTime += (end_time - start_time);
+
+            start_time = std::chrono::high_resolution_clock::now();
+#endif // TIMING_ON
+
             if (isSolution(stateAfterMove, m_puzzle.m_goal))
             {
-                // TODO remove
                 print(Puzzle<BlockCount>{ m_puzzle.m_dimensions, m_puzzle.m_goal, m_puzzle.m_forbiddenSpots, stateAfterMove });
                 std::cout << "distance: " << stateAfterMove.m_numberOfMovesFromStart << std::endl;
+
+#ifdef TIMING_ON
+                const auto now = std::chrono::high_resolution_clock::now();
+                std::cout << "Total time was: " << std::chrono::duration_cast<std::chrono::milliseconds>(now - globalTime).count() << std::endl;
+                std::cout << "pickMoveTime " << std::chrono::duration_cast<std::chrono::milliseconds>(pickMoveTime).count() << std::endl;
+                std::cout << "solutionCheckTime " << std::chrono::duration_cast<std::chrono::milliseconds>(solutionCheckTime).count() << std::endl;
+                std::cout << "hashTime " << std::chrono::duration_cast<std::chrono::milliseconds>(hashTime).count() << std::endl;
+                std::cout << "lookupTime " << std::chrono::duration_cast<std::chrono::milliseconds>(lookupTime).count() << std::endl;
+                std::cout << "gatherMovesTime " << std::chrono::duration_cast<std::chrono::milliseconds>(gatherMovesTime).count() << std::endl;
+                std::cout << "insertMovesTime " << std::chrono::duration_cast<std::chrono::milliseconds>(insertMovesTime).count() << std::endl;
+#endif // TIMING_ON
 
                 return stateAfterMove.m_numberOfMovesFromStart;
             }
 
+#ifdef TIMING_ON
+            end_time = std::chrono::high_resolution_clock::now();
+
+            solutionCheckTime += (end_time - start_time);
+            start_time = std::chrono::high_resolution_clock::now();
+#endif // TIMING_ON
+
             const auto hash = BoardHasher<BoardStateId>::hash(stateAfterMove);
+
+#ifdef TIMING_ON
+            end_time = std::chrono::high_resolution_clock::now();
+            hashTime += (end_time - start_time);
+
+            start_time = std::chrono::high_resolution_clock::now();
+#endif // TIMING_ON
+
             auto &distance = m_knownPaths[hash];
+            
+#ifdef TIMING_ON
+            end_time = std::chrono::high_resolution_clock::now();
+            lookupTime += (end_time - start_time);
+#endif // TIMING_ON
 
             if (distance == 0) // New path
                 /*|| (distance > 0 // Shorter path
@@ -81,27 +136,9 @@ public:
             {
                 distance = stateAfterMove.m_numberOfMovesFromStart;
 
-                // TODO remove
-                /*if (distance > 12)
-                {
-                    print(Puzzle{ m_puzzle.m_dimensions, m_puzzle.m_goal, m_puzzle.m_forbiddenSpots, stateAfterMove });
-                    std::cout << "Hash: " << hash << " distance: " << distance << std::endl;
-                }*/
-
-                /*if (hash.size() > 20 && hash[19] != '3' && hash[20] != '0')
-                {
-                    print(Puzzle{ m_puzzle.m_dimensions, m_puzzle.m_goal, m_puzzle.m_forbiddenSpots, stateAfterMove });
-                    std::cout << "Hash: " << hash << " distance: " << distance << std::endl;
-                }*/
-
-                /*if (hash == "@10A00B02C14D25E15F30G12H22I04")
-                {
-                    const auto newMoves = MoveDiscovery<>::gatherMoves(
-                        m_puzzle.m_dimensions,
-                        std::make_shared<BoardState>(std::move(stateAfterMove)),
-                        m_puzzle.m_forbiddenSpots);
-                    std::cout << "test";
-                }*/
+#ifdef TIMING_ON
+                start_time = std::chrono::high_resolution_clock::now();
+#endif // TIMING_ON
 
                 // Queue follow-up moves
                const auto newMoves = MoveDiscovery::gatherMoves(
@@ -109,12 +146,37 @@ public:
                     std::make_shared<BoardState<BlockCount>>(std::move(stateAfterMove)),
                     m_puzzle.m_forbiddenSpots);
 
+#ifdef TIMING_ON
+               end_time = std::chrono::high_resolution_clock::now();
+               gatherMovesTime += (end_time - start_time);
+
+               start_time = std::chrono::high_resolution_clock::now();
+#endif // TIMING_ON
+
                 for (auto &move : newMoves)
                 {
-                    //if (!containsMove(m_possibleMoves, move))
+                    if (!containsMove(m_possibleMoves, move))
                     {
                         m_possibleMoves.push_back(std::move(move));
                     }
+                }
+
+#ifdef TIMING_ON
+                end_time = std::chrono::high_resolution_clock::now();
+                insertMovesTime += (end_time - start_time);
+#endif // TIMING_ON
+
+#ifdef TIMING_ON
+                if (distance > 25)
+                {
+                    const auto now = std::chrono::high_resolution_clock::now();
+                    std::cout << "Total time was: " << std::chrono::duration_cast<std::chrono::milliseconds>(now - globalTime).count() << std::endl;
+                    std::cout << "solutionCheckTime " << std::chrono::duration_cast<std::chrono::milliseconds>(solutionCheckTime).count() << std::endl;
+                    std::cout << "hashTime " << std::chrono::duration_cast<std::chrono::milliseconds>(hashTime).count() << std::endl;
+                    std::cout << "lookupTime " << std::chrono::duration_cast<std::chrono::milliseconds>(lookupTime).count() << std::endl;
+                    std::cout << "gatherMovesTime " << std::chrono::duration_cast<std::chrono::milliseconds>(gatherMovesTime).count() << std::endl;
+                    std::cout << "insertMovesTime " << std::chrono::duration_cast<std::chrono::milliseconds>(insertMovesTime).count() << std::endl;
+#endif // TIMING_ON
                 }
             }
         }
