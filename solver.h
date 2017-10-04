@@ -9,25 +9,41 @@
 #include "MoveValidation.h"
 
 
-bool isSolution(const BoardState& state, const Block &goal);
-bool containsMove(const std::list<Move> &moves, const Move &move);
+template <int BlockCount>
+bool isSolution(const BoardState<BlockCount>& state, const Block &goal)
+{
+    return state.m_runner.m_startX == goal.m_startX
+        && state.m_runner.m_startY == goal.m_startY;
+};
+
+template <int BlockCount>
+bool containsMove(const std::list<Move<BlockCount>> &moves, const Move<BlockCount> &move)
+{
+    return std::any_of(begin(moves), end(moves), [&](const auto &existingMove)
+    {
+        return existingMove.m_state.get() == move.m_state.get()
+            && existingMove.m_directionToMove == move.m_directionToMove
+            && same(existingMove.m_block, move.m_block);
+    });
+};
 
 template <
-    template <typename MoveValidation = DefaultMoveValidation> typename MoveDiscovery
+    int BlockCount,
+    typename MoveDiscovery
 >
 class Solver
 {
 public:
     using BoardStateId = std::string;
-    using MovesFromStart = typename std::remove_const<decltype(BoardState::m_numberOfMovesFromStart)>::type;
+    using MovesFromStart = typename std::remove_const<decltype(BoardState<BlockCount>::m_numberOfMovesFromStart)>::type;
 
 public:
-    Solver(const Puzzle &puzzle)
+    Solver(const Puzzle<BlockCount> &puzzle)
         : m_puzzle{ puzzle }
     {
-        const auto initialMoves = MoveDiscovery<>::gatherMoves(
+        const auto initialMoves = MoveDiscovery::gatherMoves(
             puzzle.m_dimensions,
-            std::make_shared<BoardState>(m_puzzle.m_initialState),
+            std::make_shared<BoardState<BlockCount>>(m_puzzle.m_initialState),
             puzzle.m_forbiddenSpots);
         for (auto &move : initialMoves)
         {
@@ -50,7 +66,7 @@ public:
             if (isSolution(stateAfterMove, m_puzzle.m_goal))
             {
                 // TODO remove
-                print(Puzzle{ m_puzzle.m_dimensions, m_puzzle.m_goal, m_puzzle.m_forbiddenSpots, stateAfterMove });
+                print(Puzzle<BlockCount>{ m_puzzle.m_dimensions, m_puzzle.m_goal, m_puzzle.m_forbiddenSpots, stateAfterMove });
                 std::cout << "distance: " << stateAfterMove.m_numberOfMovesFromStart << std::endl;
 
                 return stateAfterMove.m_numberOfMovesFromStart;
@@ -88,14 +104,14 @@ public:
                 }*/
 
                 // Queue follow-up moves
-                const auto newMoves = MoveDiscovery<>::gatherMoves(
+               const auto newMoves = MoveDiscovery::gatherMoves(
                     m_puzzle.m_dimensions,
-                    std::make_shared<BoardState>(std::move(stateAfterMove)),
+                    std::make_shared<BoardState<BlockCount>>(std::move(stateAfterMove)),
                     m_puzzle.m_forbiddenSpots);
 
                 for (auto &move : newMoves)
                 {
-                    if (!containsMove(m_possibleMoves, move))
+                    //if (!containsMove(m_possibleMoves, move))
                     {
                         m_possibleMoves.push_back(std::move(move));
                     }
@@ -104,20 +120,26 @@ public:
         }
 
         return -1;
-    };
+    }
 
     // Retrieves all currently queued moves
-    const std::list<Move>& possibleMoves()
+    const std::list<Move<BlockCount>>& possibleMoves()
     {
         return m_possibleMoves;
     }
 
 private:
-    const Puzzle m_puzzle;
+    const Puzzle<BlockCount> m_puzzle;
 
     // Stores all possible moves to explore
-    std::list<Move> m_possibleMoves;
+    std::list<Move<BlockCount>> m_possibleMoves;
 
     // Stores the number of moves from the starting state
     std::unordered_map<BoardStateId, MovesFromStart> m_knownPaths;
 };
+
+template <int BlockCount, typename MoveDiscovery = MoveRunnerFirst<>>
+Solver<BlockCount, MoveDiscovery> makeSolver(const Puzzle<BlockCount> &puzzle)
+{
+    return Solver<BlockCount, MoveDiscovery>{ puzzle };
+}

@@ -12,7 +12,7 @@ namespace
 {
     // Standard klotski puzzle
     // print for sample ascii layout
-    const Puzzle initialBoard
+    const Puzzle<9> initialBoard
     {
         { 4, 6 }, // dims
         { 1, 4, 2, 2, " "}, // goal
@@ -24,15 +24,15 @@ namespace
             0, // no moves made,
             { 1, 0, 2, 2, "@"}, // runner
             { // blocks
-                { 0, 0, 1, 2, "A"},
-                { 0, 2, 1, 2, "B" },
-                { 1, 2, 2, 1, "C" },
-                { 1, 3, 1, 1, "D" },
-                { 2, 3, 1, 1, "E" },
-                { 3, 0, 1, 2, "F" },
-                { 3, 2, 1, 2, "G" },
-                { 0, 4, 1, 1, "H" },
-                { 3, 4, 1, 1, "I" }
+                Block{ 0, 0, 1, 2, "A"},
+                Block{ 0, 2, 1, 2, "B" },
+                Block{ 1, 2, 2, 1, "C" },
+                Block{ 1, 3, 1, 1, "D" },
+                Block{ 2, 3, 1, 1, "E" },
+                Block{ 3, 0, 1, 2, "F" },
+                Block{ 3, 2, 1, 2, "G" },
+                Block{ 0, 4, 1, 1, "H" },
+                Block{ 3, 4, 1, 1, "I" }
             }
         }
     };
@@ -40,36 +40,38 @@ namespace
     // Empty 3x3 block
     // Runner 1x1 at the origin
     // Single 1x1 block in the middle of the board
-    const Puzzle emptyPuzzle
+    const Puzzle<0> emptyPuzzle
     {
         { 3, 3 }, // dims
         { 2, 2, 1, 1, " " }, // goal
-        {}, // empty spaces
+        {
+            { 1, 1 } // single hindrance in the middle
+        }, // empty spaces
         {
             0, // no moves made,
             { 0, 0, 1, 1, "@"}, // runner at origin
-            { // single hindrance in the middle
-                { 1, 1 }
-            }
+            {} // no blocks
         }
     };
 
-    const Puzzle tinyPuzzle
+    const Puzzle<1> tinyPuzzle
     {
-        { 2, 2 }, // dims
+        { 3, 3 }, // dims
         { 1, 1, 1, 1, " "}, // goal
         {}, // empty spaces
         {
             0, // no moves made,
             { 0, 0, 1, 1, "@"}, // runner in the middle
-            {} // no other blocks
+            {
+                {1, 1, 1, 1} // Single block in the middle
+            }
         }
     };
 
     // Empty 3x3 block
     // Runner 1x1 at the origin
     // Single 1x1 block in the middle of the board
-    const Puzzle smallPuzzle
+    const Puzzle<2> smallPuzzle
     {
         { 3, 3 }, // dims
         { 2, 2, 1, 1, " " }, // goal
@@ -80,8 +82,8 @@ namespace
             0, // no moves made,
             { 0, 0, 1, 1, "@"}, // runner at origin
             { // 2 blocks surrounding origin
-                { 1, 0, 1, 1, "A"},
-                { 0, 1, 1, 1, "B" }
+               Block{ 1, 0, 1, 1, "A"},
+               Block{ 0, 1, 1, 1, "B" }
             }
         }
     };
@@ -166,8 +168,8 @@ void testMoveValidation()
 
     const auto isBlockPosition = [&](const auto x, const auto y)
     {
-        return x == emptyPuzzle.m_initialState.m_blocks[0].m_startX
-            && y == emptyPuzzle.m_initialState.m_blocks[0].m_startY;
+        return x == emptyPuzzle.m_forbiddenSpots[0].m_x
+            && y == emptyPuzzle.m_forbiddenSpots[0].m_y;
     };
 
     for (auto i = 0; i < emptyPuzzle.m_dimensions.m_x; i++)
@@ -191,21 +193,25 @@ void testMoveDiscovery()
     MoveRunnerFirst<> moveRunnerFirst{};
 
     {
+        using BoardType = std::remove_const<decltype(tinyPuzzle.m_initialState)>::type;
+
         const auto runnerMoves = 2; // Down + Right
         const auto blockMoves = 4; // Up + Down + Right + Left
         const auto newMoves = MoveRunnerFirst<>::gatherMoves(
-            emptyPuzzle.m_dimensions,
-            std::make_shared<BoardState>(emptyPuzzle.m_initialState),
-            emptyPuzzle.m_forbiddenSpots);
+            tinyPuzzle.m_dimensions,
+            std::make_shared<BoardType>(tinyPuzzle.m_initialState),
+            tinyPuzzle.m_forbiddenSpots);
         assert(!newMoves.empty() && "At least some moves should be possible");
         assert(newMoves.size() == (runnerMoves + blockMoves) && "We should have 6 moves discovered");
     }
     
     {
+        using BoardType = std::remove_const<decltype(initialBoard.m_initialState)>::type;
+
         const auto blockMoves = 4;
         auto newMoves = MoveRunnerFirst<>::gatherMoves(
             initialBoard.m_dimensions,
-            std::make_shared<BoardState>(initialBoard.m_initialState),
+            std::make_shared<BoardType>(initialBoard.m_initialState),
             initialBoard.m_forbiddenSpots);
         assert(!newMoves.empty() && "At least some moves should be possible");
         assert(newMoves.size() == blockMoves && "We should have 4 moves discovered");
@@ -214,8 +220,11 @@ void testMoveDiscovery()
 
 void testMoving()
 {
-    const auto sharedState = std::make_shared<BoardState>(initialBoard.m_initialState);
-    Move moveRight{ sharedState, sharedState->m_blocks[0], Direction::Right };
+    constexpr auto blockCount = initialBoard.m_initialState.blockCount;
+    using BoardType = std::remove_const<decltype(initialBoard.m_initialState)>::type;
+
+    auto sharedState = std::make_shared<BoardType>(initialBoard.m_initialState);
+    Move<blockCount> moveRight{ sharedState, sharedState->m_blocks[0], Direction::Right };
     assert(sharedState.get() == moveRight.m_state.get() && "A move should not copy the state, but only reference the original state");
 
     const auto afterMoveRight = moveRight();
@@ -244,7 +253,9 @@ void testHashing()
 void testSolver()
 {
     {
-        Solver<MoveRunnerFirst> solver{ tinyPuzzle };
+        const auto blockCount = tinyPuzzle.m_initialState.blockCount;
+        auto solver = makeSolver(tinyPuzzle);
+
         assert(
             !solver.possibleMoves().empty()
             && "A few initial moves are available");
@@ -254,7 +265,7 @@ void testSolver()
     }
 
     {
-        Solver<MoveRunnerFirst> solver{ emptyPuzzle };
+        auto solver = makeSolver(emptyPuzzle);
         assert(
             !solver.possibleMoves().empty()
             && "A few initial moves are available");
@@ -264,7 +275,7 @@ void testSolver()
     }
 
     {
-        Solver<MoveRunnerFirst> solver{ smallPuzzle };
+        auto solver = makeSolver(smallPuzzle);
         assert(
             !solver.possibleMoves().empty()
             && "A few initial moves are available");
@@ -274,7 +285,7 @@ void testSolver()
     }
 
     {
-        Solver<MoveRunnerFirst> solver{ initialBoard };
+        auto solver = makeSolver(initialBoard);
         assert(
             !solver.possibleMoves().empty()
             && "A few initial moves are available");

@@ -14,7 +14,8 @@ template <typename HashType = std::string>
 struct BoardHasher
 {
     // TODO: provide implementation for other HashTypes
-    static HashType hash(const BoardState &state)
+    template <int BlockCount>
+    static HashType hash(const BoardState<BlockCount> &state)
     {
         auto runnerState = state.m_runner.id;
         runnerState += std::to_string(state.m_runner.m_startX);
