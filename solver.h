@@ -179,6 +179,10 @@ public:
     template<>
     MovesFromStart solve<false>()
     {
+        // Note: This can be distributed over multiple threads
+        // Just lock the datastructure m_possibleMoves when popping moves & reinserting moves
+        // It's not necessary to check the latest state of m_possibleMoves, worst case scenario
+        // a few already-known moves will be queued twice
         while (!m_possibleMoves.empty())
         {
             auto firstMove = begin(m_possibleMoves);
