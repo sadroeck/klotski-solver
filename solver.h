@@ -44,9 +44,6 @@ public:
         : m_puzzle{ puzzle }
         , m_hasher{ puzzle }
     {
-        std::cout << "Solving:" << std::endl;
-        print(Puzzle<BlockCount>{ m_puzzle.m_dimensions, m_puzzle.m_goal, m_puzzle.m_forbiddenSpots, m_puzzle.m_initialState });
-
         const auto initialMoves = MoveDiscovery::gatherMoves(
             puzzle.m_dimensions,
             std::make_shared<BoardState<BlockCount>>(m_puzzle.m_initialState),

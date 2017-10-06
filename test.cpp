@@ -12,7 +12,7 @@ namespace
 {
     // Standard klotski puzzle
     // print for sample ascii layout
-    const Puzzle<9> initialBoard
+    const Puzzle<9> largePuzzle
     {
         { 4, 6 }, // dims
         { 1, 4, 2, 2, "^"}, // goal
@@ -94,7 +94,7 @@ void testPuzzles()
     assert(valid(emptyPuzzle));
     assert(valid(tinyPuzzle));
     assert(valid(smallPuzzle));
-    assert(valid(initialBoard));
+    assert(valid(largePuzzle));
 }
 
 void testBlocks()
@@ -146,16 +146,16 @@ void testMoveValidation()
     DefaultMoveValidation moveValidation{};
 
     // Test that all blocks do not overlap with their current state on the board
-    for (const auto &block : initialBoard.m_initialState.m_blocks)
+    for (const auto &block : largePuzzle.m_initialState.m_blocks)
     {
         assert(
-            DefaultMoveValidation::validBlockPosition(block, initialBoard.m_dimensions, initialBoard.m_initialState, initialBoard.m_forbiddenSpots)
+            DefaultMoveValidation::validBlockPosition(block, largePuzzle.m_dimensions, largePuzzle.m_initialState, largePuzzle.m_forbiddenSpots)
             && "A block should never overlap itself");
 
         auto blockAtSamePosition = block;
         blockAtSamePosition.id = "Another Block";
         assert(
-            !DefaultMoveValidation::validBlockPosition(blockAtSamePosition, initialBoard.m_dimensions, initialBoard.m_initialState, initialBoard.m_forbiddenSpots)
+            !DefaultMoveValidation::validBlockPosition(blockAtSamePosition, largePuzzle.m_dimensions, largePuzzle.m_initialState, largePuzzle.m_forbiddenSpots)
             && "2 blocks at the same position should always overlap");
     }
 
@@ -206,13 +206,13 @@ void testMoveDiscovery()
     }
     
     {
-        using BoardType = std::remove_const<decltype(initialBoard.m_initialState)>::type;
+        using BoardType = std::remove_const<decltype(largePuzzle.m_initialState)>::type;
 
         const auto blockMoves = 4;
         auto newMoves = MoveRunnerFirst<>::gatherMoves(
-            initialBoard.m_dimensions,
-            std::make_shared<BoardType>(initialBoard.m_initialState),
-            initialBoard.m_forbiddenSpots);
+            largePuzzle.m_dimensions,
+            std::make_shared<BoardType>(largePuzzle.m_initialState),
+            largePuzzle.m_forbiddenSpots);
         assert(!newMoves.empty() && "At least some moves should be possible");
         assert(newMoves.size() == blockMoves && "We should have 4 moves discovered");
     }
@@ -220,10 +220,10 @@ void testMoveDiscovery()
 
 void testMoving()
 {
-    constexpr auto blockCount = initialBoard.m_initialState.blockCount;
-    using BoardType = std::remove_const<decltype(initialBoard.m_initialState)>::type;
+    constexpr auto blockCount = largePuzzle.m_initialState.blockCount;
+    using BoardType = std::remove_const<decltype(largePuzzle.m_initialState)>::type;
 
-    auto sharedState = std::make_shared<BoardType>(initialBoard.m_initialState);
+    auto sharedState = std::make_shared<BoardType>(largePuzzle.m_initialState);
     Move<blockCount> moveRight{ sharedState, sharedState->m_blocks[0], Direction::Right };
     assert(sharedState.get() == moveRight.m_state.get() && "A move should not copy the state, but only reference the original state");
 
@@ -241,25 +241,25 @@ void testHashing()
 {
     // Test if type can be constructed
     BoardHasher<> emptyHasher{ emptyPuzzle };
-    BoardHasher<> initialHasher{ initialBoard };
+    BoardHasher<> initialHasher{ largePuzzle };
 
     assert(emptyHasher.hash(emptyPuzzle.m_initialState) == emptyHasher.hash(emptyPuzzle.m_initialState)
         && "Hash for identical states should be equal");
-    assert(initialHasher.hash(initialBoard.m_initialState) == initialHasher.hash(initialBoard.m_initialState)
+    assert(initialHasher.hash(largePuzzle.m_initialState) == initialHasher.hash(largePuzzle.m_initialState)
         && "Hash for identical states should be equal");
-    assert(initialHasher.hash(initialBoard.m_initialState) != emptyHasher.hash(emptyPuzzle.m_initialState)
+    assert(initialHasher.hash(largePuzzle.m_initialState) != emptyHasher.hash(emptyPuzzle.m_initialState)
         && "Hash for different states should be different");
 
-    auto swappedBlocks = initialBoard.m_initialState.m_blocks;
+    auto swappedBlocks = largePuzzle.m_initialState.m_blocks;
     auto temp= swappedBlocks[0];
     swappedBlocks[0].id = swappedBlocks[1].id;
     swappedBlocks[1].id = temp.id;
-    BoardState<decltype(initialBoard.m_initialState)::blockCount> swappedState{
+    BoardState<decltype(largePuzzle.m_initialState)::blockCount> swappedState{
         0,
-        initialBoard.m_initialState.m_runner,
+        largePuzzle.m_initialState.m_runner,
         swappedBlocks 
     };
-    assert(initialHasher.hash(swappedState) == initialHasher.hash(initialBoard.m_initialState)
+    assert(initialHasher.hash(swappedState) == initialHasher.hash(largePuzzle.m_initialState)
         && "Hash should be the same for 2 same-sized blocks in swapped positions");
 
 }
@@ -302,7 +302,7 @@ void testSolver()
     }
 
     {
-        auto solver = makeSolver(initialBoard);
+        auto solver = makeSolver(largePuzzle);
         assert(
             !solver.possibleMoves().empty()
             && "A few initial moves are available");
