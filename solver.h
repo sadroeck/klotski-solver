@@ -1,15 +1,17 @@
 #pragma once
 
-#include <list>
-#include <unordered_map>
-#include <memory>
 #include <chrono>
+#include <list>
+#include <memory>
+#include <unordered_map>
+#include <vector>
 
 #include "BoardHasher.h"
 #include "MoveDiscovery.h"
 #include "MoveValidation.h"
+#include "printer.h"
 
-#define TIMING_ON 1
+//#define TIMING_ON 1
 
 
 template <int BlockCount>
@@ -37,13 +39,17 @@ template <
 class Solver
 {
 public:
-    using BoardStateId = std::string;
+    using BoardStateId = int;
     using MovesFromStart = typename std::remove_const<decltype(BoardState<BlockCount>::m_numberOfMovesFromStart)>::type;
 
 public:
     Solver(const Puzzle<BlockCount> &puzzle)
         : m_puzzle{ puzzle }
+        , m_hasher{ puzzle }
     {
+        std::cout << "Solving:" << std::endl;
+        print(Puzzle<BlockCount>{ m_puzzle.m_dimensions, m_puzzle.m_goal, m_puzzle.m_forbiddenSpots, m_puzzle.m_initialState });
+
         const auto initialMoves = MoveDiscovery::gatherMoves(
             puzzle.m_dimensions,
             std::make_shared<BoardState<BlockCount>>(m_puzzle.m_initialState),
@@ -78,6 +84,8 @@ public:
             auto firstMove = begin(m_possibleMoves);
             auto stateAfterMove = (*firstMove)();
 
+            auto tempCopy = *firstMove;
+
             // Note: invalidates firstMove
             m_possibleMoves.pop_front();
 
@@ -88,10 +96,34 @@ public:
             start_time = std::chrono::high_resolution_clock::now();
 #endif // TIMING_ON
 
+            const auto previousHash = m_hasher.hash(*tempCopy.m_state);
+
             if (isSolution(stateAfterMove, m_puzzle.m_goal))
             {
+                std::cout << "Solution is:" << std::endl;
                 print(Puzzle<BlockCount>{ m_puzzle.m_dimensions, m_puzzle.m_goal, m_puzzle.m_forbiddenSpots, stateAfterMove });
                 std::cout << "distance: " << stateAfterMove.m_numberOfMovesFromStart << std::endl;
+                const auto hash = m_hasher.hash(stateAfterMove);
+                std::cout << "Final hash: " << hash << std::endl;
+
+                const auto initialHash = m_hasher.hash(m_puzzle.m_initialState);
+                int stopHash = previousHash;
+                while (stopHash != 0 && stopHash != initialHash)
+                {
+                    auto start = parentsOf[stopHash];
+                    if (start.size() > 0 && start[0].first != 0)
+                    {
+                        std::cout << start[0].first << std::endl;
+                        print(Puzzle<BlockCount>{ m_puzzle.m_dimensions, m_puzzle.m_goal, m_puzzle.m_forbiddenSpots, start[0].second });
+                        std::cout << std::endl << " -------------- " << std::endl;
+
+                        stopHash = start[0].first;
+                    }
+                }
+
+                std::cout << initialHash << std::endl;
+                print(Puzzle<BlockCount>{ m_puzzle.m_dimensions, m_puzzle.m_goal, m_puzzle.m_forbiddenSpots, m_puzzle.m_initialState });
+                std::cout << std::endl << " -------------- " << std::endl;
 
 #ifdef TIMING_ON
                 const auto now = std::chrono::high_resolution_clock::now();
@@ -114,7 +146,7 @@ public:
             start_time = std::chrono::high_resolution_clock::now();
 #endif // TIMING_ON
 
-            const auto hash = BoardHasher<BoardStateId>::hash(stateAfterMove);
+            const auto hash = m_hasher.hash(stateAfterMove);
 
 #ifdef TIMING_ON
             end_time = std::chrono::high_resolution_clock::now();
@@ -134,6 +166,9 @@ public:
                 /*|| (distance > 0 // Shorter path
                     && distance > stateAfterMove.m_numberOfMovesFromStart))*/
             {
+                auto &parents = parentsOf[hash];
+                parents.push_back({ previousHash, stateAfterMove });
+
                 distance = stateAfterMove.m_numberOfMovesFromStart;
 
 #ifdef TIMING_ON
@@ -155,7 +190,7 @@ public:
 
                 for (auto &move : newMoves)
                 {
-                    if (!containsMove(m_possibleMoves, move))
+                    //if (!containsMove(m_possibleMoves, move))
                     {
                         m_possibleMoves.push_back(std::move(move));
                     }
@@ -167,7 +202,7 @@ public:
 #endif // TIMING_ON
 
 #ifdef TIMING_ON
-                if (distance > 25)
+                if (distance > 40)
                 {
                     const auto now = std::chrono::high_resolution_clock::now();
                     std::cout << "Total time was: " << std::chrono::duration_cast<std::chrono::milliseconds>(now - globalTime).count() << std::endl;
@@ -176,8 +211,9 @@ public:
                     std::cout << "lookupTime " << std::chrono::duration_cast<std::chrono::milliseconds>(lookupTime).count() << std::endl;
                     std::cout << "gatherMovesTime " << std::chrono::duration_cast<std::chrono::milliseconds>(gatherMovesTime).count() << std::endl;
                     std::cout << "insertMovesTime " << std::chrono::duration_cast<std::chrono::milliseconds>(insertMovesTime).count() << std::endl;
-#endif // TIMING_ON
+
                 }
+#endif // TIMING_ON
             }
         }
 
@@ -192,12 +228,17 @@ public:
 
 private:
     const Puzzle<BlockCount> m_puzzle;
+    BoardHasher<> m_hasher;
 
     // Stores all possible moves to explore
     std::list<Move<BlockCount>> m_possibleMoves;
 
     // Stores the number of moves from the starting state
     std::unordered_map<BoardStateId, MovesFromStart> m_knownPaths;
+
+    // Testing rermove me
+    using State = std::pair<BoardStateId, BoardState<BlockCount>>;
+    std::unordered_map<BoardStateId, std::vector<State>> parentsOf;
 };
 
 template <int BlockCount, typename MoveDiscovery = MoveRunnerFirst<>>

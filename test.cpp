@@ -1,9 +1,9 @@
 #include "test.h"
 
 #include <cassert>
+#include <iostream>
 
 #include "solver.h"
-#include "printer.h"
 #include "MoveDiscovery.h"
 #include "MoveValidation.h"
 
@@ -15,7 +15,7 @@ namespace
     const Puzzle<9> initialBoard
     {
         { 4, 6 }, // dims
-        { 1, 4, 2, 2, " "}, // goal
+        { 1, 4, 2, 2, "^"}, // goal
         { // invalid spaces
             { 0, 5 },
             { 3, 5 },
@@ -43,7 +43,7 @@ namespace
     const Puzzle<0> emptyPuzzle
     {
         { 3, 3 }, // dims
-        { 2, 2, 1, 1, " " }, // goal
+        { 2, 2, 1, 1, "$" }, // goal
         {
             { 1, 1 } // single hindrance in the middle
         }, // empty spaces
@@ -57,13 +57,13 @@ namespace
     const Puzzle<1> tinyPuzzle
     {
         { 3, 3 }, // dims
-        { 1, 1, 1, 1, " "}, // goal
+        { 1, 1, 1, 1, "$"}, // goal
         {}, // empty spaces
         {
             0, // no moves made,
             { 0, 0, 1, 1, "@"}, // runner in the middle
             {
-                {1, 1, 1, 1} // Single block in the middle
+                {1, 1, 1, 1, "A"} // Single block on the goal
             }
         }
     };
@@ -74,7 +74,7 @@ namespace
     const Puzzle<2> smallPuzzle
     {
         { 3, 3 }, // dims
-        { 2, 2, 1, 1, " " }, // goal
+        { 2, 2, 1, 1, "$" }, // goal
         {
             { 1, 1 }
         }, // empty spaces
@@ -240,14 +240,28 @@ void testMoving()
 void testHashing()
 {
     // Test if type can be constructed
-    BoardHasher<> hasher{};
+    BoardHasher<> emptyHasher{ emptyPuzzle };
+    BoardHasher<> initialHasher{ initialBoard };
 
-    assert(BoardHasher<>::hash(emptyPuzzle.m_initialState) == BoardHasher<>::hash(emptyPuzzle.m_initialState)
+    assert(emptyHasher.hash(emptyPuzzle.m_initialState) == emptyHasher.hash(emptyPuzzle.m_initialState)
         && "Hash for identical states should be equal");
-    assert(BoardHasher<>::hash(initialBoard.m_initialState) == BoardHasher<>::hash(initialBoard.m_initialState)
+    assert(initialHasher.hash(initialBoard.m_initialState) == initialHasher.hash(initialBoard.m_initialState)
         && "Hash for identical states should be equal");
-    assert(BoardHasher<>::hash(initialBoard.m_initialState) != BoardHasher<>::hash(emptyPuzzle.m_initialState)
+    assert(initialHasher.hash(initialBoard.m_initialState) != emptyHasher.hash(emptyPuzzle.m_initialState)
         && "Hash for different states should be different");
+
+    auto swappedBlocks = initialBoard.m_initialState.m_blocks;
+    auto temp= swappedBlocks[0];
+    swappedBlocks[0].id = swappedBlocks[1].id;
+    swappedBlocks[1].id = temp.id;
+    BoardState<decltype(initialBoard.m_initialState)::blockCount> swappedState{
+        0,
+        initialBoard.m_initialState.m_runner,
+        swappedBlocks 
+    };
+    assert(initialHasher.hash(swappedState) == initialHasher.hash(initialBoard.m_initialState)
+        && "Hash should be the same for 2 same-sized blocks in swapped positions");
+
 }
 
 void testSolver()
@@ -261,6 +275,7 @@ void testSolver()
             && "A few initial moves are available");
 
         const auto result = solver.solve();
+        std::cout << "found solution in " << result << " steps" << std::endl;
         assert(result < 4 && result > 0 && "Tiny puzzle should be solved in less than 4 moves");
     }
 
@@ -271,6 +286,7 @@ void testSolver()
             && "A few initial moves are available");
 
         const auto result = solver.solve();
+        std::cout << "found solution in " << result << " steps" << std::endl;
         assert(result < 6 && result > 0 && "Empty puzzle should be solved in less than 6 moves");
     }
 
@@ -281,6 +297,7 @@ void testSolver()
             && "A few initial moves are available");
 
         const auto result = solver.solve();
+        std::cout << "found solution in " << result << " steps" << std::endl;
         assert(result < 10 && result > 0 && "Small puzzle should be solved in less than 10 moves");
     }
 
@@ -291,8 +308,8 @@ void testSolver()
             && "A few initial moves are available");
 
         const auto result = solver.solve();
-        std::cout << "##### Result is" << result << std::endl;
-        assert(result > 0 && result < 200 && "Not sure what a reasonable number of moves is here...");
+        std::cout << "found solution in " << result << " steps" << std::endl;
+        assert(result > 0 && result < 50 && "Not sure what a reasonable number of moves is here...");
     }
 }
 
