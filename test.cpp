@@ -274,7 +274,7 @@ void testSolver()
             !solver.possibleMoves().empty()
             && "A few initial moves are available");
 
-        const auto result = solver.solve();
+        const auto result = solver.solve<true>();
         std::cout << "found solution in " << result << " steps" << std::endl;
         assert(result < 4 && result > 0 && "Tiny puzzle should be solved in less than 4 moves");
     }
@@ -285,7 +285,7 @@ void testSolver()
             !solver.possibleMoves().empty()
             && "A few initial moves are available");
 
-        const auto result = solver.solve();
+        const auto result = solver.solve<true>();
         std::cout << "found solution in " << result << " steps" << std::endl;
         assert(result < 6 && result > 0 && "Empty puzzle should be solved in less than 6 moves");
     }
@@ -296,7 +296,7 @@ void testSolver()
             !solver.possibleMoves().empty()
             && "A few initial moves are available");
 
-        const auto result = solver.solve();
+        const auto result = solver.solve<true>();
         std::cout << "found solution in " << result << " steps" << std::endl;
         assert(result < 10 && result > 0 && "Small puzzle should be solved in less than 10 moves");
     }
@@ -307,7 +307,7 @@ void testSolver()
             !solver.possibleMoves().empty()
             && "A few initial moves are available");
 
-        const auto result = solver.solve();
+        const auto result = solver.solve<true>();
         std::cout << "found solution in " << result << " steps" << std::endl;
         assert(result > 0 && result < 50 && "Not sure what a reasonable number of moves is here...");
     }
