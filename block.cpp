@@ -1,64 +1,75 @@
 #include "block.h"
 
 #include <algorithm>
+#include <stdexcept>
 
-// Does not take block dimensions into account
-// Intended as a rough filtering step to see which blocks to try to move first
-bool nextToFreeSpace(const Block &block, const std::vector<Point> &freeSpaces)
-{
-    return std::any_of(begin(freeSpaces), end(freeSpaces), [&](const auto &freeSpace)
-    {
-        const auto nextToInX = overlaps(block, Block{ freeSpace.m_x - 1, freeSpace.m_y, 1, 1, block.id})
-            || overlaps(block, Block{ freeSpace.m_x + 1, freeSpace.m_y, 1, 1, block.id});
-        const auto nextToInY = overlaps(block, Block{ freeSpace.m_x, freeSpace.m_y - 1, 1, 1, block.id})
-            || overlaps(block, Block{ freeSpace.m_x, freeSpace.m_y + 1, 1, 1, block.id});
+Block::Block() { }
+Block::Block(
+	const Point& aShift,
+	const std::set<Point>& aPointSet,
+	const std::string& anId
+) {
+	auto aPointSetIt = aPointSet.begin();
+	const auto aPointSetItEnd = aPointSet.end();
+	if (aPointSetIt == aPointSetItEnd) {
+		//empty point list
+		shift = aShift;
 
-        return nextToInX ^ nextToInY;
-    });
+	} else {
+		int xMin = aPointSetIt->x;
+		int yMin = aPointSetIt->y;
+		++aPointSetIt;
+		for (; aPointSetIt != aPointSetItEnd; ++aPointSetIt) {
+			if (xMin > aPointSetIt->x) { xMin = aPointSetIt->x; }
+			if (yMin > aPointSetIt->y) { yMin = aPointSetIt->y; }
+		}
+		shift.x = aShift.x + xMin;
+		shift.y = aShift.y + yMin;
+
+		for (auto& p : aPointSet) {
+			pointSet.insert({ p.x - xMin, p.y - yMin });
+		}
+	}
+
+	id = anId;
 }
 
-bool overlaps(const Block &left, const Block &right)
-{
-    const auto valueInRange = [](auto value, auto min, auto max)
-    {
-        return (value >= min) && (value <= max);
-    };
-    const auto xOverlap =
-        valueInRange(left.m_startX, right.m_startX, right.m_startX + right.m_sizeX - 1)
-        || valueInRange(right.m_startX, left.m_startX, left.m_startX + left.m_sizeX - 1);
-
-    const auto yOverlap =
-        valueInRange(left.m_startY, right.m_startY, right.m_startY + right.m_sizeY - 1)
-        || valueInRange(right.m_startY, left.m_startY, left.m_startY + left.m_sizeY - 1);
-
-    return xOverlap && yOverlap;
+bool Block::overlaps(const Point& otherPoint) const {
+	for (auto& thisPoint : this->pointSet) {
+		if (
+			((this->shift.x + thisPoint.x) == (otherPoint.x))
+			&&
+			((this->shift.y + thisPoint.y) == (otherPoint.y))
+		) {
+			return true;
+		}
+	}
+	return false;
 }
 
-Block move(const Block &block, Direction dir)
-{
-    switch (dir)
-    {
-    case Up:
-        return Block{ block.m_startX, block.m_startY - 1, block.m_sizeX, block.m_sizeY, block.id };
-    case Down:
-        return Block{ block.m_startX, block.m_startY + 1, block.m_sizeX, block.m_sizeY, block.id };
-    case Left:
-        return Block{ block.m_startX - 1, block.m_startY, block.m_sizeX, block.m_sizeY, block.id };
-    case Right:
-        return Block{ block.m_startX + 1, block.m_startY, block.m_sizeX, block.m_sizeY, block.id };
-    }
-
-    throw std::runtime_error("Unknown direction " + static_cast<int>(dir));
-    return block;
+bool Block::overlaps(const Block& other) const {
+	for (auto& thisPoint : this->pointSet) {
+		for (auto& otherPoint : other.pointSet) {
+			if (
+				((this->shift.x + thisPoint.x) == (other.shift.x + otherPoint.x))
+				&&
+				((this->shift.y + thisPoint.y) == (other.shift.y + otherPoint.y))
+			) {
+				return true;
+			}
+		}
+	}
+	return false;
 }
 
-bool equalPosition(const Block &left, const Block &right)
-{
-    return left.m_startX == right.m_startX
-        && left.m_startY == right.m_startY;
+Block Block::move(const Direction& dir) const {
+	switch (dir) {
+		case Up:    return Block({ shift.x    , shift.y - 1 }, pointSet, id);
+		case Down:  return Block({ shift.x    , shift.y + 1 }, pointSet, id);
+		case Left:  return Block({ shift.x - 1, shift.y     }, pointSet, id);
+		case Right: return Block({ shift.x + 1, shift.y     }, pointSet, id);
+		default:
+			throw std::runtime_error("Unknown direction " + static_cast<int>(dir));
+	}
 }
 
-bool same(const Block &left, const Block &right)
-{
-    return left.id == right.id;
-}
