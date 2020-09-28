@@ -43,22 +43,26 @@ void printSvg(const Point& point, std::ostream& out) {
 	out << "<rect class='point' x='" << point.x << "' y='" << point.y << "' width='1' height='1'/>";
 }
 
-void printSvg(const Block& block, std::ostream& out) {
-	out << "<g class='block block" << block.id << "' transform='translate(" << block.shift.x << " " << block.shift.y << ")'>";
+void printSvg(const Block& block, const bool& displayId, std::ostream& out) {
+	out << "<g";
+	if (displayId) {
+		out << " id='block" << block.id << "'";
+	}
+	out << " class='block block" << block.id << "' transform='translate(" << block.shift.x << " " << block.shift.y << ")'>";
 	for (const Point& point : block.pointSet) {
 		printSvg(point, out);
 	}
 	out << "</g>";
 }
 
-void printSvg(const BoardState& boardState, std::ostream& out) {
-	printSvg({ boardState.runner.shift, boardState.runner.pointSet, "Runner" }, out);
+void printSvg(const BoardState& boardState, const bool& displayId, std::ostream& out) {
+	printSvg({ boardState.runner.shift, boardState.runner.pointSet, "Runner" }, displayId, out);
 	for (const Block& block : boardState.blocks) {
-		printSvg(block, out);
+		printSvg(block, displayId, out);
 	}
 }
 
-void printSvg(const Puzzle& puzzle, std::ostream& out) {
+void printSvg(const Puzzle& puzzle, const bool& displayId, std::ostream& out) {
 	out
 		<< "<g class='puzzle'>"
 		<< "<rect class='dimensions' x='0' y='0' width='" << puzzle.dimensions.x << "' height='" << puzzle.dimensions.y << "'/>"
@@ -68,9 +72,9 @@ void printSvg(const Puzzle& puzzle, std::ostream& out) {
 	forbiddenSpots.shift = {0, 0};
 	forbiddenSpots.pointSet = puzzle.forbiddenSpots;
 	forbiddenSpots.id = "Wall";
-	printSvg(forbiddenSpots, out);
-	printSvg(Block(puzzle.goal, puzzle.boardState.runner.pointSet, "Goal"), out);
-	printSvg(puzzle.boardState, out);
+	printSvg(forbiddenSpots, displayId, out);
+	printSvg(Block(puzzle.goal, puzzle.boardState.runner.pointSet, "Goal"), displayId, out);
+	printSvg(puzzle.boardState, displayId, out);
 	out << "</g>";
 }
 
@@ -79,26 +83,116 @@ void printSvg(const std::list<Puzzle>& puzzleList, std::string preffix, std::str
 	for (const Puzzle& puzzleStep : puzzleList) {
 		const std::string pos(toString(++i));
 		out << std::regex_replace(preffix, std::regex("\\{pos\\}"), pos, std::regex_constants::match_any);
-		printSvg(puzzleStep, out);
+		printSvg(puzzleStep, false, out);
 		out << std::regex_replace(suffix,  std::regex("\\{pos\\}"), pos, std::regex_constants::match_any);
 	}
 }
 
-void printHtml(const std::list<Puzzle>& puzzleList, std::ostream& out) {
-	const Puzzle& firstPuzzle = *(puzzleList.begin());
-	out << "<style>";
+void printSvgAnimate(
+	const std::string& id,
+	const std::string& from,
+	const std::string& to,
+	const std::string& step,
+	std::ostream& out
+) {
+	out << std::regex_replace(
+		std::regex_replace(
+			std::regex_replace(
+				std::regex_replace(
+					"<animateTransform"
+					" xlink:href='#block{id}'"
+					" attributeType='XML'"
+					" attributeName='transform'"
+					" type='translate'"
+					" from='{from}'"
+					" to='{to}'"
+					" dur='1s'"
+					" begin='{step}s'"
+					"fill='freeze'"
+					"/>\n",
+					std::regex("\\{id\\}"),
+					id
+				),
+				std::regex("\\{from\\}"),
+				from
+			),
+			std::regex("\\{to\\}"),
+			to
+		),
+		std::regex("\\{step\\}"),
+		step
+	);
+}
+
+void printSvgAnimate(const Block& b1, const Block& b2, const size_t& step, std::ostream& out) {
+	if (b1 != b2) {
+		printSvgAnimate(
+			b1.id,
+			toString(b1.shift.x) + ", " + toString(b1.shift.y),
+			toString(b2.shift.x) + ", " + toString(b2.shift.y),
+			toString(step),
+			out
+		);
+	}
+}
+
+void printSvgAnimate(const Puzzle& puzzle1, const Puzzle& puzzle2, const size_t& step, std::ostream& out) {
+	printSvgAnimate(
+		{ puzzle1.boardState.runner.shift, puzzle1.boardState.runner.pointSet, "Runner" },
+		{ puzzle2.boardState.runner.shift, puzzle2.boardState.runner.pointSet, "Runner" },
+		step,
+		out
+	);
+	for (size_t i = 0; i < puzzle1.boardState.blocks.size() ; ++i) {
+		printSvgAnimate(puzzle1.boardState.blocks[i], puzzle2.boardState.blocks[i], step, out);
+	}
+}
+
+void printSvgAnimate(const std::list<Puzzle>& puzzleList, std::ostream& out) {
+	auto puzzle1It = puzzleList.begin();
+	auto puzzle2It = ++(puzzleList.begin());
+	size_t step = 0;
+	while (puzzleList.end() != puzzle2It) {
+		printSvgAnimate(*puzzle1It, *puzzle2It, ++step, out);
+		++puzzle1It;
+		++puzzle2It;
+	}
+}
+
+void printHtml(const std::list<Puzzle>& puzzleList, const bool& animated, const size_t& scale, std::ostream& out) {
+	Puzzle firstPuzzle = *(puzzleList.begin());
+	out <<
+		"<meta charset='UTF-8'>\n"
+		"<style>"
+	;
 	printSvgStyle(firstPuzzle, out);
 	out << " body { color : grey; background : black; }";
 	out << "</style>\n<body>\n";
-	printSvg(
-		puzzleList,
-		" {pos}<svg width='"
-		+ toString((firstPuzzle.dimensions.x + 1) * 20) + "' height='"
-		+ toString((firstPuzzle.dimensions.y + 1) * 20)
-		+ "'><g transform='scale(20)'>",
-		"</g></svg>\n",
+	if (animated) {
 		out
-	);
+			<< "<svg"
+			<< " width='"  << ((firstPuzzle.dimensions.x + 1) * scale) << "'"
+			<< " height='" << ((firstPuzzle.dimensions.y + 1) * scale) << "'"
+			<< " xmlns:xlink='http://www.w3.org/1999/xlink'>"
+			<< "<g transform='scale(" << scale << ")'>"
+		;
+		printSvg(firstPuzzle, true, out);
+		out << "</g>\n";
+		printSvgAnimate(puzzleList, out);
+		out << "</svg>\n";
+
+	} else {
+		printSvg(
+			puzzleList,
+			toString(" {pos}<svg")
+			+ " width='"  + toString((firstPuzzle.dimensions.x + 1) * scale) + "'"
+			+ " height='" + toString((firstPuzzle.dimensions.y + 1) * scale) + "'"
+			+ ">"
+			+ "<g transform='scale(" + toString(scale) + ")'>",
+			"</g></svg>\n",
+			out
+		);
+	}
 	out << "</body>";
 }
 

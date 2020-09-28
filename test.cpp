@@ -13,6 +13,14 @@ namespace {
 	auto compareString = [&](const std::string& s1, const std::string& s2) {
 		if (s1 != s2) {
 			std::cout << s1 << "\n!=\n" << s2 << "\n";
+			std::cout << "(len1:" << s1.size() << ")\n(len2:" << s2.size() << ")\n";
+			for (size_t i = 0; i < s1.size(); ++i) {
+				if (s1[i] != s2[i]) {
+					std::cout << "(first diff at position " << i << ") ('" << s1[i] << "' != '" << s2[i] << "')\n";
+					//std::cout << "(first diff at position " << i << ") ('" << s1.substr(i - 10, 20) << "' != '" << s2.substr(i - 10, 20) << "')\n";
+					break;
+				}
+			}
 		}
 		return s1 == s2;
 	};
@@ -335,12 +343,20 @@ void testPrintScan() {
 	{
 		//print svg Block
 		std::stringstream strResult;
-		printSvg(Block({ 1, 2 }, { { 0, 0 }, { 0, 1 }, { 1, 0 } }, "A"), strResult);
+		printSvg(Block({ 1, 2 }, { { 0, 0 }, { 0, 1 }, { 1, 0 } }, "A"), true,  strResult);
+		strResult << "\n---\n";
+		printSvg(Block({ 2, 3 }, { { 4, 5 }, { 6, 7 }, { 8, 9 } }, "A"), false, strResult);
 		assert(compareString(strResult.str(),
-			"<g class='block blockA' transform='translate(1 2)'>"
+			"<g id='blockA' class='block blockA' transform='translate(1 2)'>"
 			"<rect class='point' x='0' y='0' width='1' height='1'/>"
 			"<rect class='point' x='0' y='1' width='1' height='1'/>"
 			"<rect class='point' x='1' y='0' width='1' height='1'/>"
+			"</g>"
+			"\n---\n"
+			"<g class='block blockA' transform='translate(6 8)'>"
+			"<rect class='point' x='0' y='0' width='1' height='1'/>"
+			"<rect class='point' x='2' y='2' width='1' height='1'/>"
+			"<rect class='point' x='4' y='4' width='1' height='1'/>"
 			"</g>"
 		));
 	}
@@ -348,8 +364,25 @@ void testPrintScan() {
 	{
 		//print svg BoardState
 		std::stringstream strResult;
-		printSvg(tetrisPuzzle.boardState, strResult);
+		printSvg(tetrisPuzzle.boardState, true, strResult);
+		strResult << "\n---\n";
+		printSvg(tetrisPuzzle.boardState, false, strResult);
 		assert(compareString(strResult.str(),
+			"<g id='blockRunner' class='block blockRunner' transform='translate(3 2)'>"
+			"<rect class='point' x='0' y='0' width='1' height='1'/>"
+			"<rect class='point' x='0' y='2' width='1' height='1'/>"
+			"<rect class='point' x='1' y='0' width='1' height='1'/>"
+			"<rect class='point' x='1' y='1' width='1' height='1'/>"
+			"<rect class='point' x='1' y='2' width='1' height='1'/>"
+			"</g>"
+			"<g id='blockA' class='block blockA' transform='translate(2 1)'>"
+			"<rect class='point' x='0' y='0' width='1' height='1'/>"
+			"<rect class='point' x='0' y='1' width='1' height='1'/>"
+			"<rect class='point' x='0' y='2' width='1' height='1'/>"
+			"<rect class='point' x='1' y='0' width='1' height='1'/>"
+			"<rect class='point' x='1' y='2' width='1' height='1'/>"
+			"</g>"
+			"\n---\n"
 			"<g class='block blockRunner' transform='translate(3 2)'>"
 			"<rect class='point' x='0' y='0' width='1' height='1'/>"
 			"<rect class='point' x='0' y='2' width='1' height='1'/>"
@@ -370,8 +403,39 @@ void testPrintScan() {
 	{
 		//print svg Puzzle
 		std::stringstream strResult;
-		printSvg(tetrisPuzzle, strResult);
+		printSvg(tetrisPuzzle, true, strResult);
+		strResult << "\n---\n";
+		printSvg(tetrisPuzzle, false, strResult);
 		assert(compareString(strResult.str(),
+			"<g class='puzzle'>"
+			"<rect class='dimensions' x='0' y='0' width='5' height='6'/>"
+			"<g id='blockWall' class='block blockWall' transform='translate(0 0)'>"
+			"<rect class='point' x='0' y='5' width='1' height='1'/>"
+			"<rect class='point' x='4' y='5' width='1' height='1'/>"
+			"</g>"
+			"<g id='blockGoal' class='block blockGoal' transform='translate(0 0)'>"
+			"<rect class='point' x='0' y='0' width='1' height='1'/>"
+			"<rect class='point' x='0' y='2' width='1' height='1'/>"
+			"<rect class='point' x='1' y='0' width='1' height='1'/>"
+			"<rect class='point' x='1' y='1' width='1' height='1'/>"
+			"<rect class='point' x='1' y='2' width='1' height='1'/>"
+			"</g>"
+			"<g id='blockRunner' class='block blockRunner' transform='translate(3 2)'>"
+			"<rect class='point' x='0' y='0' width='1' height='1'/>"
+			"<rect class='point' x='0' y='2' width='1' height='1'/>"
+			"<rect class='point' x='1' y='0' width='1' height='1'/>"
+			"<rect class='point' x='1' y='1' width='1' height='1'/>"
+			"<rect class='point' x='1' y='2' width='1' height='1'/>"
+			"</g>"
+			"<g id='blockA' class='block blockA' transform='translate(2 1)'>"
+			"<rect class='point' x='0' y='0' width='1' height='1'/>"
+			"<rect class='point' x='0' y='1' width='1' height='1'/>"
+			"<rect class='point' x='0' y='2' width='1' height='1'/>"
+			"<rect class='point' x='1' y='0' width='1' height='1'/>"
+			"<rect class='point' x='1' y='2' width='1' height='1'/>"
+			"</g>"
+			"</g>"
+			"\n---\n"
 			"<g class='puzzle'>"
 			"<rect class='dimensions' x='0' y='0' width='5' height='6'/>"
 			"<g class='block blockWall' transform='translate(0 0)'>"
@@ -468,10 +532,143 @@ void testPrintScan() {
 	}
 
 	{
-		//print html Puzzle list
+		//print svg animate tag
 		std::stringstream strResult;
-		printHtml(std::list<Puzzle>{ tetrisPuzzle, tetrisPuzzle}, strResult);
+		printSvgAnimate("anId", "aFrom", "aTo", "aStep", strResult);
 		assert(compareString(strResult.str(),
+			"<animateTransform"
+			" xlink:href='#blockanId'"
+			" attributeType='XML'"
+			" attributeName='transform'"
+			" type='translate'"
+			" from='aFrom'"
+			" to='aTo'"
+			" dur='1s'"
+			" begin='aSteps'"
+			"fill='freeze'"
+			"/>\n"
+		));
+	}
+	{
+		//print svg animate Block
+		std::stringstream strResult;
+		printSvgAnimate(
+			tetrisPuzzle.boardState.runner,
+			tetrisPuzzle.boardState.runner,
+			4,
+			strResult
+		);
+		strResult << "\n---\n";
+		printSvgAnimate(
+			{ { 0, 1 }, tetrisPuzzle.boardState.runner.pointSet, "anId" },
+			{ { 2, 3 }, tetrisPuzzle.boardState.runner.pointSet, "anId" },
+			5,
+			strResult
+		);
+		assert(compareString(strResult.str(),
+			"\n---\n"
+			"<animateTransform"
+			" xlink:href='#blockanId'"
+			" attributeType='XML'"
+			" attributeName='transform'"
+			" type='translate'"
+			" from='0, 1'"
+			" to='2, 3'"
+			" dur='1s'"
+			" begin='5s'"
+			"fill='freeze'"
+			"/>\n"
+		));
+	}
+	{
+		//print svg animate Puzzle
+		std::stringstream strResult;
+		printSvgAnimate(
+			smallPuzzle,
+			smallPuzzle,
+			6,
+			strResult
+		);
+		strResult << "\n---\n";
+		printSvgAnimate(
+			smallPuzzle,
+			{ smallPuzzle.dimensions, smallPuzzle.goal, smallPuzzle.forbiddenSpots, { smallPuzzle.boardState.numberOfMoves, { { 0, 0 }, smallPuzzle.boardState.runner.pointSet, "anOtherId" }, { Block({ 1, 0 }, { { 0, 0 } }, "A"),	Block({ 0, 0 }, { { 0, 0 } }, "B") } } },
+			7,
+			strResult
+		);
+		assert(compareString(strResult.str(),
+			"\n---\n"
+			"<animateTransform"
+			" xlink:href='#blockB'"
+			" attributeType='XML'"
+			" attributeName='transform'"
+			" type='translate'"
+			" from='0, 1'"
+			" to='0, 0'"
+			" dur='1s'"
+			" begin='7s'"
+			"fill='freeze'"
+			"/>\n"
+		));
+	}
+	{
+		//print svg animate Puzzle list
+		std::stringstream strResult;
+		printSvgAnimate(
+			{
+				smallPuzzle,
+				{ smallPuzzle.dimensions, smallPuzzle.goal, smallPuzzle.forbiddenSpots, { smallPuzzle.boardState.numberOfMoves, { { 0, 0 }, smallPuzzle.boardState.runner.pointSet, "anOtherId" }, { Block({ 1, 0 }, { { 0, 0 } }, "A"),	Block({ 0, 0 }, { { 0, 0 } }, "B") } } },
+				{ smallPuzzle.dimensions, smallPuzzle.goal, smallPuzzle.forbiddenSpots, { smallPuzzle.boardState.numberOfMoves, { { 0, 0 }, smallPuzzle.boardState.runner.pointSet, "anOtherId" }, { Block({ 1, 1 }, { { 0, 0 } }, "A"),	Block({ 0, 0 }, { { 0, 0 } }, "B") } } },
+			},
+			strResult
+		);
+		assert(compareString(strResult.str(),
+			"<animateTransform"
+			" xlink:href='#blockB'"
+			" attributeType='XML'"
+			" attributeName='transform'"
+			" type='translate'"
+			" from='0, 1'"
+			" to='0, 0'"
+			" dur='1s'"
+			" begin='1s'"
+			"fill='freeze'"
+			"/>\n"
+			"<animateTransform"
+			" xlink:href='#blockA'"
+			" attributeType='XML'"
+			" attributeName='transform'"
+			" type='translate'"
+			" from='1, 0'"
+			" to='1, 1'"
+			" dur='1s'"
+			" begin='2s'"
+			"fill='freeze'"
+			"/>\n"
+		));
+	}
+
+	{
+		//print html Puzzle list
+		const Puzzle tetrisPuzzle2 {
+			tetrisPuzzle.dimensions,
+			tetrisPuzzle.goal,
+			tetrisPuzzle.forbiddenSpots,
+			{
+				1,
+				Block({ 0, 0 }, { { 0, 0 }, { 0, 2 }, { 1, 0 }, { 1, 1 }, { 1, 2 } }, "@"), // runner
+				{ // blocks
+					Block({ 3, 1 }, { { 0, 0 }, { 0, 1 }, { 0, 2 }, { 1, 0 }, { 1, 2 } }, "A")
+				}
+			}
+		};
+
+		std::stringstream strResult;
+		printHtml(std::list<Puzzle>{ tetrisPuzzle, tetrisPuzzle2}, false, 20, strResult);
+		strResult << "\n---\n";
+		printHtml(std::list<Puzzle>{ tetrisPuzzle, tetrisPuzzle2}, true, 100, strResult);
+		assert(compareString(strResult.str(),
+			"<meta charset='UTF-8'>\n"
 			"<style>"
 			" .dimensions { stroke : red; stroke-width : 0.1; }"
 			" .blockRunner { fill : red; }"
@@ -524,14 +721,14 @@ void testPrintScan() {
 			"<rect class='point' x='1' y='1' width='1' height='1'/>"
 			"<rect class='point' x='1' y='2' width='1' height='1'/>"
 			"</g>"
-			"<g class='block blockRunner' transform='translate(3 2)'>"
+			"<g class='block blockRunner' transform='translate(0 0)'>"
 			"<rect class='point' x='0' y='0' width='1' height='1'/>"
 			"<rect class='point' x='0' y='2' width='1' height='1'/>"
 			"<rect class='point' x='1' y='0' width='1' height='1'/>"
 			"<rect class='point' x='1' y='1' width='1' height='1'/>"
 			"<rect class='point' x='1' y='2' width='1' height='1'/>"
 			"</g>"
-			"<g class='block blockA' transform='translate(2 1)'>"
+			"<g class='block blockA' transform='translate(3 1)'>"
 			"<rect class='point' x='0' y='0' width='1' height='1'/>"
 			"<rect class='point' x='0' y='1' width='1' height='1'/>"
 			"<rect class='point' x='0' y='2' width='1' height='1'/>"
@@ -539,6 +736,70 @@ void testPrintScan() {
 			"<rect class='point' x='1' y='2' width='1' height='1'/>"
 			"</g>"
 			"</g></g></svg>\n"
+			"</body>"
+			"\n---\n"
+			"<meta charset='UTF-8'>\n"
+			"<style>"
+			" .dimensions { stroke : red; stroke-width : 0.1; }"
+			" .blockRunner { fill : red; }"
+			" .blockWall { fill : black; }"
+			" .blockGoal { fill : powderblue; }"
+			" .blockA { fill : pink; }"
+			" .puzzle { fill : #202020; }"
+			" body { color : grey; background : black; }"
+			"</style>\n"
+			"<body>\n"
+			"<svg width='600' height='700' xmlns:xlink='http://www.w3.org/1999/xlink'><g transform='scale(100)'><g class='puzzle'>"
+			"<rect class='dimensions' x='0' y='0' width='5' height='6'/>"
+			"<g id='blockWall' class='block blockWall' transform='translate(0 0)'>"
+			"<rect class='point' x='0' y='5' width='1' height='1'/>"
+			"<rect class='point' x='4' y='5' width='1' height='1'/>"
+			"</g>"
+			"<g id='blockGoal' class='block blockGoal' transform='translate(0 0)'>"
+			"<rect class='point' x='0' y='0' width='1' height='1'/>"
+			"<rect class='point' x='0' y='2' width='1' height='1'/>"
+			"<rect class='point' x='1' y='0' width='1' height='1'/>"
+			"<rect class='point' x='1' y='1' width='1' height='1'/>"
+			"<rect class='point' x='1' y='2' width='1' height='1'/>"
+			"</g>"
+			"<g id='blockRunner' class='block blockRunner' transform='translate(3 2)'>"
+			"<rect class='point' x='0' y='0' width='1' height='1'/>"
+			"<rect class='point' x='0' y='2' width='1' height='1'/>"
+			"<rect class='point' x='1' y='0' width='1' height='1'/>"
+			"<rect class='point' x='1' y='1' width='1' height='1'/>"
+			"<rect class='point' x='1' y='2' width='1' height='1'/>"
+			"</g>"
+			"<g id='blockA' class='block blockA' transform='translate(2 1)'>"
+			"<rect class='point' x='0' y='0' width='1' height='1'/>"
+			"<rect class='point' x='0' y='1' width='1' height='1'/>"
+			"<rect class='point' x='0' y='2' width='1' height='1'/>"
+			"<rect class='point' x='1' y='0' width='1' height='1'/>"
+			"<rect class='point' x='1' y='2' width='1' height='1'/>"
+			"</g>"
+			"</g></g>\n"
+			"<animateTransform"
+			" xlink:href='#blockRunner'"
+			" attributeType='XML'"
+			" attributeName='transform'"
+			" type='translate'"
+			" from='3, 2'"
+			" to='0, 0'"
+			" dur='1s'"
+			" begin='1s'"
+			"fill='freeze'"
+			"/>\n"
+			"<animateTransform"
+			" xlink:href='#blockA'"
+			" attributeType='XML'"
+			" attributeName='transform'"
+			" type='translate'"
+			" from='2, 1'"
+			" to='3, 1'"
+			" dur='1s'"
+			" begin='1s'"
+			"fill='freeze'"
+			"/>\n"
+			"</svg>\n"
 			"</body>"
 		));
 	}

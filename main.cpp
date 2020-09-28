@@ -11,7 +11,8 @@ int main(int /*argc*/, char* /*argv*/[]) {
 		return 1;
 	}
 
-	printHtml(result, std::cout);
+	printHtml(result, true, 100, std::cout);
+	//printHtml(result, false, 20, std::cout);
 	printText(result, std::cerr);
 	return 0;
 }
