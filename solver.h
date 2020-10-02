@@ -19,7 +19,7 @@ public:
 private:
 	std::list<Puzzle> solveDebug(std::ostream* debugOut);
 	std::list<Puzzle> solveFast();
-	std::list<Puzzle> solution(const BoardState& firstBoardState, const BoardState& lastBoardState);
+	std::list<Puzzle> solution(std::shared_ptr<BoardState> firstBoardState, std::shared_ptr<BoardState> lastBoardState);
 
 	const Puzzle puzzle;
 	BoardHasher<HashType> hasher;
@@ -31,7 +31,7 @@ private:
 	std::unordered_map<HashType, NumberOfMovesType> knownPaths;
 
 	// Testing rermove me
-	std::unordered_map<HashType, std::vector<std::pair<HashType, BoardState>>> parentsOf;
+	std::unordered_map<HashType, std::vector<std::pair<HashType, std::shared_ptr<BoardState>>>> parentsOf;
 
 	const MoveDiscovery& moveDiscovery;
 };

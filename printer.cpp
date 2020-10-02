@@ -31,9 +31,10 @@ void printSvgStyle(const Puzzle& puzzle, std::ostream& out) {
 	out << " .blockWall { fill : black; }";
 	out << " .blockGoal { fill : powderblue; }";
 
-	int iColor = -1;
-	for (const Block& block : puzzle.boardState.blocks) {
-		out << " .block" << block.id << " { fill : " << colorMap[++iColor] << "; }";
+	int iColor = 0;
+	for (const Block& block : puzzle.boardState->blocks) {
+		out << " .block" << block.id << " { fill : " << colorMap[iColor] << "; }";
+		iColor = (iColor + 1) % colorMap.size();
 	}
 
 	out << " .puzzle { fill : #202020; }";
@@ -73,8 +74,8 @@ void printSvg(const Puzzle& puzzle, const bool& displayId, std::ostream& out) {
 	forbiddenSpots.pointSet = puzzle.forbiddenSpots;
 	forbiddenSpots.id = "Wall";
 	printSvg(forbiddenSpots, displayId, out);
-	printSvg(Block(puzzle.goal, puzzle.boardState.runner.pointSet, "Goal"), displayId, out);
-	printSvg(puzzle.boardState, displayId, out);
+	printSvg(Block(puzzle.goal, puzzle.boardState->runner.pointSet, "Goal"), displayId, out);
+	printSvg(*(puzzle.boardState), displayId, out);
 	out << "</g>";
 }
 
@@ -138,13 +139,13 @@ void printSvgAnimate(const Block& b1, const Block& b2, const size_t& step, std::
 
 void printSvgAnimate(const Puzzle& puzzle1, const Puzzle& puzzle2, const size_t& step, std::ostream& out) {
 	printSvgAnimate(
-		{ puzzle1.boardState.runner.shift, puzzle1.boardState.runner.pointSet, "Runner" },
-		{ puzzle2.boardState.runner.shift, puzzle2.boardState.runner.pointSet, "Runner" },
+		{ puzzle1.boardState->runner.shift, puzzle1.boardState->runner.pointSet, "Runner" },
+		{ puzzle2.boardState->runner.shift, puzzle2.boardState->runner.pointSet, "Runner" },
 		step,
 		out
 	);
-	for (size_t i = 0; i < puzzle1.boardState.blocks.size() ; ++i) {
-		printSvgAnimate(puzzle1.boardState.blocks[i], puzzle2.boardState.blocks[i], step, out);
+	for (size_t i = 0; i < puzzle1.boardState->blocks.size() ; ++i) {
+		printSvgAnimate(puzzle1.boardState->blocks[i], puzzle2.boardState->blocks[i], step, out);
 	}
 }
 
@@ -230,13 +231,13 @@ void printText(const Puzzle& puzzle, std::ostream& out) {
 		}
 	};
 
-	fillBlock({ puzzle.goal, puzzle.boardState.runner.pointSet, "^" });
+	fillBlock({ puzzle.goal, puzzle.boardState->runner.pointSet, "^" });
 
 	//fill runner block
-	fillBlock(puzzle.boardState.runner);
+	fillBlock(puzzle.boardState->runner);
 
 	//fill other blocks
-	for (const auto& contentBlock : puzzle.boardState.blocks) {
+	for (const auto& contentBlock : puzzle.boardState->blocks) {
 		fillBlock(contentBlock);
 	}
 
@@ -309,11 +310,11 @@ Puzzle scanText(std::istream& in) {
 		dimension,
 		goal,
 		forbiddenSpots,
-		{
+		std::make_shared<BoardState>(BoardState{
 			0,
 			Block({0, 0}, runnerPointSet, runnerId),
 			blockList
-		}
+		})
 	};
 }
 

@@ -34,7 +34,7 @@ namespace {
 			{ 0, 5 },
 			{ 3, 5 },
 		},
-		{ // Initial board state
+		std::make_shared<BoardState>(BoardState{
 			0, // no moves made,
 			Block({ 1, 0 }, { { 0, 0 }, { 1, 0 }, { 0, 1 }, { 1, 1 } }, "@"), // runner
 			{ // blocks
@@ -48,7 +48,7 @@ namespace {
 				Block({ 0, 4 }, { { 0, 0 }           }, "H"),
 				Block({ 3, 4 }, { { 0, 0 }           }, "I")
 			}
-		}
+		})
 	};
 
 	// Empty 3x3 block
@@ -60,11 +60,11 @@ namespace {
 		{
 			{ 1, 1 } // single hindrance in the middle
 		}, // empty spaces
-		{
+		std::make_shared<BoardState>(BoardState{
 			0, // no moves made,
 			Block({ 0, 0 }, { { 0, 0 } }, "@"), // runner at origin
 			{} // no blocks
-		}
+		})
 	};
 
 	const Puzzle tinyPuzzle
@@ -72,13 +72,13 @@ namespace {
 		{ 3, 3 }, // dims
 		{ 1, 1 }, // goal
 		{}, // empty spaces
-		{
+		std::make_shared<BoardState>(BoardState{
 			0, // no moves made,
 			Block({ 0, 0 }, { { 0, 0 } }, "@"), // runner
 			{
 				Block({1, 1 }, { { 0, 0 } }, "A") // Single block on the goal
 			}
-		}
+		})
 	};
 
 	// Empty 3x3 block
@@ -91,14 +91,14 @@ namespace {
 		{
 			{ 1, 1 }
 		}, // empty spaces
-		{
+		std::make_shared<BoardState>(BoardState{
 			0, // no moves made,
 			Block({ 0, 0 }, { { 0, 0 } }, "@"), // runner at origin
 			{ // 2 blocks surrounding origin
 				Block({ 1, 0 }, { { 0, 0 } }, "A"),
 				Block({ 0, 1 }, { { 0, 0 } }, "B")
 			}
-		}
+		})
 	};
 
 	// Tetris klotski puzzle
@@ -110,13 +110,13 @@ namespace {
 			{ 0, 5 },
 			{ 4, 5 },
 		},
-		{ // Initial board state
+		std::make_shared<BoardState>(BoardState{
 			0, // no moves made,
 			Block({ 3, 2 }, { { 0, 0 }, { 0, 2 }, { 1, 0 }, { 1, 1 }, { 1, 2 } }, "@"), // runner
 			{ // blocks
 				Block({ 2, 1 }, { { 0, 0 }, { 0, 1 }, { 0, 2 }, { 1, 0 }, { 1, 2 } }, "A")
 			}
-		}
+		})
 	};
 
 }
@@ -313,7 +313,47 @@ void testPrintScan() {
 	{
 		//print svg style
 		std::stringstream strResult;
-		printSvgStyle(largePuzzle, strResult);
+		printSvgStyle(
+			{
+				{ 20, 20 }, // dims
+				{ 19, 19 }, // goal
+				{ // invalid spaces
+				},
+				std::make_shared<BoardState>(BoardState{
+					0, // no moves made,
+					Block({ 0, 0 }, { { 0, 0 }, }, "@"), // runner
+					{ // blocks
+						Block({  0,  0 }, { {  0,  0 }, }, "A"),
+						Block({  0,  0 }, { {  0,  0 }, }, "B"),
+						Block({  0,  0 }, { {  0,  0 }, }, "C"),
+						Block({  0,  0 }, { {  0,  0 }, }, "D"),
+						Block({  0,  0 }, { {  0,  0 }, }, "E"),
+						Block({  0,  0 }, { {  0,  0 }, }, "F"),
+						Block({  0,  0 }, { {  0,  0 }, }, "G"),
+						Block({  0,  0 }, { {  0,  0 }, }, "H"),
+						Block({  0,  0 }, { {  0,  0 }, }, "I"),
+						Block({  0,  0 }, { {  0,  0 }, }, "J"),
+						Block({  0,  0 }, { {  0,  0 }, }, "K"),
+						Block({  0,  0 }, { {  0,  0 }, }, "L"),
+						Block({  0,  0 }, { {  0,  0 }, }, "M"),
+						Block({  0,  0 }, { {  0,  0 }, }, "N"),
+						Block({  0,  0 }, { {  0,  0 }, }, "O"),
+						Block({  0,  0 }, { {  0,  0 }, }, "P"),
+						Block({  0,  0 }, { {  0,  0 }, }, "Q"),
+						Block({  0,  0 }, { {  0,  0 }, }, "R"),
+						Block({  0,  0 }, { {  0,  0 }, }, "S"),
+						Block({  0,  0 }, { {  0,  0 }, }, "T"),
+						Block({  0,  0 }, { {  0,  0 }, }, "U"),
+						Block({  0,  0 }, { {  0,  0 }, }, "V"),
+						Block({  0,  0 }, { {  0,  0 }, }, "W"),
+						Block({  0,  0 }, { {  0,  0 }, }, "X"),
+						Block({  0,  0 }, { {  0,  0 }, }, "Y"),
+						Block({  0,  0 }, { {  0,  0 }, }, "Z"),
+					}
+				})
+			},
+			strResult
+		);
 		assert(compareString(
 			strResult.str(),
 			" .dimensions { stroke : red; stroke-width : 0.1; }"
@@ -329,6 +369,23 @@ void testPrintScan() {
 			" .blockG { fill : darkred; }"
 			" .blockH { fill : darkmagenta; }"
 			" .blockI { fill : darkorchid; }"
+			" .blockJ { fill : darkslategray; }"
+			" .blockK { fill : firebrick; }"
+			" .blockL { fill : green; }"
+			" .blockM { fill : indigo; }"
+			" .blockN { fill : seagreen; }"
+			" .blockO { fill : teal; }"
+			" .blockP { fill : yellowgreen; }"
+			" .blockQ { fill : yellow; }"
+			" .blockR { fill : pink; }"
+			" .blockS { fill : aqua; }"
+			" .blockT { fill : blueviolet; }"
+			" .blockU { fill : darkblue; }"
+			" .blockV { fill : darkcyan; }"
+			" .blockW { fill : darkgoldenrod; }"
+			" .blockX { fill : darkred; }"
+			" .blockY { fill : darkmagenta; }"
+			" .blockZ { fill : darkorchid; }"
 			" .puzzle { fill : #202020; }"
 		));
 	}
@@ -364,9 +421,9 @@ void testPrintScan() {
 	{
 		//print svg BoardState
 		std::stringstream strResult;
-		printSvg(tetrisPuzzle.boardState, true, strResult);
+		printSvg(*(tetrisPuzzle.boardState), true, strResult);
 		strResult << "\n---\n";
-		printSvg(tetrisPuzzle.boardState, false, strResult);
+		printSvg(*(tetrisPuzzle.boardState), false, strResult);
 		assert(compareString(strResult.str(),
 			"<g id='blockRunner' class='block blockRunner' transform='translate(3 2)'>"
 			"<rect class='point' x='0' y='0' width='1' height='1'/>"
@@ -553,15 +610,15 @@ void testPrintScan() {
 		//print svg animate Block
 		std::stringstream strResult;
 		printSvgAnimate(
-			tetrisPuzzle.boardState.runner,
-			tetrisPuzzle.boardState.runner,
+			tetrisPuzzle.boardState->runner,
+			tetrisPuzzle.boardState->runner,
 			4,
 			strResult
 		);
 		strResult << "\n---\n";
 		printSvgAnimate(
-			{ { 0, 1 }, tetrisPuzzle.boardState.runner.pointSet, "anId" },
-			{ { 2, 3 }, tetrisPuzzle.boardState.runner.pointSet, "anId" },
+			{ { 0, 1 }, tetrisPuzzle.boardState->runner.pointSet, "anId" },
+			{ { 2, 3 }, tetrisPuzzle.boardState->runner.pointSet, "anId" },
 			5,
 			strResult
 		);
@@ -592,7 +649,7 @@ void testPrintScan() {
 		strResult << "\n---\n";
 		printSvgAnimate(
 			smallPuzzle,
-			{ smallPuzzle.dimensions, smallPuzzle.goal, smallPuzzle.forbiddenSpots, { smallPuzzle.boardState.numberOfMoves, { { 0, 0 }, smallPuzzle.boardState.runner.pointSet, "anOtherId" }, { Block({ 1, 0 }, { { 0, 0 } }, "A"),	Block({ 0, 0 }, { { 0, 0 } }, "B") } } },
+			{ smallPuzzle.dimensions, smallPuzzle.goal, smallPuzzle.forbiddenSpots, std::make_shared<BoardState>(BoardState{ smallPuzzle.boardState->numberOfMoves, { { 0, 0 }, smallPuzzle.boardState->runner.pointSet, "anOtherId" }, { Block({ 1, 0 }, { { 0, 0 } }, "A"),	Block({ 0, 0 }, { { 0, 0 } }, "B") } }) },
 			7,
 			strResult
 		);
@@ -617,8 +674,8 @@ void testPrintScan() {
 		printSvgAnimate(
 			{
 				smallPuzzle,
-				{ smallPuzzle.dimensions, smallPuzzle.goal, smallPuzzle.forbiddenSpots, { smallPuzzle.boardState.numberOfMoves, { { 0, 0 }, smallPuzzle.boardState.runner.pointSet, "anOtherId" }, { Block({ 1, 0 }, { { 0, 0 } }, "A"),	Block({ 0, 0 }, { { 0, 0 } }, "B") } } },
-				{ smallPuzzle.dimensions, smallPuzzle.goal, smallPuzzle.forbiddenSpots, { smallPuzzle.boardState.numberOfMoves, { { 0, 0 }, smallPuzzle.boardState.runner.pointSet, "anOtherId" }, { Block({ 1, 1 }, { { 0, 0 } }, "A"),	Block({ 0, 0 }, { { 0, 0 } }, "B") } } },
+				{ smallPuzzle.dimensions, smallPuzzle.goal, smallPuzzle.forbiddenSpots, std::make_shared<BoardState>(BoardState{ smallPuzzle.boardState->numberOfMoves, { { 0, 0 }, smallPuzzle.boardState->runner.pointSet, "anOtherId" }, { Block({ 1, 0 }, { { 0, 0 } }, "A"),	Block({ 0, 0 }, { { 0, 0 } }, "B") } }) },
+				{ smallPuzzle.dimensions, smallPuzzle.goal, smallPuzzle.forbiddenSpots, std::make_shared<BoardState>(BoardState{ smallPuzzle.boardState->numberOfMoves, { { 0, 0 }, smallPuzzle.boardState->runner.pointSet, "anOtherId" }, { Block({ 1, 1 }, { { 0, 0 } }, "A"),	Block({ 0, 0 }, { { 0, 0 } }, "B") } }) },
 			},
 			strResult
 		);
@@ -654,13 +711,13 @@ void testPrintScan() {
 			tetrisPuzzle.dimensions,
 			tetrisPuzzle.goal,
 			tetrisPuzzle.forbiddenSpots,
-			{
+			std::make_shared<BoardState>(BoardState{
 				1,
 				Block({ 0, 0 }, { { 0, 0 }, { 0, 2 }, { 1, 0 }, { 1, 1 }, { 1, 2 } }, "@"), // runner
 				{ // blocks
 					Block({ 3, 1 }, { { 0, 0 }, { 0, 1 }, { 0, 2 }, { 1, 0 }, { 1, 2 } }, "A")
 				}
-			}
+			})
 		};
 
 		std::stringstream strResult;
@@ -812,31 +869,31 @@ void testMoveValidation() {
 	//MoveValidation moveValidation{};
 
 	// Test that all blocks do not overlap with their current state on the board
-	for (const auto &block : largePuzzle.boardState.blocks) {
+	for (const auto &block : largePuzzle.boardState->blocks) {
 		assert(
-			validBlockPosition(block, largePuzzle.dimensions, largePuzzle.boardState, largePuzzle.forbiddenSpots)
+			validBlockPosition(block, largePuzzle.dimensions, *(largePuzzle.boardState), largePuzzle.forbiddenSpots)
 			&& "A block should never overlap itself"
 		);
 
 		auto blockAtSamePosition = block;
 		blockAtSamePosition.id = "Another Block";
 		assert(
-			!validBlockPosition(blockAtSamePosition, largePuzzle.dimensions, largePuzzle.boardState, largePuzzle.forbiddenSpots)
+			!validBlockPosition(blockAtSamePosition, largePuzzle.dimensions, *(largePuzzle.boardState), largePuzzle.forbiddenSpots)
 			&& "2 blocks at the same position should always overlap"
 		);
 	}
 
 	// Test all block pisition
 	//printText(emptyPuzzle, std::cout);
-	assert(!validBlockPosition(Block({ 0, 0 }, { { 0, 0 } }, "someBlock"), emptyPuzzle.dimensions, emptyPuzzle.boardState, emptyPuzzle.forbiddenSpots));
-	assert( validBlockPosition(Block({ 1, 0 }, { { 0, 0 } }, "someBlock"), emptyPuzzle.dimensions, emptyPuzzle.boardState, emptyPuzzle.forbiddenSpots));
-	assert( validBlockPosition(Block({ 2, 0 }, { { 0, 0 } }, "someBlock"), emptyPuzzle.dimensions, emptyPuzzle.boardState, emptyPuzzle.forbiddenSpots));
-	assert( validBlockPosition(Block({ 0, 1 }, { { 0, 0 } }, "someBlock"), emptyPuzzle.dimensions, emptyPuzzle.boardState, emptyPuzzle.forbiddenSpots));
-	assert(!validBlockPosition(Block({ 1, 1 }, { { 0, 0 } }, "someBlock"), emptyPuzzle.dimensions, emptyPuzzle.boardState, emptyPuzzle.forbiddenSpots));
-	assert( validBlockPosition(Block({ 2, 1 }, { { 0, 0 } }, "someBlock"), emptyPuzzle.dimensions, emptyPuzzle.boardState, emptyPuzzle.forbiddenSpots));
-	assert( validBlockPosition(Block({ 0, 2 }, { { 0, 0 } }, "someBlock"), emptyPuzzle.dimensions, emptyPuzzle.boardState, emptyPuzzle.forbiddenSpots));
-	assert( validBlockPosition(Block({ 1, 2 }, { { 0, 0 } }, "someBlock"), emptyPuzzle.dimensions, emptyPuzzle.boardState, emptyPuzzle.forbiddenSpots));
-	assert( validBlockPosition(Block({ 2, 2 }, { { 0, 0 } }, "someBlock"), emptyPuzzle.dimensions, emptyPuzzle.boardState, emptyPuzzle.forbiddenSpots));
+	assert(!validBlockPosition(Block({ 0, 0 }, { { 0, 0 } }, "someBlock"), emptyPuzzle.dimensions, *(emptyPuzzle.boardState), emptyPuzzle.forbiddenSpots));
+	assert( validBlockPosition(Block({ 1, 0 }, { { 0, 0 } }, "someBlock"), emptyPuzzle.dimensions, *(emptyPuzzle.boardState), emptyPuzzle.forbiddenSpots));
+	assert( validBlockPosition(Block({ 2, 0 }, { { 0, 0 } }, "someBlock"), emptyPuzzle.dimensions, *(emptyPuzzle.boardState), emptyPuzzle.forbiddenSpots));
+	assert( validBlockPosition(Block({ 0, 1 }, { { 0, 0 } }, "someBlock"), emptyPuzzle.dimensions, *(emptyPuzzle.boardState), emptyPuzzle.forbiddenSpots));
+	assert(!validBlockPosition(Block({ 1, 1 }, { { 0, 0 } }, "someBlock"), emptyPuzzle.dimensions, *(emptyPuzzle.boardState), emptyPuzzle.forbiddenSpots));
+	assert( validBlockPosition(Block({ 2, 1 }, { { 0, 0 } }, "someBlock"), emptyPuzzle.dimensions, *(emptyPuzzle.boardState), emptyPuzzle.forbiddenSpots));
+	assert( validBlockPosition(Block({ 0, 2 }, { { 0, 0 } }, "someBlock"), emptyPuzzle.dimensions, *(emptyPuzzle.boardState), emptyPuzzle.forbiddenSpots));
+	assert( validBlockPosition(Block({ 1, 2 }, { { 0, 0 } }, "someBlock"), emptyPuzzle.dimensions, *(emptyPuzzle.boardState), emptyPuzzle.forbiddenSpots));
+	assert( validBlockPosition(Block({ 2, 2 }, { { 0, 0 } }, "someBlock"), emptyPuzzle.dimensions, *(emptyPuzzle.boardState), emptyPuzzle.forbiddenSpots));
 }
 
 void testMoveDiscovery() {
@@ -846,7 +903,7 @@ void testMoveDiscovery() {
 		const int blockMoves = 4; // Up + Down + Right + Left
 		const auto newMoves = moveDiscovery.gatherMoves(
 			tinyPuzzle.dimensions,
-			std::make_shared<BoardState>(tinyPuzzle.boardState),
+			tinyPuzzle.boardState,
 			tinyPuzzle.forbiddenSpots
 		);
 		assert(!newMoves.empty() && "At least some moves should be possible");
@@ -857,7 +914,7 @@ void testMoveDiscovery() {
 		const auto blockMoves = 4;
 		auto newMoves = moveDiscovery.gatherMoves(
 			largePuzzle.dimensions,
-			std::make_shared<BoardState>(largePuzzle.boardState),
+			largePuzzle.boardState,
 			largePuzzle.forbiddenSpots
 		);
 		assert(!newMoves.empty() && "At least some moves should be possible");
@@ -869,18 +926,17 @@ void testMoveDiscovery() {
 void testMoving() {
 	using BoardType = std::remove_const<decltype(largePuzzle.boardState)>::type;
 
-	auto sharedState = std::make_shared<BoardType>(largePuzzle.boardState);
-	Move moveRight{ sharedState, sharedState->blocks[0], Direction::Right };
-	assert(sharedState.get() == moveRight.boardState.get() && "A move should not copy the state, but only reference the original state");
+	Move moveRight{ largePuzzle.boardState, largePuzzle.boardState->blocks[0], Direction::Right };
+	assert(largePuzzle.boardState.get() == moveRight.boardState.get() && "A move should not copy the state, but only reference the original state");
 
 	const auto afterMoveRight = moveRight.proceed();
-	assert(sharedState->blocks[0].move(Direction::Right) == afterMoveRight.blocks[0]);
-	assert(sharedState->blocks[0].move(Direction::Left)  != afterMoveRight.blocks[0]);
-	assert(sharedState->blocks[0].move(Direction::Up)    != afterMoveRight.blocks[0]);
-	assert(sharedState->blocks[0].move(Direction::Down)  != afterMoveRight.blocks[0]);
-	assert(sharedState->blocks[0].id == afterMoveRight.blocks[0].id);
+	assert(largePuzzle.boardState->blocks[0].move(Direction::Right) == afterMoveRight->blocks[0]);
+	assert(largePuzzle.boardState->blocks[0].move(Direction::Left)  != afterMoveRight->blocks[0]);
+	assert(largePuzzle.boardState->blocks[0].move(Direction::Up)    != afterMoveRight->blocks[0]);
+	assert(largePuzzle.boardState->blocks[0].move(Direction::Down)  != afterMoveRight->blocks[0]);
+	assert(largePuzzle.boardState->blocks[0].id == afterMoveRight->blocks[0].id);
 
-	assert(sharedState->numberOfMoves + 1 == afterMoveRight.numberOfMoves);
+	assert(largePuzzle.boardState->numberOfMoves + 1 == afterMoveRight->numberOfMoves);
 
 	{
 		Block middle({ 2, 2 }, { { 0, 0 }, { 1, 0 }, { 0, 1 }, { 1, 1 } }, "blockMid");
@@ -900,20 +956,20 @@ void testHashing() {
 	BoardHasher<int> emptyHasher{ emptyPuzzle };
 	BoardHasher<int> initialHasher{ largePuzzle };
 
-	assert(emptyHasher.hash(emptyPuzzle.boardState) == emptyHasher.hash(emptyPuzzle.boardState) && "Hash for identical states should be equal");
-	assert(initialHasher.hash(largePuzzle.boardState) == initialHasher.hash(largePuzzle.boardState) && "Hash for identical states should be equal");
-	assert(initialHasher.hash(largePuzzle.boardState) != emptyHasher.hash(emptyPuzzle.boardState) && "Hash for different states should be different");
+	assert(emptyHasher.hash(*(emptyPuzzle.boardState))   == emptyHasher.hash(*(emptyPuzzle.boardState)) && "Hash for identical states should be equal");
+	assert(initialHasher.hash(*(largePuzzle.boardState)) == initialHasher.hash(*(largePuzzle.boardState)) && "Hash for identical states should be equal");
+	assert(initialHasher.hash(*(largePuzzle.boardState)) != emptyHasher.hash(*(emptyPuzzle.boardState)) && "Hash for different states should be different");
 
-	auto swappedBlocks = largePuzzle.boardState.blocks;
+	auto swappedBlocks = largePuzzle.boardState->blocks;
 	auto temp= swappedBlocks[0];
 	swappedBlocks[0].id = swappedBlocks[1].id;
 	swappedBlocks[1].id = temp.id;
 	BoardState swappedState{
 		0,
-		largePuzzle.boardState.runner,
+		largePuzzle.boardState->runner,
 		swappedBlocks 
 	};
-	assert(initialHasher.hash(swappedState) == initialHasher.hash(largePuzzle.boardState) && "Hash should be the same for 2 same-sized blocks in swapped positions");
+	assert(initialHasher.hash(swappedState) == initialHasher.hash(*(largePuzzle.boardState)) && "Hash should be the same for 2 same-sized blocks in swapped positions");
 }
 
 auto testSolverFx = [&](Solver solver, const bool& debug, std::string expectedOut = "") {

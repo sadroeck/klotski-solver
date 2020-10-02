@@ -31,7 +31,7 @@ public:
 		, hashList{}
 		, blockPointSetSet{}
 	{
-		for (const auto block : puzzle.boardState.blocks) {
+		for (const auto block : puzzle.boardState->blocks) {
 			blockPointSetSet.insert(block.pointSet);
 		}
 

@@ -1,29 +1,28 @@
 #include "puzzle.h"
 
-BoardState Move::proceed() {
+std::shared_ptr<BoardState> Move::proceed() const {
 	if (block.id == boardState->runner.id) {
 		// Block to move is the runner
-		return BoardState {
+		return std::make_shared<BoardState>(BoardState {
 			boardState->numberOfMoves + 1,
 			boardState->runner.move(directionToMove),
 			boardState->blocks,
-		};
-
-	} else {
-		// Block to move is one of the other blocks
-		// Notes: assumes linear distance in storage container
-		const auto blockIndex = &block - &boardState->blocks[0];
-
-		auto newBlocks = boardState->blocks;
-		newBlocks[blockIndex] = block.move(directionToMove);
-
-		return BoardState {
-			boardState->numberOfMoves + 1,
-			boardState->runner,
-			std::move(newBlocks),
-		};
+		});
 
 	}
+
+	// Block to move is one of the other blocks
+	// Notes: assumes linear distance in storage container
+	const auto blockIndex = &block - &boardState->blocks[0];
+
+	auto newBlocks = boardState->blocks;
+	newBlocks[blockIndex] = block.move(directionToMove);
+
+	return std::make_shared<BoardState>(BoardState {
+		boardState->numberOfMoves + 1,
+		boardState->runner,
+		std::move(newBlocks),
+	});
 }
 
 Move::Move(std::shared_ptr<BoardState> boardState, const Block& block, Direction dir)
@@ -34,24 +33,24 @@ Move::Move(std::shared_ptr<BoardState> boardState, const Block& block, Direction
 }
 
 PuzzleValidation Puzzle::validate() const {
-	const auto& blockSize = boardState.blocks.size();
+	const auto& blockSize = boardState->blocks.size();
 
 	for (size_t i = 0; i < blockSize; ++i) {
 		for (size_t j = 0; j < blockSize; ++j) {
 			if (i < j) {
-				if (boardState.blocks[i].overlaps(boardState.blocks[j])) {
+				if (boardState->blocks[i].overlaps(boardState->blocks[j])) {
 					return blocksOverlaps;
 				}
-				if (boardState.blocks[i].id == boardState.blocks[j].id) {
+				if (boardState->blocks[i].id == boardState->blocks[j].id) {
 					return blocksWithSameId;
 				}
 			}
 		}
 
-		if (boardState.blocks[i].overlaps(this->boardState.runner)) {
+		if (boardState->blocks[i].overlaps(this->boardState->runner)) {
 			return runnerOverlaps;
 		}
-		if (boardState.runner.id == boardState.blocks[i].id) {
+		if (boardState->runner.id == boardState->blocks[i].id) {
 			return runnerWithSameId;
 		}
 	}

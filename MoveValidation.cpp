@@ -23,25 +23,26 @@ namespace detail {
 		) {
 				return true;
 		}
-		for (const auto& blockPoint : block.pointSet) {
-			if (
-				((block.shift.x + blockPoint.x) >= dims.x)
-				||
-				((block.shift.y + blockPoint.y) >= dims.y)
-			) {
-				return true;
+		return std::any_of(
+			begin(block.pointSet),
+			end(block.pointSet),
+			[&](const Point& blockPoint) {
+				return
+					((block.shift.x + blockPoint.x) >= dims.x)
+					||
+					((block.shift.y + blockPoint.y) >= dims.y)
+				;
 			}
-		}
-		return false;
+		);
 	}
 
-	bool overlapsWithOtherBlocks(const Block& block, const BoardState& board) {
+	bool overlapsWithOtherBlocks(const Block& block, const BoardState& boardState) {
 		return
-			((block.id != board.runner.id) && block.overlaps(board.runner))
+			((block.id != boardState.runner.id) && block.overlaps(boardState.runner))
 			||
 			std::any_of(
-				begin(board.blocks),
-				end(board.blocks),
+				begin(boardState.blocks),
+				end(boardState.blocks),
 				[&](const auto& other) { return (other.id != block.id) && block.overlaps(other); }
 			)
 		;
