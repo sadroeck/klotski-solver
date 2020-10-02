@@ -12,7 +12,7 @@ public:
 	using NumberOfMovesType = typename std::remove_const<decltype(BoardState::numberOfMoves)>::type;
 
 public:
-	Solver(const Puzzle &puzzle, const MoveDiscovery& moveDiscovery);
+	Solver(const Puzzle& puzzle, const MoveDiscovery& moveDiscovery);
 	~Solver() = default;
 	std::list<Puzzle> solve(std::ostream* debugOut = nullptr);
 

@@ -42,15 +42,15 @@ namespace detail {
 			std::any_of(
 				begin(board.blocks),
 				end(board.blocks),
-				[&](const auto &other) { return (other.id != block.id) && block.overlaps(other); }
+				[&](const auto& other) { return (other.id != block.id) && block.overlaps(other); }
 			)
 		;
 	}
 }
 
 bool validBlockPosition(
-	const Block &block,
-	const Point &dims,
+	const Block& block,
+	const Point& dims,
 	const BoardState& boardState,
 	const std::set<Point> invalidPositions
 ) {

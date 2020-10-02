@@ -11,7 +11,7 @@ std::vector<Move> MoveRunnerFirst::gatherMoves(
 ) const {
 	std::vector<Move> result{};
 
-	auto moveBlockIfPossible = [&](const Block &block) {
+	auto moveBlockIfPossible = [&](const Block& block) {
 		for (auto dir = 0; dir < static_cast<int>(Direction::Number_of_dirs); ++dir) {
 				if (validBlockPosition(
 					block.move(static_cast<Direction>(dir)),
@@ -28,7 +28,7 @@ std::vector<Move> MoveRunnerFirst::gatherMoves(
 	moveBlockIfPossible(boardState->runner);
 
 	// Move other blocks second
-	for (const auto &block : boardState->blocks) {
+	for (const auto& block : boardState->blocks) {
 		moveBlockIfPossible(block);
 	}
 	return result;

@@ -236,7 +236,7 @@ void printText(const Puzzle& puzzle, std::ostream& out) {
 	fillBlock(puzzle.boardState.runner);
 
 	//fill other blocks
-	for (const auto &contentBlock : puzzle.boardState.blocks) {
+	for (const auto& contentBlock : puzzle.boardState.blocks) {
 		fillBlock(contentBlock);
 	}
 

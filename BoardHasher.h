@@ -16,10 +16,10 @@
 template <typename HashType/* = int*/>
 class BoardHasher {
 public:
-	HashType hash(const BoardState &boardState) {
+	HashType hash(const BoardState& boardState) {
 		HashType result{};
 		result ^= runnerHash(boardState.runner);
-		for (const auto &block : boardState.blocks) {
+		for (const auto& block : boardState.blocks) {
 			result ^= blockSetHash(block);
 		}
 		return result;
@@ -51,9 +51,7 @@ private:
 			std::find_if(
 				begin(blockPointSetSet),
 				end(blockPointSetSet),
-				[&](const auto& b) {
-					return b == block.pointSet;
-				}
+				[&](const auto& b) { return b == block.pointSet; }
 			)
 		);
 
@@ -61,7 +59,7 @@ private:
 		return hashList[((blockPos + 1) * numberOfPuzzlePos) + (block.shift.x * dimensions.y) + block.shift.y];
 	}
 
-	int runnerHash(const Block &runner) {
+	int runnerHash(const Block& runner) {
 		// First blockType is the runner : blockPos == 0
 		return hashList[(runner.shift.x * dimensions.y) + runner.shift.y];
 	}

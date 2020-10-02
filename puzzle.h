@@ -24,7 +24,7 @@ public:
 	std::shared_ptr<BoardState> boardState;
 
 	// Block to be moved
-	const Block &block;
+	const Block& block;
 
 	// Direction in which to move block
 	Direction directionToMove;
@@ -32,7 +32,7 @@ public:
 	// Returns the BoardState after the move
 	BoardState proceed();
 
-	Move(std::shared_ptr<BoardState> boardState, const Block &block, Direction dir);
+	Move(std::shared_ptr<BoardState> boardState, const Block& block, Direction dir);
 };
 
 enum PuzzleValidation {

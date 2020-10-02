@@ -26,7 +26,7 @@ BoardState Move::proceed() {
 	}
 }
 
-Move::Move(std::shared_ptr<BoardState> boardState, const Block &block, Direction dir)
+Move::Move(std::shared_ptr<BoardState> boardState, const Block& block, Direction dir)
 	: boardState{ boardState }
 	, block{ block }
 	, directionToMove{ dir }

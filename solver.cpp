@@ -7,7 +7,7 @@ bool isSolution(const BoardState& boardState, const Point& goal) {
 	return (boardState.runner.shift.x == goal.x) && (boardState.runner.shift.y == goal.y);
 }
 
-Solver::Solver(const Puzzle &puzzle, const MoveDiscovery& moveDiscovery)
+Solver::Solver(const Puzzle& puzzle, const MoveDiscovery& moveDiscovery)
 	: puzzle{ puzzle }
 	, hasher{ puzzle }
 	, moveDiscovery{ moveDiscovery }
@@ -17,7 +17,7 @@ Solver::Solver(const Puzzle &puzzle, const MoveDiscovery& moveDiscovery)
 		std::make_shared<BoardState>(puzzle.boardState),
 		puzzle.forbiddenSpots
 	);
-	for (auto &move : initialMoves) {
+	for (auto& move : initialMoves) {
 		possibleMoveStack.push_back(std::move(move));
 	}
 }
@@ -112,7 +112,7 @@ std::list<Puzzle> Solver::solveDebug(std::ostream* debugOut) {
 			gatherMovesTime += (end_time - start_time);
 			start_time = std::chrono::high_resolution_clock::now();
 
-			for (auto &move : newMoves) {
+			for (auto& move : newMoves) {
 				possibleMoveStack.push_back(std::move(move));
 			}
 
