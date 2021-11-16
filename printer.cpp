@@ -26,10 +26,13 @@ std::map<int, const std::string> colorMap{
 };
 
 void printSvgStyle(const Puzzle& puzzle, std::ostream& out) {
-	out << " .dimensions { stroke : red; stroke-width : 0.1; }";
-	out << " .blockRunner { fill : red; }";
-	out << " .blockWall { fill : black; }";
-	out << " .blockGoal { fill : powderblue; }";
+	out <<
+		" .dimensions { stroke : red; stroke-width : 0.01; }"
+		" .block { fill-opacity : 0.93 }"
+		" .blockRunner { fill : red; }"
+		" .blockWall { fill : black; }"
+		" .blockGoal { fill : url(#zebra-gradient) powderblue; }"
+	;
 
 	int iColor = 0;
 	for (const Block& block : puzzle.boardState->blocks) {
@@ -45,7 +48,7 @@ void printSvg(const Point& point, std::ostream& out) {
 }
 
 void printSvg(const Block& block, const bool& displayId, std::ostream& out) {
-	out << "<g";
+	out << "\t<g";
 	if (displayId) {
 		out << " id='block" << block.id << "'";
 	}
@@ -53,7 +56,7 @@ void printSvg(const Block& block, const bool& displayId, std::ostream& out) {
 	for (const Point& point : block.pointSet) {
 		printSvg(point, out);
 	}
-	out << "</g>";
+	out << "</g>\n";
 }
 
 void printSvg(const BoardState& boardState, const bool& displayId, std::ostream& out) {
@@ -66,7 +69,7 @@ void printSvg(const BoardState& boardState, const bool& displayId, std::ostream&
 void printSvg(const Puzzle& puzzle, const bool& displayId, std::ostream& out) {
 	out
 		<< "<g class='puzzle'>"
-		<< "<rect class='dimensions' x='0' y='0' width='" << puzzle.dimensions.x << "' height='" << puzzle.dimensions.y << "'/>"
+		<< "<rect class='dimensions' x='0' y='0' width='" << puzzle.dimensions.x << "' height='" << puzzle.dimensions.y << "'/>\n"
 	;
 
 	Block forbiddenSpots;
@@ -160,7 +163,7 @@ void printSvgAnimate(const std::list<Puzzle>& puzzleList, std::ostream& out) {
 	}
 }
 
-void printHtml(const std::list<Puzzle>& puzzleList, const bool& animated, const size_t& scale, std::ostream& out) {
+void printHtml(const std::list<Puzzle>& puzzleList, const size_t& animatedScale, const size_t& staticScale, std::ostream& out) {
 	Puzzle firstPuzzle = *(puzzleList.begin());
 	out <<
 		"<meta charset='UTF-8'>\n"
@@ -169,32 +172,47 @@ void printHtml(const std::list<Puzzle>& puzzleList, const bool& animated, const 
 	printSvgStyle(firstPuzzle, out);
 	out << " body { color : grey; background : black; }";
 	out << "</style>\n<body>\n";
-	if (animated) {
+	if (animatedScale > 0) {
 		out
 			<< "<svg"
-			<< " width='"  << ((firstPuzzle.dimensions.x + 1) * scale) << "'"
-			<< " height='" << ((firstPuzzle.dimensions.y + 1) * scale) << "'"
-			<< " xmlns:xlink='http://www.w3.org/1999/xlink'>"
-			<< "<g transform='scale(" << scale << ")'>"
+			<< " width='"  << ((firstPuzzle.dimensions.x + 1) * animatedScale) << "'"
+			<< " height='" << ((firstPuzzle.dimensions.y + 1) * animatedScale) << "'"
+			<< " xmlns:xlink='http://www.w3.org/1999/xlink'"
+			<< ">\n"
+			<< "<linearGradient id='zebra-gradient' x2='2' y2='1'>"
+		;
+		for (int i = 0; i < 100; i += 20) {
+			out
+				<< "<stop offset='" << (i +  0) << "%' stop-color='white'/><stop offset='" << (i + 10) << "%' stop-color='white'/>"
+				<< "<stop offset='" << (i + 10) << "%' stop-color='black'/><stop offset='" << (i + 20) << "%' stop-color='black'/>"
+			;
+		}
+		out
+			<< "</linearGradient>\n"
+			<< "<g transform='scale(" << animatedScale << ")'>"
 		;
 		printSvg(firstPuzzle, true, out);
 		out << "</g>\n";
 		printSvgAnimate(puzzleList, out);
 		out << "</svg>\n";
 
-	} else {
+	}
+	if (staticScale > 0) {
+		if (animatedScale > 0) {
+			out << "<br/>\n";
+		}
 		printSvg(
 			puzzleList,
 			toString(" {pos}<svg")
-			+ " width='"  + toString((firstPuzzle.dimensions.x + 1) * scale) + "'"
-			+ " height='" + toString((firstPuzzle.dimensions.y + 1) * scale) + "'"
-			+ ">"
-			+ "<g transform='scale(" + toString(scale) + ")'>",
-			"</g></svg>\n",
+			+ " width='"  + toString((firstPuzzle.dimensions.x + 1) * staticScale) + "'"
+			+ " height='" + toString((firstPuzzle.dimensions.y + 1) * staticScale) + "'"
+			+ ">\n"
+			+ "<g transform='scale(" + toString(staticScale) + ")'>",
+			"</g>\n</svg>\n",
 			out
 		);
 	}
-	out << "</body>";
+	out << "</body>\n";
 }
 
 void printText(const Puzzle& puzzle, std::ostream& out) {

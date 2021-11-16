@@ -6,7 +6,7 @@ text, svg, animated html output.
 
 # Build instructions
 ## Linux
-rm -frv "/tmp/build";  
+rm -frv "/tmp/build";
 mkdir -pv "/tmp/build" && cmake -B "/tmp/build" -S . && make -j --directory="/tmp/build" && echo done
 
 ## Windows

@@ -23,8 +23,8 @@ void printSvgAnimate(const std::list<Puzzle>& puzzleList, std::ostream& out);
 
 void printHtml(
 	const std::list<Puzzle>& puzzleList,
-	const bool& animated,
-	const size_t& scale,
+	const size_t& animatedScale,
+	const size_t& staticScale,
 	std::ostream& out
 );
 
