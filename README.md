@@ -31,6 +31,10 @@ time "/tmp/build/solve" < "in_hardPuzzle.txt" 1> out_hardPuzzle.html 2> out_hard
 ### Windows
 `solve.exe` < "in_smallPuzzle.txt" 1> out_smallPuzzle.html
 
+## Benchmark
+### Linux
+"/tmp/build/solve" benchmark < "in_hardPuzzle.txt" 1> /dev/null
+
 # Notes
 `solve` is using :
 - standard input as puzzle to solve

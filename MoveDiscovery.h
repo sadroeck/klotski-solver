@@ -1,6 +1,5 @@
 #pragma once
 
-#include "MoveValidation.h"
 #include "puzzle.h"
 
 #include <vector>

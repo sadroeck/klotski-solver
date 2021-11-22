@@ -22,12 +22,12 @@ Solver::Solver(const Puzzle& puzzle, const MoveDiscovery& moveDiscovery)
 	}
 }
 
-std::list<Puzzle> Solver::solve(std::ostream* debugOut) {
-	return (nullptr == debugOut) ? solveFast() : solveDebug(debugOut);
+std::list<Puzzle> Solver::solve(std::ostream* benchmarkOut) {
+	return (nullptr == benchmarkOut) ? solveFast() : solveBenchmark(benchmarkOut);
 }
 
-std::list<Puzzle> Solver::solveDebug(std::ostream* debugOut) {
-	printText(puzzle, *debugOut);
+std::list<Puzzle> Solver::solveBenchmark(std::ostream* benchmarkOut) {
+	printText(puzzle, *benchmarkOut);
 
 	auto globalTime = std::chrono::high_resolution_clock::now();
 	auto pickMoveTime = std::chrono::high_resolution_clock::duration{};
@@ -40,34 +40,33 @@ std::list<Puzzle> Solver::solveDebug(std::ostream* debugOut) {
 	while (!possibleMoveStack.empty()) {
 		auto start_time = std::chrono::high_resolution_clock::now();
 
-		Move firstMove = *(begin(possibleMoveStack));
-		// Note: invalidates firstMoveIt
+		Move currentMove = *(begin(possibleMoveStack));
 		possibleMoveStack.pop_front();
 
-		std::shared_ptr<BoardState> boardStateAfterMove = firstMove.proceed();
+		std::shared_ptr<BoardState> boardStateAfterMove = currentMove.proceed();
 
 		auto end_time = std::chrono::high_resolution_clock::now();
 		pickMoveTime += (end_time - start_time);
 		start_time = std::chrono::high_resolution_clock::now();
 
 		if (isSolution(*boardStateAfterMove, puzzle.goal)) {
-			*debugOut << "Solution is:" << std::endl;
-			printText(Puzzle{ puzzle.dimensions, puzzle.goal, puzzle.forbiddenSpots, boardStateAfterMove }, *debugOut);
-			*debugOut << "numberOfMoves: " << boardStateAfterMove->numberOfMoves << std::endl;
+			*benchmarkOut << "Solution is:" << std::endl;
+			printText(Puzzle{ puzzle.dimensions, puzzle.goal, puzzle.forbiddenSpots, boardStateAfterMove }, *benchmarkOut);
+			*benchmarkOut << "numberOfMoves: " << boardStateAfterMove->numberOfMoves << std::endl;
 			const auto hash = hasher.hash(*boardStateAfterMove);
-			*debugOut << "Final hash: " << hash << std::endl;
+			*benchmarkOut << "Final hash: " << hash << std::endl;
 
-			auto result = solution(firstMove.boardState, boardStateAfterMove);
+			auto result = solution(currentMove.boardState, boardStateAfterMove);
 
-			*debugOut << hasher.hash(*(puzzle.boardState)) << std::endl;
-			printText(puzzle, *debugOut);
-			*debugOut << std::endl << "-------------- " << std::endl;
+			*benchmarkOut << hasher.hash(*(puzzle.boardState)) << std::endl;
+			printText(puzzle, *benchmarkOut);
+			*benchmarkOut << std::endl << "-------------- " << std::endl;
 
 			const auto now = std::chrono::high_resolution_clock::now();
 			const auto totalTime = std::chrono::duration_cast<std::chrono::milliseconds>(now - globalTime).count();
-			*debugOut << "Total time was:    " << totalTime << std::endl;
+			*benchmarkOut << "Total time was:    " << totalTime << std::endl;
 			if (0 < totalTime) {
-				*debugOut
+				*benchmarkOut
 					<< "pickMoveTime:      " << (100 * std::chrono::duration_cast<std::chrono::milliseconds>(pickMoveTime).count()      / totalTime) << "%" << std::endl
 					<< "solutionCheckTime: " << (100 * std::chrono::duration_cast<std::chrono::milliseconds>(solutionCheckTime).count() / totalTime) << "%" << std::endl
 					<< "hashTime:          " << (100 * std::chrono::duration_cast<std::chrono::milliseconds>(hashTime).count()          / totalTime) << "%" << std::endl
@@ -97,7 +96,7 @@ std::list<Puzzle> Solver::solveDebug(std::ostream* debugOut) {
 		if (numberOfMoves == 0) {
 			numberOfMoves = boardStateAfterMove->numberOfMoves;
 
-			parentsOf[boardStateAfterMoveHash].push_back({ hasher.hash(*firstMove.boardState), boardStateAfterMove });
+			parentsOf[boardStateAfterMoveHash].push_back({ hasher.hash(*currentMove.boardState), boardStateAfterMove });
 
 			start_time = std::chrono::high_resolution_clock::now();
 
@@ -131,14 +130,13 @@ std::list<Puzzle> Solver::solveFast() {
 	// a few already-known moves will be queued twice
 	while (!possibleMoveStack.empty()) {
 		//peek a move
-		Move firstMove = *(begin(possibleMoveStack));
-		// Note: invalidates firstMoveIt
+		Move currentMove = *(begin(possibleMoveStack));
 		possibleMoveStack.pop_front();
 
-		std::shared_ptr<BoardState> boardStateAfterMove(firstMove.proceed());
+		std::shared_ptr<BoardState> boardStateAfterMove(currentMove.proceed());
 
 		if (isSolution(*boardStateAfterMove, puzzle.goal)) {
-			return solution(firstMove.boardState, boardStateAfterMove);
+			return solution(currentMove.boardState, boardStateAfterMove);
 		}
 
 		const auto boardStateAfterMoveHash = hasher.hash(*boardStateAfterMove);
@@ -147,28 +145,30 @@ std::list<Puzzle> Solver::solveFast() {
 			//unknown paths to add
 			numberOfMoves = boardStateAfterMove->numberOfMoves;
 
-			parentsOf[boardStateAfterMoveHash].push_back({ hasher.hash(*firstMove.boardState), boardStateAfterMove });
+			parentsOf[boardStateAfterMoveHash].push_back({ hasher.hash(*currentMove.boardState), boardStateAfterMove });
 
 			// Queue follow-up moves
-			const auto newMoves = moveDiscovery.gatherMoves(
+			for (auto& move : moveDiscovery.gatherMoves(
 				puzzle.dimensions,
 				std::move(boardStateAfterMove),
 				puzzle.forbiddenSpots
-			);
-
-			for (auto& move : newMoves) {
+			)) {
 				possibleMoveStack.push_back(std::move(move));
 			}
 		}
 	}
 
+	//no result found
 	return {};
 }
 
 std::list<Puzzle> Solver::solution(std::shared_ptr<BoardState> firstBoardState, std::shared_ptr<BoardState> lastBoardState) {
 	std::list<Puzzle> result;
+
+	//add solved board (at front)
 	result.push_front({ puzzle.dimensions, puzzle.goal, puzzle.forbiddenSpots, lastBoardState });
 
+	//add each board step (at front)
 	const auto initialHash = hasher.hash(*(puzzle.boardState));
 	HashType stopHash = hasher.hash(*firstBoardState);
 	while (stopHash != 0 && stopHash != initialHash) {
@@ -178,6 +178,8 @@ std::list<Puzzle> Solver::solution(std::shared_ptr<BoardState> firstBoardState, 
 			stopHash = start[0].first;
 		}
 	}
+
+	//add initial board (at front)
 	result.push_front(puzzle);
 	return result;
 }

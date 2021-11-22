@@ -3,9 +3,7 @@
 #include "block.h"
 
 #include <vector>
-#include <cassert>
 #include <memory>
-#include <sstream>
 
 struct BoardState {
 	// Numer of moves made since the start position

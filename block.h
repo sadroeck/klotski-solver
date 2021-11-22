@@ -1,6 +1,5 @@
 #pragma once
 
-#include <string>
 #include <set>
 #include <sstream>
 
@@ -46,8 +45,8 @@ public:
 		const std::string& anId
 	);
 
-	bool overlaps(const Block& other) const;
 	bool overlaps(const Point& otherPoint) const;
+	bool overlaps(const Block& other) const;
 	Block move(const Direction& dir) const;
 };
 

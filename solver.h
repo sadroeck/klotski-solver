@@ -14,11 +14,13 @@ public:
 public:
 	Solver(const Puzzle& puzzle, const MoveDiscovery& moveDiscovery);
 	~Solver() = default;
-	std::list<Puzzle> solve(std::ostream* debugOut = nullptr);
+	std::list<Puzzle> solve(std::ostream* benchmarkOut = nullptr);
 
 private:
-	std::list<Puzzle> solveDebug(std::ostream* debugOut);
+	std::list<Puzzle> solveBenchmark(std::ostream* benchmarkOut);
 	std::list<Puzzle> solveFast();
+
+	//format solution using solver data
 	std::list<Puzzle> solution(std::shared_ptr<BoardState> firstBoardState, std::shared_ptr<BoardState> lastBoardState);
 
 	const Puzzle puzzle;
@@ -30,7 +32,6 @@ private:
 	// Stores the number of moves from the starting state
 	std::unordered_map<HashType, NumberOfMovesType> knownPaths;
 
-	// Testing rermove me
 	std::unordered_map<HashType, std::vector<std::pair<HashType, std::shared_ptr<BoardState>>>> parentsOf;
 
 	const MoveDiscovery& moveDiscovery;

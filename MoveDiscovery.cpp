@@ -1,8 +1,6 @@
 #include "MoveDiscovery.h"
 
-#include "block.h"
-
-#include <memory>
+#include "MoveValidation.h"
 
 std::vector<Move> MoveRunnerFirst::gatherMoves(
 	const Point dimensions,

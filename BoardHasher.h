@@ -1,17 +1,14 @@
 #pragma once
 #include "puzzle.h"
 
-#include <numeric>
 #include <random>
-#include <vector>
 #include <algorithm> // std::find
 
 // Need a hash that's both order invariant & block-id invariant
 // i.e. 2 blocks with different ids at the same position should still hash the same
 // i.e. hash should be the same regardless of the order in which the blocks on the board are hashed
 
-// As we only update 1 block at a time, this would be perfect to update incrementally
-// But i'll add this to the TODO list :-) ...
+// TODO : As we only update 1 block at a time, this would be perfect to update incrementally
 
 template <typename HashType/* = int*/>
 class BoardHasher {
@@ -20,7 +17,7 @@ public:
 		HashType result{};
 		result ^= runnerHash(boardState.runner);
 		for (const auto& block : boardState.blocks) {
-			result ^= blockSetHash(block);
+			result ^= blockHash(block);
 		}
 		return result;
 	};
@@ -45,7 +42,7 @@ public:
 	}
 
 private:
-	int blockSetHash(const Block& block) {
+	int blockHash(const Block& block) {
 		const auto blockPos = std::distance(
 			begin(blockPointSetSet),
 			std::find_if(

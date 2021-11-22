@@ -976,10 +976,10 @@ void testHashing() {
 	assert(initialHasher.hash(swappedState) == initialHasher.hash(*(largePuzzle.boardState)) && "Hash should be the same for 2 same-sized blocks in swapped positions");
 }
 
-auto testSolverFx = [&](Solver solver, const bool& debug, std::string expectedOut = "") {
+auto testSolverFx = [&](Solver solver, const bool& benchmark, std::string expectedOut = "") {
 	std::stringstream out;
 	std::list<Puzzle> result;
-	if (debug) {
+	if (benchmark) {
 		result = solver.solve(&out);
 	} else {
 		result = solver.solve();
