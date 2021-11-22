@@ -1,5 +1,5 @@
 
--------------- 0
+-------------- step:0 move:0
 6 5
 4 3 @
 ########
@@ -10,7 +10,7 @@
 #effhij#
 ########
 
--------------- 1
+-------------- step:1 move:1
 6 5
 4 3 @
 ########
@@ -21,7 +21,7 @@
 #effhij#
 ########
 
--------------- 2
+-------------- step:2 move:2
 6 5
 4 3 @
 ########
@@ -32,7 +32,7 @@
 #effhij#
 ########
 
--------------- 3
+-------------- step:3 move:3
 6 5
 4 3 @
 ########
@@ -43,7 +43,7 @@
 #effhij#
 ########
 
--------------- 4
+-------------- step:4 move:4
 6 5
 4 3 @
 ########
@@ -54,7 +54,7 @@
 #effhij#
 ########
 
--------------- 5
+-------------- step:5 move:5
 6 5
 4 3 @
 ########
@@ -65,7 +65,7 @@
 #effhij#
 ########
 
--------------- 6
+-------------- step:6 move:5
 6 5
 4 3 @
 ########
@@ -76,73 +76,95 @@
 #effhij#
 ########
 
--------------- 7
+-------------- step:7 move:6
 6 5
 4 3 @
 ########
 #@@aabd#
 #@@acdd#
-#kkl im#
-#eefgij#
-#effh^j#
-########
-
--------------- 8
-6 5
-4 3 @
-########
-#@@aabd#
-#@@acdd#
-#kkl im#
-#eefgij#
-#eff hj#
-########
-
--------------- 9
-6 5
-4 3 @
-########
-#@@aabd#
-#@@acdd#
-#kkl im#
+#kklg m#
 #eef ij#
-#effghj#
+#effhij#
 ########
 
--------------- 10
+-------------- step:8 move:6
 6 5
 4 3 @
 ########
 #@@aabd#
 #@@acdd#
-#kkli m#
+#kkl gm#
+#eef ij#
+#effhij#
+########
+
+-------------- step:9 move:7
+6 5
+4 3 @
+########
+#@@aabd#
+#@@acdd#
+#kkl gm#
+#eefhij#
+#eff ij#
+########
+
+-------------- step:10 move:7
+6 5
+4 3 @
+########
+#@@aabd#
+#@@acdd#
+#kklhgm#
+#eef ij#
+#eff ij#
+########
+
+-------------- step:11 move:8
+6 5
+4 3 @
+########
+#@@aabd#
+#@@acdd#
+#kklhgm#
 #eefi^j#
-#effghj#
+#effi^j#
 ########
 
--------------- 11
+-------------- step:12 move:9
 6 5
 4 3 @
 ########
 #@@aabd#
 #@@acdd#
-#kkli m#
-#eefihj#
-#effg^j#
+#kklh m#
+#eefigj#
+#effi^j#
 ########
 
--------------- 12
+-------------- step:13 move:9
 6 5
 4 3 @
 ########
 #@@aabd#
 #@@acdd#
-#kkli m#
-#eefihj#
-#eff gj#
+#kklh m#
+#eefi^j#
+#effigj#
 ########
 
--------------- 13
+-------------- step:14 move:10
+6 5
+4 3 @
+########
+#@@aabd#
+#@@acdd#
+#kkl hm#
+#eefi^j#
+#effigj#
+########
+
+-------------- step:15 move:10
 6 5
 4 3 @
 ########
@@ -153,7 +175,7 @@
 #effigj#
 ########
 
--------------- 14
+-------------- step:16 move:11
 6 5
 4 3 @
 ########
@@ -164,18 +186,18 @@
 #effigj#
 ########
 
--------------- 15
+-------------- step:17 move:11
 6 5
 4 3 @
 ########
 #@@aabd#
 #@@acdd#
-# kkl m#
+#kk  lm#
 #eefihj#
 #effigj#
 ########
 
--------------- 16
+-------------- step:18 move:12
 6 5
 4 3 @
 ########
@@ -186,7 +208,7 @@
 #effigj#
 ########
 
--------------- 17
+-------------- step:19 move:12
 6 5
 4 3 @
 ########
@@ -197,7 +219,7 @@
 #effigj#
 ########
 
--------------- 18
+-------------- step:20 move:13
 6 5
 4 3 @
 ########
@@ -208,7 +230,7 @@
 # ffigj#
 ########
 
--------------- 19
+-------------- step:21 move:14
 6 5
 4 3 @
 ########
@@ -219,7 +241,7 @@
 #ff igj#
 ########
 
--------------- 20
+-------------- step:22 move:15
 6 5
 4 3 @
 ########
@@ -230,18 +252,18 @@
 #ffi gj#
 ########
 
--------------- 21
+-------------- step:23 move:16
 6 5
 4 3 @
 ########
 #@@aabd#
 #@@acdd#
 #eekklm#
-#efi hj#
-#ffig^j#
+#efih^j#
+#ffi gj#
 ########
 
--------------- 22
+-------------- step:24 move:16
 6 5
 4 3 @
 ########
@@ -249,10 +271,10 @@
 #@@acdd#
 #eekklm#
 #efi ^j#
-#ffighj#
+#ffihgj#
 ########
 
--------------- 23
+-------------- step:25 move:17
 6 5
 4 3 @
 ########
@@ -260,54 +282,54 @@
 #@@acdd#
 #eekk m#
 #efi lj#
-#ffighj#
+#ffihgj#
 ########
 
--------------- 24
+-------------- step:26 move:17
+6 5
+4 3 @
+########
+#@@aabd#
+#@@acdd#
+#eekk m#
+#efil^j#
+#ffihgj#
+########
+
+-------------- step:27 move:18
 6 5
 4 3 @
 ########
 #@@aabd#
 #@@acdd#
 #ee kkm#
-#efi lj#
-#ffighj#
+#efil^j#
+#ffihgj#
 ########
 
--------------- 25
+-------------- step:28 move:19
 6 5
 4 3 @
 ########
 #@@aabd#
 #@@acdd#
 #eeikkm#
-#efi lj#
-#ff ghj#
+#efil^j#
+#ff hgj#
 ########
 
--------------- 26
+-------------- step:29 move:20
 6 5
 4 3 @
 ########
 #@@aabd#
 #@@acdd#
 #eeikkm#
-#efi lj#
-#ffg hj#
+#efil^j#
+#ffh gj#
 ########
 
--------------- 27
-6 5
-4 3 @
-########
-#@@aabd#
-#@@acdd#
-#eeikkm#
-#efi lj#
-#ffgh^j#
-########
-
--------------- 28
+-------------- step:30 move:21
 6 5
 4 3 @
 ########
@@ -315,10 +337,10 @@
 #@@acdd#
 #eeikkm#
 #efi ^j#
-#ffghlj#
+#ffhlgj#
 ########
 
--------------- 29
+-------------- step:31 move:22
 6 5
 4 3 @
 ########
@@ -326,10 +348,10 @@
 #@@acdd#
 #eei  m#
 #efikkj#
-#ffghlj#
+#ffhlgj#
 ########
 
--------------- 30
+-------------- step:32 move:23
 6 5
 4 3 @
 ########
@@ -337,10 +359,10 @@
 #@@acdd#
 #eei m #
 #efikkj#
-#ffghlj#
+#ffhlgj#
 ########
 
--------------- 31
+-------------- step:33 move:23
 6 5
 4 3 @
 ########
@@ -348,10 +370,10 @@
 #@@acdd#
 #eeim  #
 #efikkj#
-#ffghlj#
+#ffhlgj#
 ########
 
--------------- 32
+-------------- step:34 move:24
 6 5
 4 3 @
 ########
@@ -359,10 +381,10 @@
 #@@ac d#
 #eeimdd#
 #efikkj#
-#ffghlj#
+#ffhlgj#
 ########
 
--------------- 33
+-------------- step:35 move:25
 6 5
 4 3 @
 ########
@@ -370,10 +392,10 @@
 #@@ac d#
 #eeimdd#
 #efikkj#
-#ffghlj#
+#ffhlgj#
 ########
 
--------------- 34
+-------------- step:36 move:26
 6 5
 4 3 @
 ########
@@ -381,10 +403,10 @@
 #@@a cd#
 #eeimdd#
 #efikkj#
-#ffghlj#
+#ffhlgj#
 ########
 
--------------- 35
+-------------- step:37 move:26
 6 5
 4 3 @
 ########
@@ -392,10 +414,10 @@
 #@@a  d#
 #eeimdd#
 #efikkj#
-#ffghlj#
+#ffhlgj#
 ########
 
--------------- 36
+-------------- step:38 move:27
 6 5
 4 3 @
 ########
@@ -403,10 +425,10 @@
 #@@am d#
 #eei dd#
 #efikkj#
-#ffghlj#
+#ffhlgj#
 ########
 
--------------- 37
+-------------- step:39 move:28
 6 5
 4 3 @
 ########
@@ -414,10 +436,10 @@
 #@@amd #
 #eeidd #
 #efikkj#
-#ffghlj#
+#ffhlgj#
 ########
 
--------------- 38
+-------------- step:40 move:29
 6 5
 4 3 @
 ########
@@ -425,10 +447,10 @@
 #@@amd #
 #eeiddj#
 #efikkj#
-#ffghl^#
+#ffhlg^#
 ########
 
--------------- 39
+-------------- step:41 move:29
 6 5
 4 3 @
 ########
@@ -436,252 +458,274 @@
 #@@amdj#
 #eeiddj#
 #efikk^#
-#ffghl^#
+#ffhlg^#
 ########
 
--------------- 40
+-------------- step:42 move:30
 6 5
 4 3 @
 ########
 #@@aacb#
 #@@amdj#
 #eeiddj#
-#efi kk#
-#ffghl^#
+#efikk^#
+#ffhl^g#
 ########
 
--------------- 41
+-------------- step:43 move:30
 6 5
 4 3 @
 ########
 #@@aacb#
 #@@amdj#
 #eeiddj#
-#efihkk#
-#ffg l^#
+#efikkg#
+#ffhl^^#
 ########
 
--------------- 42
+-------------- step:44 move:31
 6 5
 4 3 @
 ########
 #@@aacb#
 #@@amdj#
 #eeiddj#
-#efihkk#
-#ffgl^^#
+#efikkg#
+#ffh l^#
 ########
 
--------------- 43
+-------------- step:45 move:31
 6 5
 4 3 @
 ########
 #@@aacb#
 #@@amdj#
 #eeiddj#
-#efih^^#
-#ffglkk#
+#efikkg#
+#ffh ^l#
 ########
 
--------------- 44
+-------------- step:46 move:32
 6 5
 4 3 @
 ########
 #@@aacb#
 #@@amdj#
 #eeiddj#
-#efi h^#
-#ffglkk#
+#efi ^g#
+#ffhkkl#
 ########
 
--------------- 45
-6 5
-4 3 @
-########
-#@@aacb#
-#@@amdj#
-#eeiddj#
-#efi ^h#
-#ffglkk#
-########
-
--------------- 46
+-------------- step:47 move:33
 6 5
 4 3 @
 ########
 #@@aacb#
 #@@am j#
 #eei dj#
-#efiddh#
-#ffglkk#
+#efiddg#
+#ffhkkl#
 ########
 
--------------- 47
+-------------- step:48 move:34
 6 5
 4 3 @
 ########
 #@@aa b#
 #@@amcj#
 #eei dj#
-#efiddh#
-#ffglkk#
+#efiddg#
+#ffhkkl#
 ########
 
--------------- 48
+-------------- step:49 move:35
 6 5
 4 3 @
 ########
 #@@aa b#
 #@@a cj#
 #eeimdj#
-#efiddh#
-#ffglkk#
+#efiddg#
+#ffhkkl#
 ########
 
--------------- 49
+-------------- step:50 move:36
 6 5
 4 3 @
 ########
 #@@ aab#
 #@@ acj#
 #eeimdj#
-#efiddh#
-#ffglkk#
+#efiddg#
+#ffhkkl#
 ########
 
--------------- 50
+-------------- step:51 move:37
 6 5
 4 3 @
 ########
 #@@ aab#
 #@@iacj#
 #eeimdj#
-#ef ddh#
-#ffglkk#
+#ef ddg#
+#ffhkkl#
 ########
 
--------------- 51
-6 5
-4 3 @
-########
-#@@ aab#
-#@@iacj#
-#eeimdj#
-#efgddh#
-#ff lkk#
-########
-
--------------- 52
+-------------- step:52 move:37
 6 5
 4 3 @
 ########
 #@@iaab#
 #@@iacj#
 #ee mdj#
-#efgddh#
-#ff lkk#
+#ef ddg#
+#ffhkkl#
 ########
 
--------------- 53
+-------------- step:53 move:38
 6 5
 4 3 @
 ########
 #@@iaab#
 #@@iacj#
 #ee mdj#
-#efgddh#
-#ffl kk#
+#efhddg#
+#ff kkl#
 ########
 
--------------- 54
+-------------- step:54 move:39
 6 5
 4 3 @
 ########
 #@@iaab#
 #@@iacj#
 #ee mdj#
-#efgddh#
-#fflkk^#
+#efhddg#
+#ffkk^l#
 ########
 
--------------- 55
+-------------- step:55 move:40
 6 5
 4 3 @
 ########
 #@@iaab#
 #@@iacj#
 #ee mdj#
-#efgdd^#
-#fflkkh#
+#efhddg#
+#ffkkl^#
 ########
 
--------------- 56
+-------------- step:56 move:41
+6 5
+4 3 @
+########
+#@@iaab#
+#@@iacj#
+#ee mdj#
+#efhdd^#
+#ffkklg#
+########
+
+-------------- step:57 move:42
 6 5
 4 3 @
 ########
 #@@iaab#
 #@@iac #
 #ee mdj#
-#efgddj#
-#fflkkh#
+#efhddj#
+#ffkklg#
 ########
 
--------------- 57
+-------------- step:58 move:43
 6 5
 4 3 @
 ########
 #@@iaab#
 #@@ia c#
 #ee mdj#
-#efgddj#
-#fflkkh#
+#efhddj#
+#ffkklg#
 ########
 
--------------- 58
+-------------- step:59 move:44
 6 5
 4 3 @
 ########
 #@@iaab#
 #@@ia c#
 #eem dj#
-#efgddj#
-#fflkkh#
+#efhddj#
+#ffkklg#
 ########
 
--------------- 59
+-------------- step:60 move:45
 6 5
 4 3 @
 ########
 #@@iaab#
 #@@iadc#
 #eemddj#
-#efg ^j#
-#fflkkh#
+#efh ^j#
+#ffkklg#
 ########
 
--------------- 60
+-------------- step:61 move:46
 6 5
 4 3 @
 ########
 #@@iaab#
 #@@iadc#
 #eemddj#
-#efgkkj#
-#ffl ^h#
+#ef h^j#
+#ffkklg#
 ########
 
--------------- 61
+-------------- step:62 move:46
 6 5
 4 3 @
 ########
 #@@iaab#
 #@@iadc#
 #eemddj#
-#efgkkj#
-#ff l^h#
+#ef  hj#
+#ffkklg#
 ########
 
--------------- 62
+-------------- step:63 move:47
+6 5
+4 3 @
+########
+#@@iaab#
+#@@iadc#
+#eemddj#
+#efkkhj#
+#ff  lg#
+########
+
+-------------- step:64 move:48
+6 5
+4 3 @
+########
+#@@iaab#
+#@@iadc#
+#eemddj#
+#efkkhj#
+#ff l^g#
+########
+
+-------------- step:65 move:49
+6 5
+4 3 @
+########
+#@@iaab#
+#@@iadc#
+#eemddj#
+#efkk^j#
+#ff lhg#
+########
+
+-------------- step:66 move:50
 6 5
 4 3 @
 ########
@@ -689,32 +733,10 @@
 #@@iadc#
 #eemddj#
 #ef kkj#
-#ffgl^h#
+#ff lhg#
 ########
 
--------------- 63
-6 5
-4 3 @
-########
-#@@iaab#
-#@@iadc#
-#eemddj#
-#ef kkj#
-#ffg lh#
-########
-
--------------- 64
-6 5
-4 3 @
-########
-#@@iaab#
-#@@iadc#
-#eemddj#
-#ef kkj#
-#ff glh#
-########
-
--------------- 65
+-------------- step:67 move:51
 6 5
 4 3 @
 ########
@@ -722,21 +744,21 @@
 #@@iadc#
 #ee ddj#
 #efmkkj#
-#ff glh#
+#ff lhg#
 ########
 
--------------- 66
+-------------- step:68 move:51
 6 5
 4 3 @
 ########
-#@@ aab#
+#@@iaab#
 #@@iadc#
-#eeiddj#
-#efmkkj#
-#ff glh#
+#ee ddj#
+#ef kkj#
+#ffmlhg#
 ########
 
--------------- 67
+-------------- step:69 move:52
 6 5
 4 3 @
 ########
@@ -744,10 +766,10 @@
 #@@iadc#
 #eeiddj#
 #ef kkj#
-#ffmglh#
+#ffmlhg#
 ########
 
--------------- 68
+-------------- step:70 move:52
 6 5
 4 3 @
 ########
@@ -755,10 +777,10 @@
 #@@ adc#
 #eeiddj#
 #efikkj#
-#ffmglh#
+#ffmlhg#
 ########
 
--------------- 69
+-------------- step:71 move:53
 6 5
 4 3 @
 ########
@@ -766,10 +788,10 @@
 #@@a dc#
 #eeiddj#
 #efikkj#
-#ffmglh#
+#ffmlhg#
 ########
 
--------------- 70
+-------------- step:72 move:54
 6 5
 4 3 @
 ########
@@ -777,10 +799,10 @@
 #@@addc#
 #eei  j#
 #efikkj#
-#ffmglh#
+#ffmlhg#
 ########
 
--------------- 71
+-------------- step:73 move:55
 6 5
 4 3 @
 ########
@@ -788,1215 +810,1237 @@
 #@@addc#
 #eeikkj#
 #efi ^j#
-#ffmglh#
+#ffmlhg#
 ########
 
--------------- 72
+-------------- step:74 move:56
 6 5
 4 3 @
 ########
 #@@aadb#
 #@@addc#
 #eeikkj#
-#efig^j#
-#ffm lh#
+#efi hj#
+#ffml^g#
 ########
 
--------------- 73
+-------------- step:75 move:57
 6 5
 4 3 @
 ########
 #@@aadb#
 #@@addc#
 #eeikkj#
-#efiglj#
-#ffm ^h#
+#efi hj#
+#ffmlg^#
 ########
 
--------------- 74
-6 5
-4 3 @
-########
-#@@aadb#
-#@@addc#
-#eeikkj#
-#efiglj#
-#ffm h^#
-########
-
--------------- 75
+-------------- step:76 move:58
 6 5
 4 3 @
 ########
 #@@aadb#
 #@@addc#
 #eeikk #
-#efiglj#
-#ffm hj#
+#efi hj#
+#ffmlgj#
 ########
 
--------------- 76
+-------------- step:77 move:59
 6 5
 4 3 @
 ########
 #@@aadb#
 #@@addc#
 #eei kk#
-#efiglj#
-#ffm hj#
+#efi hj#
+#ffmlgj#
 ########
 
--------------- 77
+-------------- step:78 move:60
 6 5
 4 3 @
 ########
 #@@aadb#
 #@@addc#
-#eeigkk#
-#efi lj#
-#ffm hj#
+#ee ikk#
+#ef ihj#
+#ffmlgj#
 ########
 
--------------- 78
+-------------- step:79 move:61
 6 5
 4 3 @
 ########
 #@@aadb#
 #@@addc#
-#eeigkk#
-#efi lj#
-#ff mhj#
+#ee ikk#
+#efmihj#
+#ff lgj#
 ########
 
--------------- 79
+-------------- step:80 move:61
 6 5
 4 3 @
 ########
 #@@aadb#
 #@@addc#
-#ee gkk#
-#efi lj#
-#ffimhj#
+#eemikk#
+#ef ihj#
+#ff lgj#
 ########
 
--------------- 80
+-------------- step:81 move:62
 6 5
 4 3 @
 ########
 #@@aadb#
 #@@addc#
-#eeg kk#
-#efi lj#
-#ffimhj#
+#eemikk#
+#ef ihj#
+#ffl gj#
 ########
 
--------------- 81
+-------------- step:82 move:62
 6 5
 4 3 @
 ########
 #@@aadb#
 #@@addc#
-#eeg kk#
-#efimlj#
-#ffi hj#
+#eemikk#
+#eflihj#
+#ff  gj#
 ########
 
--------------- 82
+-------------- step:83 move:63
 6 5
 4 3 @
 ########
 #@@aadb#
 #@@addc#
-#eegmkk#
-#efi lj#
-#ffi hj#
+#eem kk#
+#eflihj#
+#ff igj#
 ########
 
--------------- 83
+-------------- step:84 move:64
 6 5
 4 3 @
 ########
 #@@aadb#
 #@@addc#
-#eegmkk#
-#ef ilj#
-#ff ihj#
+#ee mkk#
+#eflihj#
+#ff igj#
 ########
 
--------------- 84
+-------------- step:85 move:65
 6 5
 4 3 @
 ########
 #@@aadb#
 #@@addc#
-#eegmkk#
-#e filj#
-# ffihj#
+#eelmkk#
+#ef ihj#
+#ff igj#
 ########
 
--------------- 85
+-------------- step:86 move:66
 6 5
 4 3 @
 ########
 #@@aadb#
 #@@addc#
-#  gmkk#
-#eefilj#
-#effihj#
+#eelmkk#
+#e fihj#
+# ffigj#
 ########
 
--------------- 86
+-------------- step:87 move:67
 6 5
 4 3 @
 ########
 #@@aadb#
 #@@addc#
-# g mkk#
-#eefilj#
-#effihj#
+#  lmkk#
+#eefihj#
+#effigj#
 ########
 
--------------- 87
+-------------- step:88 move:68
 6 5
 4 3 @
 ########
 #@@aadb#
 #@@addc#
-#g  mkk#
-#eefilj#
-#effihj#
+# l mkk#
+#eefihj#
+#effigj#
 ########
 
--------------- 88
+-------------- step:89 move:68
 6 5
 4 3 @
 ########
 #@@aadb#
 #@@addc#
-#g m kk#
-#eefilj#
-#effihj#
+#l  mkk#
+#eefihj#
+#effigj#
 ########
 
--------------- 89
+-------------- step:90 move:69
 6 5
 4 3 @
 ########
 #@@aadb#
 #@@addc#
-#g mkk #
-#eefilj#
-#effihj#
+#l m kk#
+#eefihj#
+#effigj#
 ########
 
--------------- 90
+-------------- step:91 move:69
+6 5
+4 3 @
+########
+#@@aadb#
+#@@addc#
+#lm  kk#
+#eefihj#
+#effigj#
+########
+
+-------------- step:92 move:70
+6 5
+4 3 @
+########
+#@@aadb#
+#@@addc#
+#lm kk #
+#eefihj#
+#effigj#
+########
+
+-------------- step:93 move:70
+6 5
+4 3 @
+########
+#@@aadb#
+#@@addc#
+#lmkk  #
+#eefihj#
+#effigj#
+########
+
+-------------- step:94 move:71
 6 5
 4 3 @
 ########
 #@@aadb#
 #@@add #
-#g mkkc#
-#eefilj#
-#effihj#
+#lmkk c#
+#eefihj#
+#effigj#
 ########
 
--------------- 91
+-------------- step:95 move:71
+6 5
+4 3 @
+########
+#@@aadb#
+#@@add #
+#lmkkc #
+#eefihj#
+#effigj#
+########
+
+-------------- step:96 move:72
 6 5
 4 3 @
 ########
 #@@aad #
 #@@addb#
-#g mkkc#
-#eefilj#
-#effihj#
+#lmkkc #
+#eefihj#
+#effigj#
 ########
 
--------------- 92
-6 5
-4 3 @
-########
-#@@aad #
-#@@addb#
-#gm kkc#
-#eefilj#
-#effihj#
-########
-
--------------- 93
-6 5
-4 3 @
-########
-#@@aad #
-#@@addb#
-#gmkk c#
-#eefilj#
-#effihj#
-########
-
--------------- 94
-6 5
-4 3 @
-########
-#@@aad #
-#@@addb#
-#gmkkc #
-#eefilj#
-#effihj#
-########
-
--------------- 95
+-------------- step:97 move:72
 6 5
 4 3 @
 ########
 #@@aad #
 #@@add #
-#gmkkcb#
-#eefilj#
-#effihj#
+#lmkkcb#
+#eefihj#
+#effigj#
 ########
 
--------------- 96
+-------------- step:98 move:73
 6 5
 4 3 @
 ########
 #@@aa d#
 #@@a dd#
-#gmkkcb#
-#eefilj#
-#effihj#
+#lmkkcb#
+#eefihj#
+#effigj#
 ########
 
--------------- 97
+-------------- step:99 move:74
 6 5
 4 3 @
 ########
 #@@ aad#
 #@@ add#
-#gmkkcb#
-#eefilj#
-#effihj#
+#lmkkcb#
+#eefihj#
+#effigj#
 ########
 
--------------- 98
+-------------- step:100 move:75
 6 5
 4 3 @
 ########
 # @@aad#
 # @@add#
-#gmkkcb#
-#eefilj#
-#effihj#
+#lmkkcb#
+#eefihj#
+#effigj#
 ########
 
--------------- 99
+-------------- step:101 move:76
 6 5
 4 3 @
 ########
 # @@aad#
-#g@@add#
+#l@@add#
 # mkkcb#
-#eefilj#
-#effihj#
+#eefihj#
+#effigj#
 ########
 
--------------- 100
+-------------- step:102 move:76
 6 5
 4 3 @
 ########
-#g@@aad#
+#l@@aad#
 # @@add#
 # mkkcb#
-#eefilj#
-#effihj#
+#eefihj#
+#effigj#
 ########
 
--------------- 101
+-------------- step:103 move:77
 6 5
 4 3 @
 ########
-#g@@aad#
+#l@@aad#
 # @@add#
 #m kkcb#
-#eefilj#
-#effihj#
+#eefihj#
+#effigj#
 ########
 
--------------- 102
+-------------- step:104 move:77
 6 5
 4 3 @
 ########
-#g@@aad#
-# @@add#
-#mkk cb#
-#eefilj#
-#effihj#
-########
-
--------------- 103
-6 5
-4 3 @
-########
-#g@@aad#
-# @@add#
-#mkkc b#
-#eefilj#
-#effihj#
-########
-
--------------- 104
-6 5
-4 3 @
-########
-#g@@aad#
+#l@@aad#
 #m@@add#
-# kkc b#
-#eefilj#
-#effihj#
+#  kkcb#
+#eefihj#
+#effigj#
 ########
 
--------------- 105
+-------------- step:105 move:78
 6 5
 4 3 @
 ########
-#g@@aad#
+#l@@aad#
+#m@@add#
+# kk cb#
+#eefihj#
+#effigj#
+########
+
+-------------- step:106 move:78
+6 5
+4 3 @
+########
+#l@@aad#
+#m@@add#
+#kk  cb#
+#eefihj#
+#effigj#
+########
+
+-------------- step:107 move:79
+6 5
+4 3 @
+########
+#l@@aad#
 #m@@add#
 #kk c b#
-#eefilj#
-#effihj#
+#eefihj#
+#effigj#
 ########
 
--------------- 106
+-------------- step:108 move:79
 6 5
 4 3 @
 ########
-#g@@aad#
+#l@@aad#
 #m@@add#
 #kkc  b#
-#eefilj#
-#effihj#
+#eefihj#
+#effigj#
 ########
 
--------------- 107
+-------------- step:109 move:80
 6 5
 4 3 @
 ########
-#g@@aad#
+#l@@aad#
 #m@@add#
-#kkci b#
-#eefilj#
-#eff hj#
-########
-
--------------- 108
-6 5
-4 3 @
-########
-#g@@aad#
-#m@@add#
-#kkci b#
-#eefilj#
-#effh^j#
-########
-
--------------- 109
-6 5
-4 3 @
-########
-#g@@aad#
-#m@@add#
-#kkci b#
+#kkc hb#
 #eefi^j#
-#effhlj#
+#effigj#
 ########
 
--------------- 110
+-------------- step:110 move:80
 6 5
 4 3 @
 ########
-#g@@aad#
+#l@@aad#
 #m@@add#
-#kkc ib#
+#kkch b#
+#eefi^j#
+#effigj#
+########
+
+-------------- step:111 move:81
+6 5
+4 3 @
+########
+#l@@aad#
+#m@@add#
+#kkch b#
+#eefigj#
+#effi^j#
+########
+
+-------------- step:112 move:81
+6 5
+4 3 @
+########
+#l@@aad#
+#m@@add#
+#kkchgb#
+#eefi^j#
+#effi^j#
+########
+
+-------------- step:113 move:82
+6 5
+4 3 @
+########
+#l@@aad#
+#m@@add#
+#kkchgb#
 #eef ij#
-#effhlj#
+#eff ij#
 ########
 
--------------- 111
+-------------- step:114 move:83
 6 5
 4 3 @
 ########
-#g@@aad#
+#l@@aad#
 #m@@add#
-#kkc ib#
+#kkc gb#
 #eefhij#
-#eff lj#
+#eff ij#
 ########
 
--------------- 112
+-------------- step:115 move:83
 6 5
 4 3 @
 ########
-#g@@aad#
+#l@@aad#
 #m@@add#
-#kkc ib#
-#eefhij#
-#effl^j#
+#kkc gb#
+#eef ij#
+#effhij#
 ########
 
--------------- 113
+-------------- step:116 move:84
 6 5
 4 3 @
 ########
-#g@@aad#
+#l@@aad#
+#m@@add#
+#kkcg b#
+#eef ij#
+#effhij#
+########
+
+-------------- step:117 move:84
+6 5
+4 3 @
+########
+#l@@aad#
 #m@@add#
 #kkc  b#
-#eefhij#
-#efflij#
+#eefgij#
+#effhij#
 ########
 
--------------- 114
+-------------- step:118 move:85
 6 5
 4 3 @
 ########
-#g@@aad#
+#l@@aad#
 #m@@add#
 #kkc b #
-#eefhij#
-#efflij#
+#eefgij#
+#effhij#
 ########
 
--------------- 115
+-------------- step:119 move:85
 6 5
 4 3 @
 ########
-#g@@aad#
+#l@@aad#
 #m@@add#
 #kkcb  #
-#eefhij#
-#efflij#
+#eefgij#
+#effhij#
 ########
 
--------------- 116
+-------------- step:120 move:86
 6 5
 4 3 @
 ########
-#g@@aa #
+#l@@aa #
 #m@@a d#
 #kkcbdd#
-#eefhij#
-#efflij#
+#eefgij#
+#effhij#
 ########
 
--------------- 117
+-------------- step:121 move:87
 6 5
 4 3 @
 ########
-#g@@ aa#
+#l@@ aa#
 #m@@ ad#
 #kkcbdd#
-#eefhij#
-#efflij#
+#eefgij#
+#effhij#
 ########
 
--------------- 118
+-------------- step:122 move:88
 6 5
 4 3 @
 ########
-#g @@aa#
+#l @@aa#
 #m @@ad#
 #kkcbdd#
-#eefhij#
-#efflij#
+#eefgij#
+#effhij#
 ########
 
--------------- 119
+-------------- step:123 move:89
 6 5
 4 3 @
 ########
-# g@@aa#
-#m @@ad#
+#l @@aa#
+# m@@ad#
 #kkcbdd#
-#eefhij#
-#efflij#
+#eefgij#
+#effhij#
 ########
 
--------------- 120
+-------------- step:124 move:89
 6 5
 4 3 @
 ########
-#mg@@aa#
+#lm@@aa#
 #  @@ad#
 #kkcbdd#
-#eefhij#
-#efflij#
+#eefgij#
+#effhij#
 ########
 
--------------- 121
+-------------- step:125 move:90
 6 5
 4 3 @
 ########
-#mg@@aa#
+#lm@@aa#
 #kk@@ad#
 #  cbdd#
-#eefhij#
-#efflij#
+#eefgij#
+#effhij#
 ########
 
--------------- 122
+-------------- step:126 move:91
 6 5
 4 3 @
 ########
-#mg@@aa#
+#lm@@aa#
 #kk@@ad#
 # c bdd#
-#eefhij#
-#efflij#
+#eefgij#
+#effhij#
 ########
 
--------------- 123
+-------------- step:127 move:91
 6 5
 4 3 @
 ########
-#mg@@aa#
+#lm@@aa#
 #kk@@ad#
-# cb dd#
-#eefhij#
-#efflij#
+#c  bdd#
+#eefgij#
+#effhij#
 ########
 
--------------- 124
+-------------- step:128 move:92
 6 5
 4 3 @
 ########
-#mg@@aa#
+#lm@@aa#
 #kk@@ad#
 #c b dd#
-#eefhij#
-#efflij#
+#eefgij#
+#effhij#
 ########
 
--------------- 125
+-------------- step:129 move:92
 6 5
 4 3 @
 ########
-#mg@@aa#
+#lm@@aa#
 #kk@@ad#
 #cb  dd#
-#eefhij#
-#efflij#
+#eefgij#
+#effhij#
 ########
 
--------------- 126
+-------------- step:130 move:93
 6 5
 4 3 @
 ########
-#mg  aa#
+#lm  aa#
 #kk@@ad#
 #cb@@dd#
-#eefhij#
-#efflij#
+#eefgij#
+#effhij#
 ########
 
--------------- 127
+-------------- step:131 move:94
 6 5
 4 3 @
 ########
-#m g aa#
+#l m aa#
 #kk@@ad#
 #cb@@dd#
-#eefhij#
-#efflij#
+#eefgij#
+#effhij#
 ########
 
--------------- 128
+-------------- step:132 move:94
 6 5
 4 3 @
 ########
-#m  gaa#
+#l  maa#
 #kk@@ad#
 #cb@@dd#
-#eefhij#
-#efflij#
+#eefgij#
+#effhij#
 ########
 
--------------- 129
+-------------- step:133 move:95
 6 5
 4 3 @
 ########
-# m gaa#
+# l maa#
 #kk@@ad#
 #cb@@dd#
-#eefhij#
-#efflij#
+#eefgij#
+#effhij#
 ########
 
--------------- 130
+-------------- step:134 move:95
 6 5
 4 3 @
 ########
-#  mgaa#
+#  lmaa#
 #kk@@ad#
 #cb@@dd#
-#eefhij#
-#efflij#
+#eefgij#
+#effhij#
 ########
 
--------------- 131
+-------------- step:135 move:96
 6 5
 4 3 @
 ########
-#kkmgaa#
+#kklmaa#
 #  @@ad#
 #cb@@dd#
-#eefhij#
-#efflij#
+#eefgij#
+#effhij#
 ########
 
--------------- 132
+-------------- step:136 move:97
 6 5
 4 3 @
 ########
-#kkmgaa#
+#kklmaa#
 # b@@ad#
 #c @@dd#
-#eefhij#
-#efflij#
+#eefgij#
+#effhij#
 ########
 
--------------- 133
+-------------- step:137 move:98
 6 5
 4 3 @
 ########
-#kkmgaa#
+#kklmaa#
 #cb@@ad#
 #  @@dd#
-#eefhij#
-#efflij#
+#eefgij#
+#effhij#
 ########
 
--------------- 134
+-------------- step:138 move:99
 6 5
 4 3 @
 ########
-#kkmgaa#
+#kklmaa#
 #cb@@ad#
 #ee@@dd#
-#e fhij#
-# fflij#
+#e fgij#
+# ffhij#
 ########
 
--------------- 135
+-------------- step:139 move:100
 6 5
 4 3 @
 ########
-#kkmgaa#
+#kklmaa#
 #cb@@ad#
 #ee@@dd#
-#ef hij#
-#ff lij#
+#ef gij#
+#ff hij#
 ########
 
--------------- 136
+-------------- step:140 move:101
 6 5
 4 3 @
 ########
-#kkmgaa#
+#kklmaa#
 #cb@@ad#
 #ee@@dd#
-#efh ij#
-#ff lij#
+#efg ij#
+#ff hij#
 ########
 
--------------- 137
+-------------- step:141 move:101
 6 5
 4 3 @
 ########
-#kkmgaa#
+#kklmaa#
 #cb@@ad#
 #ee@@dd#
 #ef  ij#
-#ffhlij#
+#ffghij#
 ########
 
--------------- 138
+-------------- step:142 move:102
 6 5
 4 3 @
 ########
-#kkmgaa#
+#kklmaa#
 #cb  ad#
 #ee@@dd#
 #ef@@ij#
-#ffhlij#
+#ffghij#
 ########
 
--------------- 139
+-------------- step:143 move:103
 6 5
 4 3 @
 ########
-#kkm aa#
-#cb gad#
+#kkl aa#
+#cb mad#
 #ee@@dd#
 #ef@@ij#
-#ffhlij#
+#ffghij#
 ########
 
--------------- 140
+-------------- step:144 move:103
 6 5
 4 3 @
 ########
-#kkm aa#
-#cbg ad#
+#kkl aa#
+#cbm ad#
 #ee@@dd#
 #ef@@ij#
-#ffhlij#
+#ffghij#
 ########
 
--------------- 141
+-------------- step:145 move:104
 6 5
 4 3 @
 ########
-#kkmaa #
-#cbga d#
+#kklaa #
+#cbma d#
 #ee@@dd#
 #ef@@ij#
-#ffhlij#
+#ffghij#
 ########
 
--------------- 142
+-------------- step:146 move:105
 6 5
 4 3 @
 ########
-#kkmaad#
-#cbgadd#
+#kklaad#
+#cbmadd#
 #ee@@  #
 #ef@@ij#
-#ffhlij#
+#ffghij#
 ########
 
--------------- 143
+-------------- step:147 move:106
 6 5
 4 3 @
 ########
-#kkmaad#
-#cbgadd#
+#kklaad#
+#cbmadd#
 #ee@@i #
 #ef@@ij#
-#ffhl^j#
+#ffgh^j#
 ########
 
--------------- 144
+-------------- step:148 move:107
 6 5
 4 3 @
 ########
-#kkmaad#
-#cbgadd#
+#kklaad#
+#cbmadd#
+#ee@@i #
+#ef@@ij#
+#ffg hj#
+########
+
+-------------- step:149 move:108
+6 5
+4 3 @
+########
+#kklaad#
+#cbmadd#
+#ee@@i #
+#ef@@ij#
+#ff ghj#
+########
+
+-------------- step:150 move:109
+6 5
+4 3 @
+########
+#kklaad#
+#cbmadd#
 #ee@@ij#
 #ef@@ij#
-#ffhl^^#
+#ff gh^#
 ########
 
--------------- 145
+-------------- step:151 move:110
 6 5
 4 3 @
 ########
-#kkmaad#
-#cbgadd#
+#kklaad#
+#cbmadd#
 #ee@@ij#
 #ef@@ij#
-#ffh l^#
+#ff g^h#
 ########
 
--------------- 146
+-------------- step:152 move:111
 6 5
 4 3 @
 ########
-#kkmaad#
-#cbgadd#
+#kklaad#
+#cbmadd#
 #ee@@ij#
 #ef@@ij#
-#ff hl^#
+#ff  gh#
 ########
 
--------------- 147
+-------------- step:153 move:112
 6 5
 4 3 @
 ########
-#kkmaad#
-#cbgadd#
-#ee@@ij#
-#ef@@ij#
-#ff h^l#
-########
-
--------------- 148
-6 5
-4 3 @
-########
-#kkmaad#
-#cbgadd#
-#ee@@ij#
-#ef@@ij#
-#ff  hl#
-########
-
--------------- 149
-6 5
-4 3 @
-########
-#kkmaad#
-#cbgadd#
+#kklaad#
+#cbmadd#
 #ee  ij#
 #ef@@ij#
-#ff@@hl#
+#ff@@gh#
 ########
 
--------------- 150
+-------------- step:154 move:113
 6 5
 4 3 @
 ########
-#kkmaad#
+#kklaad#
 #cb add#
-#eeg ij#
+#eem ij#
 #ef@@ij#
-#ff@@hl#
+#ff@@gh#
 ########
 
--------------- 151
+-------------- step:155 move:113
 6 5
 4 3 @
 ########
-#kkmaad#
+#kklaad#
+#cb add#
+#ee mij#
+#ef@@ij#
+#ff@@gh#
+########
+
+-------------- step:156 move:114
+6 5
+4 3 @
+########
+#kklaad#
 #c badd#
-#eeg ij#
+#ee mij#
 #ef@@ij#
-#ff@@hl#
+#ff@@gh#
 ########
 
--------------- 152
+-------------- step:157 move:114
 6 5
 4 3 @
 ########
-#kkmaad#
-# cbadd#
-#eeg ij#
+#kklaad#
+#c  add#
+#eebmij#
 #ef@@ij#
-#ff@@hl#
+#ff@@gh#
 ########
 
--------------- 153
+-------------- step:158 move:115
 6 5
 4 3 @
 ########
-#kkmaad#
-# cbadd#
-#ee gij#
-#ef@@ij#
-#ff@@hl#
-########
-
--------------- 154
-6 5
-4 3 @
-########
-#kkmaad#
+#kklaad#
 # c add#
-#eebgij#
+#eebmij#
 #ef@@ij#
-#ff@@hl#
+#ff@@gh#
 ########
 
--------------- 155
+-------------- step:159 move:115
 6 5
 4 3 @
 ########
-#kkmaad#
+#kklaad#
 #  cadd#
-#eebgij#
+#eebmij#
 #ef@@ij#
-#ff@@hl#
+#ff@@gh#
 ########
 
--------------- 156
+-------------- step:160 move:116
 6 5
 4 3 @
 ########
-#  maad#
+#  laad#
 #kkcadd#
-#eebgij#
+#eebmij#
 #ef@@ij#
-#ff@@hl#
+#ff@@gh#
 ########
 
--------------- 157
+-------------- step:161 move:117
 6 5
 4 3 @
 ########
-# m aad#
+# l aad#
 #kkcadd#
-#eebgij#
+#eebmij#
 #ef@@ij#
-#ff@@hl#
+#ff@@gh#
 ########
 
--------------- 158
+-------------- step:162 move:117
 6 5
 4 3 @
 ########
-# mcaad#
+#l  aad#
+#kkcadd#
+#eebmij#
+#ef@@ij#
+#ff@@gh#
+########
+
+-------------- step:163 move:118
+6 5
+4 3 @
+########
+#l caad#
 #kk add#
-#eebgij#
+#eebmij#
 #ef@@ij#
-#ff@@hl#
+#ff@@gh#
 ########
 
--------------- 159
+-------------- step:164 move:118
 6 5
 4 3 @
 ########
-#m caad#
+#lc aad#
 #kk add#
-#eebgij#
+#eebmij#
 #ef@@ij#
-#ff@@hl#
+#ff@@gh#
 ########
 
--------------- 160
+-------------- step:165 move:119
 6 5
 4 3 @
 ########
-#mc aad#
-#kk add#
-#eebgij#
-#ef@@ij#
-#ff@@hl#
-########
-
--------------- 161
-6 5
-4 3 @
-########
-#mcaa d#
+#lcaa d#
 #kka dd#
-#eebgij#
+#eebmij#
 #ef@@ij#
-#ff@@hl#
+#ff@@gh#
 ########
 
--------------- 162
+-------------- step:166 move:120
 6 5
 4 3 @
 ########
-#mcaad #
+#lcaad #
 #kkadd #
-#eebgij#
+#eebmij#
 #ef@@ij#
-#ff@@hl#
+#ff@@gh#
 ########
 
--------------- 163
+-------------- step:167 move:121
 6 5
 4 3 @
 ########
-#mcaad #
+#lcaad #
 #kkaddj#
-#eebgij#
+#eebmij#
 #ef@@i^#
-#ff@@hl#
+#ff@@gh#
 ########
 
--------------- 164
+-------------- step:168 move:121
 6 5
 4 3 @
 ########
-#mcaadj#
+#lcaadj#
 #kkaddj#
-#eebgi #
+#eebmi #
 #ef@@i^#
-#ff@@hl#
+#ff@@gh#
 ########
 
--------------- 165
+-------------- step:169 move:122
 6 5
 4 3 @
 ########
-#mcaadj#
+#lcaadj#
 #kkaddj#
-#eebg i#
+#eebm i#
 #ef@@^i#
-#ff@@hl#
+#ff@@gh#
 ########
 
--------------- 166
+-------------- step:170 move:123
 6 5
 4 3 @
 ########
-#mcaadj#
+#lcaadj#
 #kkaddj#
-#eebg i#
-#ef@@hi#
-#ff@@^l#
+#eebm i#
+#ef@@gi#
+#ff@@^h#
 ########
 
--------------- 167
+-------------- step:171 move:123
 6 5
 4 3 @
 ########
-#mcaadj#
+#lcaadj#
 #kkaddj#
-#eebghi#
+#eebmgi#
 #ef@@^i#
-#ff@@^l#
+#ff@@^h#
 ########
 
--------------- 168
+-------------- step:172 move:124
 6 5
 4 3 @
 ########
-#mcaadj#
+#lcaadj#
 #kkaddj#
-#eebghi#
+#eebmgi#
 #ef @@i#
-#ff @@l#
+#ff @@h#
 ########
 
--------------- 169
+-------------- step:173 move:125
 6 5
 4 3 @
 ########
-#mcaadj#
+#lcaadj#
 #kkaddj#
-#eebghi#
+#eebmgi#
 #e f@@i#
-# ff@@l#
+# ff@@h#
 ########
 
--------------- 170
+-------------- step:174 move:126
 6 5
 4 3 @
 ########
-#mcaadj#
+#lcaadj#
 #kkaddj#
-#  bghi#
+#  bmgi#
 #eef@@i#
-#eff@@l#
+#eff@@h#
 ########
 
--------------- 171
+-------------- step:175 move:127
 6 5
 4 3 @
 ########
-#mcaadj#
+#lcaadj#
 #  addj#
-#kkbghi#
+#kkbmgi#
 #eef@@i#
-#eff@@l#
+#eff@@h#
 ########
 
--------------- 172
+-------------- step:176 move:128
 6 5
 4 3 @
 ########
-#m aadj#
+#l aadj#
 # caddj#
-#kkbghi#
+#kkbmgi#
 #eef@@i#
-#eff@@l#
+#eff@@h#
 ########
 
--------------- 173
+-------------- step:177 move:128
 6 5
 4 3 @
 ########
-#m aadj#
+#l aadj#
 #c addj#
-#kkbghi#
+#kkbmgi#
 #eef@@i#
-#eff@@l#
+#eff@@h#
 ########
 
--------------- 174
+-------------- step:178 move:129
 6 5
 4 3 @
 ########
-#maa dj#
+#laa dj#
 #ca ddj#
-#kkbghi#
+#kkbmgi#
 #eef@@i#
-#eff@@l#
+#eff@@h#
 ########
 
--------------- 175
+-------------- step:179 move:130
 6 5
 4 3 @
 ########
-#maad j#
+#laad j#
 #cadd j#
-#kkbghi#
+#kkbmgi#
 #eef@@i#
-#eff@@l#
+#eff@@h#
 ########
 
--------------- 176
+-------------- step:180 move:131
 6 5
 4 3 @
 ########
-#maadj #
+#laadj #
 #caddj #
-#kkbghi#
+#kkbmgi#
 #eef@@i#
-#eff@@l#
+#eff@@h#
 ########
 
--------------- 177
+-------------- step:181 move:132
 6 5
 4 3 @
 ########
-#maadj #
+#laadj #
 #caddji#
-#kkbghi#
+#kkbmgi#
 #eef@@^#
-#eff@@l#
+#eff@@h#
 ########
 
--------------- 178
+-------------- step:182 move:132
 6 5
 4 3 @
 ########
-#maadji#
+#laadji#
 #caddji#
-#kkbgh #
+#kkbmg #
 #eef@@^#
-#eff@@l#
+#eff@@h#
 ########
 
--------------- 179
+-------------- step:183 move:133
 6 5
 4 3 @
 ########
-#maadji#
+#laadji#
 #caddji#
-#kkbgh #
-#eef@@l#
+#kkbmg #
+#eef@@h#
 #eff@@^#
 ########
 
--------------- 180
+-------------- step:184 move:133
 6 5
 4 3 @
 ########
-#maadji#
+#laadji#
 #caddji#
-#kkbghl#
+#kkbmgh#
 #eef@@^#
 #eff@@^#
 ########
 
--------------- 181
+-------------- step:185 move:134
 6 5
 4 3 @
 ########
-#maadji#
+#laadji#
 #caddji#
-#kkbghl#
+#kkbmgh#
 #eef @@#
 #eff @@#
 ########

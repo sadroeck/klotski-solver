@@ -9,7 +9,7 @@
 class Solver {
 public:
 	using HashType = int;
-	using NumberOfMovesType = typename std::remove_const<decltype(BoardState::numberOfMoves)>::type;
+	using MoveNumberType = typename std::remove_const<decltype(BoardState::moveNumber)>::type;
 
 public:
 	Solver(const Puzzle& puzzle, const MoveDiscovery& moveDiscovery);
@@ -27,12 +27,10 @@ private:
 	BoardHasher<HashType> hasher;
 
 	// Stores all possible moves to explore
-	std::list<Move> possibleMoveStack;
+	std::list<Move> movesToExploreSoon;
+	std::list<Move> movesToExploreLater;
 
-	// Stores the number of moves from the starting state
-	std::unordered_map<HashType, NumberOfMovesType> knownPaths;
-
-	std::unordered_map<HashType, std::vector<std::pair<HashType, std::shared_ptr<BoardState>>>> parentsOf;
+	std::unordered_map<HashType, std::pair<HashType, std::shared_ptr<BoardState>>> parentOf;
 
 	const MoveDiscovery& moveDiscovery;
 };

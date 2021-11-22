@@ -7,7 +7,7 @@
 
 struct BoardState {
 	// Numer of moves made since the start position
-	const int numberOfMoves;
+	const size_t moveNumber;
 
 	// Puzzle piece to be moved to the goal
 	const Block runner;
@@ -24,13 +24,16 @@ public:
 	// Block to be moved
 	const Block& block;
 
+	// move effort
+	const size_t effort;
+
 	// Direction in which to move block
-	Direction directionToMove;
+	const Direction directionToMove;
 
 	// Returns the BoardState after the move
 	std::shared_ptr<BoardState> proceed() const;
 
-	Move(std::shared_ptr<BoardState> boardState, const Block& block, Direction dir);
+	Move(std::shared_ptr<BoardState> boardState, const Block& block, const size_t effort, const Direction dir);
 };
 
 enum PuzzleValidation {

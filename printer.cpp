@@ -82,13 +82,43 @@ void printSvg(const Puzzle& puzzle, const bool& displayId, std::ostream& out) {
 	out << "</g>";
 }
 
-void printSvg(const std::list<Puzzle>& puzzleList, std::string preffix, std::string suffix, std::ostream& out) {
+void printSvg(
+	const std::list<Puzzle>& puzzleList,
+	const bool printAll,
+	std::string preffix,
+	std::string suffix,
+	std::ostream& out
+) {
+	static auto replaceTag = [&](const std::string& text, const std::string& tag, const std::string& value) {
+		return std::regex_replace(text, std::regex(tag), value, std::regex_constants::match_any);
+	};
+	static auto replaceTags = [&](const std::string& text, const std::string& step, const std::string& move) {
+		return replaceTag(replaceTag(text, "\\{step\\}", step), "\\{move\\}", move);
+	};
+
 	size_t i = 0;
-	for (const Puzzle& puzzleStep : puzzleList) {
-		const std::string pos(toString(++i));
-		out << std::regex_replace(preffix, std::regex("\\{pos\\}"), pos, std::regex_constants::match_any);
-		printSvg(puzzleStep, false, out);
-		out << std::regex_replace(suffix,  std::regex("\\{pos\\}"), pos, std::regex_constants::match_any);
+	const auto puzzleStepEnd = puzzleList.end();
+	auto puzzleStepIt = puzzleList.begin();
+	const Puzzle* previousPuzzleStep = &*puzzleStepIt;
+	++puzzleStepIt;
+	while (true) {
+		if (
+			printAll
+			||
+			(puzzleStepEnd == puzzleStepIt)
+			||
+			(previousPuzzleStep->boardState->moveNumber != puzzleStepIt->boardState->moveNumber)
+		) {
+			const std::string step(toString(i));
+			const std::string moveNumber(toString(previousPuzzleStep->boardState->moveNumber));
+			out << replaceTags(preffix, step, moveNumber);
+			printSvg(*previousPuzzleStep, false, out);
+			out << replaceTags(suffix, step, moveNumber);
+		}
+		if (puzzleStepEnd == puzzleStepIt) { break; }
+		previousPuzzleStep = &*puzzleStepIt;
+		++i;
+		++puzzleStepIt;
 	}
 }
 
@@ -163,7 +193,13 @@ void printSvgAnimate(const std::list<Puzzle>& puzzleList, std::ostream& out) {
 	}
 }
 
-void printHtml(const std::list<Puzzle>& puzzleList, const size_t& animatedScale, const size_t& staticScale, std::ostream& out) {
+void printHtml(
+	const std::list<Puzzle>& puzzleList,
+	const bool printAll,
+	const size_t& animatedScale,
+	const size_t& staticScale,
+	std::ostream& out
+) {
 	Puzzle firstPuzzle = *(puzzleList.begin());
 	out <<
 		"<meta charset='UTF-8'>\n"
@@ -203,7 +239,8 @@ void printHtml(const std::list<Puzzle>& puzzleList, const size_t& animatedScale,
 		}
 		printSvg(
 			puzzleList,
-			toString(" {pos}<svg")
+			printAll,
+			toString(" {move}<svg")
 			+ " width='"  + toString((firstPuzzle.dimensions.x + 1) * staticScale) + "'"
 			+ " height='" + toString((firstPuzzle.dimensions.y + 1) * staticScale) + "'"
 			+ ">\n"
@@ -275,7 +312,7 @@ void printText(const Puzzle& puzzle, std::ostream& out) {
 void printText(const std::list<Puzzle>& puzzleList, std::ostream& out) {
 	int pos = -1;
 	for (const Puzzle& puzzleStep : puzzleList) {
-		out << std::endl << "-------------- " << ++pos << "\n";
+		out << std::endl << "-------------- step:" << ++pos << " move:"<< puzzleStep.boardState->moveNumber << "\n";
 		printText(puzzleStep, out);
 	}
 }

@@ -4,7 +4,7 @@ std::shared_ptr<BoardState> Move::proceed() const {
 	if (block.id == boardState->runner.id) {
 		// Block to move is the runner
 		return std::make_shared<BoardState>(BoardState {
-			boardState->numberOfMoves + 1,
+			boardState->moveNumber + effort,
 			boardState->runner.move(directionToMove),
 			boardState->blocks,
 		});
@@ -19,15 +19,16 @@ std::shared_ptr<BoardState> Move::proceed() const {
 	newBlocks[blockIndex] = block.move(directionToMove);
 
 	return std::make_shared<BoardState>(BoardState {
-		boardState->numberOfMoves + 1,
+		boardState->moveNumber + effort,
 		boardState->runner,
 		std::move(newBlocks),
 	});
 }
 
-Move::Move(std::shared_ptr<BoardState> boardState, const Block& block, Direction dir)
+Move::Move(std::shared_ptr<BoardState> boardState, const Block& block, const size_t effort, const Direction dir)
 	: boardState{ boardState }
 	, block{ block }
+	, effort{ effort }
 	, directionToMove{ dir }
 {
 }

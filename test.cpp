@@ -528,7 +528,9 @@ void testPrintScan() {
 	{
 		//print svg Puzzle list
 		std::stringstream strResult;
-		printSvg(std::list<Puzzle>{ tetrisPuzzle, tetrisPuzzle}, "av", "ap", strResult);
+		printSvg(std::list<Puzzle>{ tetrisPuzzle, tetrisPuzzle }, true, "av", "ap", strResult);
+		strResult << "\n---\n";
+		printSvg(std::list<Puzzle>{ tetrisPuzzle, tetrisPuzzle }, false, "av", "ap", strResult);
 		assert(compareString(strResult.str(),
 			"av<g class='puzzle'>"
 			"<rect class='dimensions' x='0' y='0' width='5' height='6'/>\n"
@@ -559,6 +561,35 @@ void testPrintScan() {
 			"</g>\n"
 			"</g>apav"
 			"<g class='puzzle'>"
+			"<rect class='dimensions' x='0' y='0' width='5' height='6'/>\n"
+			"\t<g class='block blockWall' transform='translate(0 0)'>"
+			"<rect class='point' x='0' y='5' width='1' height='1'/>"
+			"<rect class='point' x='4' y='5' width='1' height='1'/>"
+			"</g>\n"
+			"\t<g class='block blockGoal' transform='translate(0 0)'>"
+			"<rect class='point' x='0' y='0' width='1' height='1'/>"
+			"<rect class='point' x='0' y='2' width='1' height='1'/>"
+			"<rect class='point' x='1' y='0' width='1' height='1'/>"
+			"<rect class='point' x='1' y='1' width='1' height='1'/>"
+			"<rect class='point' x='1' y='2' width='1' height='1'/>"
+			"</g>\n"
+			"\t<g class='block blockRunner' transform='translate(3 2)'>"
+			"<rect class='point' x='0' y='0' width='1' height='1'/>"
+			"<rect class='point' x='0' y='2' width='1' height='1'/>"
+			"<rect class='point' x='1' y='0' width='1' height='1'/>"
+			"<rect class='point' x='1' y='1' width='1' height='1'/>"
+			"<rect class='point' x='1' y='2' width='1' height='1'/>"
+			"</g>\n"
+			"\t<g class='block blockA' transform='translate(2 1)'>"
+			"<rect class='point' x='0' y='0' width='1' height='1'/>"
+			"<rect class='point' x='0' y='1' width='1' height='1'/>"
+			"<rect class='point' x='0' y='2' width='1' height='1'/>"
+			"<rect class='point' x='1' y='0' width='1' height='1'/>"
+			"<rect class='point' x='1' y='2' width='1' height='1'/>"
+			"</g>\n"
+			"</g>ap"
+			"\n---\n"
+			"av<g class='puzzle'>"
 			"<rect class='dimensions' x='0' y='0' width='5' height='6'/>\n"
 			"\t<g class='block blockWall' transform='translate(0 0)'>"
 			"<rect class='point' x='0' y='5' width='1' height='1'/>"
@@ -650,7 +681,7 @@ void testPrintScan() {
 		strResult << "\n---\n";
 		printSvgAnimate(
 			smallPuzzle,
-			{ smallPuzzle.dimensions, smallPuzzle.goal, smallPuzzle.forbiddenSpots, std::make_shared<BoardState>(BoardState{ smallPuzzle.boardState->numberOfMoves, { { 0, 0 }, smallPuzzle.boardState->runner.pointSet, "anOtherId" }, { Block({ 1, 0 }, { { 0, 0 } }, "A"),	Block({ 0, 0 }, { { 0, 0 } }, "B") } }) },
+			{ smallPuzzle.dimensions, smallPuzzle.goal, smallPuzzle.forbiddenSpots, std::make_shared<BoardState>(BoardState{ smallPuzzle.boardState->moveNumber, { { 0, 0 }, smallPuzzle.boardState->runner.pointSet, "anOtherId" }, { Block({ 1, 0 }, { { 0, 0 } }, "A"),	Block({ 0, 0 }, { { 0, 0 } }, "B") } }) },
 			7,
 			strResult
 		);
@@ -675,8 +706,8 @@ void testPrintScan() {
 		printSvgAnimate(
 			{
 				smallPuzzle,
-				{ smallPuzzle.dimensions, smallPuzzle.goal, smallPuzzle.forbiddenSpots, std::make_shared<BoardState>(BoardState{ smallPuzzle.boardState->numberOfMoves, { { 0, 0 }, smallPuzzle.boardState->runner.pointSet, "anOtherId" }, { Block({ 1, 0 }, { { 0, 0 } }, "A"),	Block({ 0, 0 }, { { 0, 0 } }, "B") } }) },
-				{ smallPuzzle.dimensions, smallPuzzle.goal, smallPuzzle.forbiddenSpots, std::make_shared<BoardState>(BoardState{ smallPuzzle.boardState->numberOfMoves, { { 0, 0 }, smallPuzzle.boardState->runner.pointSet, "anOtherId" }, { Block({ 1, 1 }, { { 0, 0 } }, "A"),	Block({ 0, 0 }, { { 0, 0 } }, "B") } }) },
+				{ smallPuzzle.dimensions, smallPuzzle.goal, smallPuzzle.forbiddenSpots, std::make_shared<BoardState>(BoardState{ smallPuzzle.boardState->moveNumber, { { 0, 0 }, smallPuzzle.boardState->runner.pointSet, "anOtherId" }, { Block({ 1, 0 }, { { 0, 0 } }, "A"),	Block({ 0, 0 }, { { 0, 0 } }, "B") } }) },
+				{ smallPuzzle.dimensions, smallPuzzle.goal, smallPuzzle.forbiddenSpots, std::make_shared<BoardState>(BoardState{ smallPuzzle.boardState->moveNumber, { { 0, 0 }, smallPuzzle.boardState->runner.pointSet, "anOtherId" }, { Block({ 1, 1 }, { { 0, 0 } }, "A"),	Block({ 0, 0 }, { { 0, 0 } }, "B") } }) },
 			},
 			strResult
 		);
@@ -722,9 +753,9 @@ void testPrintScan() {
 		};
 
 		std::stringstream strResult;
-		printHtml(std::list<Puzzle>{ tetrisPuzzle, tetrisPuzzle2}, 0,  20, strResult);
+		printHtml(std::list<Puzzle>{ tetrisPuzzle, tetrisPuzzle2}, true, 0,  20, strResult);
 		strResult << "\n---\n";
-		printHtml(std::list<Puzzle>{ tetrisPuzzle, tetrisPuzzle2}, 100, 0, strResult);
+		printHtml(std::list<Puzzle>{ tetrisPuzzle, tetrisPuzzle2}, true, 100, 0, strResult);
 		assert(compareString(strResult.str(),
 			"<meta charset='UTF-8'>\n"
 			"<style>"
@@ -738,7 +769,7 @@ void testPrintScan() {
 			" body { color : grey; background : black; }"
 			"</style>\n"
 			"<body>\n"
-			" 1<svg width='120' height='140'>\n<g transform='scale(20)'><g class='puzzle'>"
+			" 0<svg width='120' height='140'>\n<g transform='scale(20)'><g class='puzzle'>"
 			"<rect class='dimensions' x='0' y='0' width='5' height='6'/>\n"
 			"\t<g class='block blockWall' transform='translate(0 0)'>"
 			"<rect class='point' x='0' y='5' width='1' height='1'/>"
@@ -766,7 +797,7 @@ void testPrintScan() {
 			"<rect class='point' x='1' y='2' width='1' height='1'/>"
 			"</g>\n"
 			"</g></g>\n</svg>\n"
-			" 2<svg width='120' height='140'>\n<g transform='scale(20)'>"
+			" 1<svg width='120' height='140'>\n<g transform='scale(20)'>"
 			"<g class='puzzle'>"
 			"<rect class='dimensions' x='0' y='0' width='5' height='6'/>\n"
 			"\t<g class='block blockWall' transform='translate(0 0)'>"
@@ -908,7 +939,8 @@ void testMoveDiscovery() {
 		const auto newMoves = moveDiscovery.gatherMoves(
 			tinyPuzzle.dimensions,
 			tinyPuzzle.boardState,
-			tinyPuzzle.forbiddenSpots
+			tinyPuzzle.forbiddenSpots,
+			nullptr
 		);
 		assert(!newMoves.empty() && "At least some moves should be possible");
 		assert(newMoves.size() == (runnerMoves + blockMoves) && "We should have 6 moves discovered");
@@ -919,7 +951,8 @@ void testMoveDiscovery() {
 		auto newMoves = moveDiscovery.gatherMoves(
 			largePuzzle.dimensions,
 			largePuzzle.boardState,
-			largePuzzle.forbiddenSpots
+			largePuzzle.forbiddenSpots,
+			nullptr
 		);
 		assert(!newMoves.empty() && "At least some moves should be possible");
 		//std::cout << "discover " << newMoves.size() << " moves" << std::endl;
@@ -930,7 +963,7 @@ void testMoveDiscovery() {
 void testMoving() {
 	using BoardType = std::remove_const<decltype(largePuzzle.boardState)>::type;
 
-	Move moveRight{ largePuzzle.boardState, largePuzzle.boardState->blocks[0], Direction::Right };
+	Move moveRight{ largePuzzle.boardState, largePuzzle.boardState->blocks[0], 1, Direction::Right };
 	assert(largePuzzle.boardState.get() == moveRight.boardState.get() && "A move should not copy the state, but only reference the original state");
 
 	const auto afterMoveRight = moveRight.proceed();
@@ -940,7 +973,7 @@ void testMoving() {
 	assert(largePuzzle.boardState->blocks[0].move(Direction::Down)  != afterMoveRight->blocks[0]);
 	assert(largePuzzle.boardState->blocks[0].id == afterMoveRight->blocks[0].id);
 
-	assert(largePuzzle.boardState->numberOfMoves + 1 == afterMoveRight->numberOfMoves);
+	assert(largePuzzle.boardState->moveNumber + 1 == afterMoveRight->moveNumber);
 
 	{
 		Block middle({ 2, 2 }, { { 0, 0 }, { 1, 0 }, { 0, 1 }, { 1, 1 } }, "blockMid");
@@ -1000,7 +1033,7 @@ void testSolver() {
 
 	assert( 4 == testSolverFx(Solver(tinyPuzzle, moveDiscovery), false,
 		"\n"
-		"-------------- 0\n"
+		"-------------- step:0 move:0\n"
 		"3 3\n"
 		"1 1 @\n"
 		"#####\n"
@@ -1009,7 +1042,7 @@ void testSolver() {
 		"#   #\n"
 		"#####\n"
 		"\n"
-		"-------------- 1\n"
+		"-------------- step:1 move:1\n"
 		"3 3\n"
 		"1 1 @\n"
 		"#####\n"
@@ -1018,7 +1051,7 @@ void testSolver() {
 		"#   #\n"
 		"#####\n"
 		"\n"
-		"-------------- 2\n"
+		"-------------- step:2 move:2\n"
 		"3 3\n"
 		"1 1 @\n"
 		"#####\n"
@@ -1027,7 +1060,7 @@ void testSolver() {
 		"# A #\n"
 		"#####\n"
 		"\n"
-		"-------------- 3\n"
+		"-------------- step:3 move:3\n"
 		"3 3\n"
 		"1 1 @\n"
 		"#####\n"

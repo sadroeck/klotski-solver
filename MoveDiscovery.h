@@ -10,7 +10,8 @@ public:
 	virtual std::vector<Move> gatherMoves(
 		const Point dimensions,
 		const std::shared_ptr<BoardState>& boardState,
-		const std::set<Point>& invalidPositions
+		const std::set<Point>& invalidPositions,
+		const Block* lastMovedBlock
 	) const = 0;
 };
 
@@ -19,7 +20,8 @@ public:
 	virtual std::vector<Move> gatherMoves(
 		const Point dimensions,
 		const std::shared_ptr<BoardState>& boardState,
-		const std::set<Point>& invalidPositions
+		const std::set<Point>& invalidPositions,
+		const Block* lastMovedBlock
 	) const;
 };
 

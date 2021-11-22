@@ -15,10 +15,15 @@ Solver::Solver(const Puzzle& puzzle, const MoveDiscovery& moveDiscovery)
 	const auto initialMoves = moveDiscovery.gatherMoves(
 		puzzle.dimensions,
 		puzzle.boardState,
-		puzzle.forbiddenSpots
+		puzzle.forbiddenSpots,
+		nullptr
 	);
 	for (auto& move : initialMoves) {
-		possibleMoveStack.push_back(std::move(move));
+		if (0 == move.effort) {
+			movesToExploreSoon.push_back(std::move(move));
+		} else {
+			movesToExploreLater.push_back(std::move(move));
+		}
 	}
 }
 
@@ -37,11 +42,12 @@ std::list<Puzzle> Solver::solveBenchmark(std::ostream* benchmarkOut) {
 	auto gatherMovesTime = std::chrono::high_resolution_clock::duration{};
 	auto insertMovesTime = std::chrono::high_resolution_clock::duration{};
 
-	while (!possibleMoveStack.empty()) {
+	while (!(movesToExploreSoon.empty() && movesToExploreLater.empty())) {
 		auto start_time = std::chrono::high_resolution_clock::now();
 
-		Move currentMove = *(begin(possibleMoveStack));
-		possibleMoveStack.pop_front();
+		auto& movesToExplore = (movesToExploreSoon.empty() ? movesToExploreLater : movesToExploreSoon);
+		Move currentMove = *(begin(movesToExplore));
+		movesToExplore.pop_front();
 
 		std::shared_ptr<BoardState> boardStateAfterMove = currentMove.proceed();
 
@@ -52,7 +58,7 @@ std::list<Puzzle> Solver::solveBenchmark(std::ostream* benchmarkOut) {
 		if (isSolution(*boardStateAfterMove, puzzle.goal)) {
 			*benchmarkOut << "Solution is:" << std::endl;
 			printText(Puzzle{ puzzle.dimensions, puzzle.goal, puzzle.forbiddenSpots, boardStateAfterMove }, *benchmarkOut);
-			*benchmarkOut << "numberOfMoves: " << boardStateAfterMove->numberOfMoves << std::endl;
+			*benchmarkOut << "moveNumber: " << boardStateAfterMove->moveNumber << std::endl;
 			const auto hash = hasher.hash(*boardStateAfterMove);
 			*benchmarkOut << "Final hash: " << hash << std::endl;
 
@@ -88,15 +94,15 @@ std::list<Puzzle> Solver::solveBenchmark(std::ostream* benchmarkOut) {
 		hashTime += (end_time - start_time);
 		start_time = std::chrono::high_resolution_clock::now();
 
-		auto& numberOfMoves = knownPaths[boardStateAfterMoveHash];
+		auto& parent = parentOf[boardStateAfterMoveHash];
 		
 		end_time = std::chrono::high_resolution_clock::now();
 		lookupTime += (end_time - start_time);
 
-		if (numberOfMoves == 0) {
-			numberOfMoves = boardStateAfterMove->numberOfMoves;
-
-			parentsOf[boardStateAfterMoveHash].push_back({ hasher.hash(*currentMove.boardState), boardStateAfterMove });
+		if (parent.first == 0) {
+			//unknown paths
+			parent.first  = hasher.hash(*currentMove.boardState);
+			parent.second = boardStateAfterMove;
 
 			start_time = std::chrono::high_resolution_clock::now();
 
@@ -104,7 +110,8 @@ std::list<Puzzle> Solver::solveBenchmark(std::ostream* benchmarkOut) {
 			const auto newMoves = moveDiscovery.gatherMoves(
 				puzzle.dimensions,
 				std::move(boardStateAfterMove),
-				puzzle.forbiddenSpots
+				puzzle.forbiddenSpots,
+				nullptr
 			);
 
 			end_time = std::chrono::high_resolution_clock::now();
@@ -112,7 +119,11 @@ std::list<Puzzle> Solver::solveBenchmark(std::ostream* benchmarkOut) {
 			start_time = std::chrono::high_resolution_clock::now();
 
 			for (auto& move : newMoves) {
-				possibleMoveStack.push_back(std::move(move));
+				if (0 == move.effort) {
+					movesToExploreSoon.push_back(std::move(move));
+				} else {
+					movesToExploreLater.push_back(std::move(move));
+				}
 			}
 
 			end_time = std::chrono::high_resolution_clock::now();
@@ -123,15 +134,17 @@ std::list<Puzzle> Solver::solveBenchmark(std::ostream* benchmarkOut) {
 	return {};
 }
 
+#include <iostream>
 std::list<Puzzle> Solver::solveFast() {
 	// Note: This can be distributed over multiple threads
-	// Just lock the datastructure possibleMoveStack when popping moves & reinserting moves
-	// It's not necessary to check the latest state of possibleMoveStack, worst case scenario
+	// Just lock the datastructure movesToExplore when popping moves & reinserting moves
+	// It's not necessary to check the latest state of movesToExplore, worst case scenario
 	// a few already-known moves will be queued twice
-	while (!possibleMoveStack.empty()) {
+	while (!(movesToExploreSoon.empty() && movesToExploreLater.empty())) {
 		//peek a move
-		Move currentMove = *(begin(possibleMoveStack));
-		possibleMoveStack.pop_front();
+		auto& movesToExplore = (movesToExploreSoon.empty() ? movesToExploreLater : movesToExploreSoon);
+		Move currentMove = *(begin(movesToExplore));
+		movesToExplore.pop_front();
 
 		std::shared_ptr<BoardState> boardStateAfterMove(currentMove.proceed());
 
@@ -140,20 +153,24 @@ std::list<Puzzle> Solver::solveFast() {
 		}
 
 		const auto boardStateAfterMoveHash = hasher.hash(*boardStateAfterMove);
-		auto& numberOfMoves = knownPaths[boardStateAfterMoveHash];
-		if (numberOfMoves == 0) {
-			//unknown paths to add
-			numberOfMoves = boardStateAfterMove->numberOfMoves;
-
-			parentsOf[boardStateAfterMoveHash].push_back({ hasher.hash(*currentMove.boardState), boardStateAfterMove });
+		auto& parent = parentOf[boardStateAfterMoveHash];
+		if (parent.first == 0) {
+			//unknown paths
+			parent.first = hasher.hash(*currentMove.boardState);
+			parent.second = boardStateAfterMove;
 
 			// Queue follow-up moves
 			for (auto& move : moveDiscovery.gatherMoves(
 				puzzle.dimensions,
 				std::move(boardStateAfterMove),
-				puzzle.forbiddenSpots
+				puzzle.forbiddenSpots,
+				&currentMove.block
 			)) {
-				possibleMoveStack.push_back(std::move(move));
+				if (0 == move.effort) {
+					movesToExploreSoon.push_back(std::move(move));
+				} else {
+					movesToExploreLater.push_back(std::move(move));
+				}
 			}
 		}
 	}
@@ -170,12 +187,12 @@ std::list<Puzzle> Solver::solution(std::shared_ptr<BoardState> firstBoardState, 
 
 	//add each board step (at front)
 	const auto initialHash = hasher.hash(*(puzzle.boardState));
-	HashType stopHash = hasher.hash(*firstBoardState);
-	while (stopHash != 0 && stopHash != initialHash) {
-		auto start = parentsOf[stopHash];
-		if (start.size() > 0 && start[0].first != 0) {
-			result.push_front({ puzzle.dimensions, puzzle.goal, puzzle.forbiddenSpots, start[0].second });
-			stopHash = start[0].first;
+	HashType nextHash = hasher.hash(*firstBoardState);
+	while (nextHash != 0 && nextHash != initialHash) {
+		auto parent = parentOf[nextHash];
+		if (parent.first != 0) {
+			result.push_front({ puzzle.dimensions, puzzle.goal, puzzle.forbiddenSpots, parent.second });
+			nextHash = parent.first;
 		}
 	}
 

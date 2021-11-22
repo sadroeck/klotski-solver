@@ -8,7 +8,13 @@ void printSvg(const Point& point, std::ostream& out);
 void printSvg(const Block& block, const bool& displayId, std::ostream& out);
 void printSvg(const BoardState& boardState, const bool& displayId, std::ostream& out);
 void printSvg(const Puzzle& puzzle, const bool& displayId, std::ostream& out);
-void printSvg(const std::list<Puzzle>& puzzleList, std::string preffix, std::string suffix, std::ostream& out);
+void printSvg(
+	const std::list<Puzzle>& puzzleList,
+	const bool printAll,
+	std::string preffix,
+	std::string suffix,
+	std::ostream& out
+);
 
 void printSvgAnimate(
 	const std::string& id,
@@ -23,6 +29,7 @@ void printSvgAnimate(const std::list<Puzzle>& puzzleList, std::ostream& out);
 
 void printHtml(
 	const std::list<Puzzle>& puzzleList,
+	const bool printAll,
 	const size_t& animatedScale,
 	const size_t& staticScale,
 	std::ostream& out

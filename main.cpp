@@ -12,7 +12,7 @@ int main(int argc, char* /*argv*/[]) {
 		return 1;
 	}
 
-	printHtml(result, 100, 20, std::cout);
+	printHtml(result, false, 100, 20, std::cout);
 	if (!benchmark) { printText(result, std::cerr); }
 	return 0;
 }
