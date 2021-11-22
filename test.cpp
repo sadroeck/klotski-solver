@@ -285,7 +285,7 @@ void testPrintScan() {
 	assert(checkPrintScan(
 		tetrisPuzzle,
 		"5 6\n"
-		"0 0\n"
+		"0 0 @\n"
 		"#######\n"
 		"#^^   #\n"
 		"# ^AA #\n"
@@ -299,7 +299,7 @@ void testPrintScan() {
 	assert(checkPrintScan(
 		largePuzzle,
 		"4 6\n"
-		"1 4\n"
+		"1 4 @\n"
 		"######\n"
 		"#A@@F#\n"
 		"#A@@F#\n"
@@ -1002,7 +1002,7 @@ void testSolver() {
 		"\n"
 		"-------------- 0\n"
 		"3 3\n"
-		"1 1\n"
+		"1 1 @\n"
 		"#####\n"
 		"#@  #\n"
 		"# A #\n"
@@ -1011,7 +1011,7 @@ void testSolver() {
 		"\n"
 		"-------------- 1\n"
 		"3 3\n"
-		"1 1\n"
+		"1 1 @\n"
 		"#####\n"
 		"#   #\n"
 		"#@A #\n"
@@ -1020,7 +1020,7 @@ void testSolver() {
 		"\n"
 		"-------------- 2\n"
 		"3 3\n"
-		"1 1\n"
+		"1 1 @\n"
 		"#####\n"
 		"#   #\n"
 		"#@^ #\n"
@@ -1029,7 +1029,7 @@ void testSolver() {
 		"\n"
 		"-------------- 3\n"
 		"3 3\n"
-		"1 1\n"
+		"1 1 @\n"
 		"#####\n"
 		"#   #\n"
 		"# @ #\n"

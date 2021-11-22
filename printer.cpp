@@ -215,6 +215,7 @@ void printHtml(const std::list<Puzzle>& puzzleList, const size_t& animatedScale,
 	out << "</body>\n";
 }
 
+const char goalChar = '^';
 void printText(const Puzzle& puzzle, std::ostream& out) {
 
 	//init layout
@@ -229,18 +230,19 @@ void printText(const Puzzle& puzzle, std::ostream& out) {
 	}
 
 	// Print border blocks
+	const char borderChar = '#';
 	for (auto x = 0; x < puzzle.dimensions.x + 2; ++x) {
-		layout[x][0] = '#';
-		layout[x][puzzle.dimensions.y + 1] = '#';
+		layout[x][0] = borderChar;
+		layout[x][puzzle.dimensions.y + 1] = borderChar;
 	}
 	for (auto y = 1; y < puzzle.dimensions.y + 1; ++y) {
-		layout[0][y] = '#';
-		layout[puzzle.dimensions.x + 1][y] = '#';
+		layout[0][y] = borderChar;
+		layout[puzzle.dimensions.x + 1][y] = borderChar;
 	}
 
 	// print content
 	for (const auto &forbiddenPoint : puzzle.forbiddenSpots) {
-		layout[forbiddenPoint.x + 1][forbiddenPoint.y + 1] = '#';
+		layout[forbiddenPoint.x + 1][forbiddenPoint.y + 1] = borderChar;
 	}
 
 	auto fillBlock = [&](const Block& block) {
@@ -249,7 +251,7 @@ void printText(const Puzzle& puzzle, std::ostream& out) {
 		}
 	};
 
-	fillBlock({ puzzle.goal, puzzle.boardState->runner.pointSet, "^" });
+	fillBlock({ puzzle.goal, puzzle.boardState->runner.pointSet, toString(goalChar) });
 
 	//fill runner block
 	fillBlock(puzzle.boardState->runner);
@@ -261,7 +263,7 @@ void printText(const Puzzle& puzzle, std::ostream& out) {
 
 	//prepare output
 	out << puzzle.dimensions.x << " " << puzzle.dimensions.y << "\n";
-	out << puzzle.goal.x << " " << puzzle.goal.y << "\n";
+	out << puzzle.goal.x << " " << puzzle.goal.y << " " << puzzle.boardState->runner.id << "\n";
 	for (auto y = 0; y < puzzle.dimensions.y + 2; ++y) {
 		for (auto x = 0; x < puzzle.dimensions.x + 2; ++x) {
 			out << layout[x][y];
@@ -281,8 +283,9 @@ void printText(const std::list<Puzzle>& puzzleList, std::ostream& out) {
 Puzzle scanText(std::istream& in) {
 	Point dimension;
 	Point goal;
-	in >> dimension.x >> dimension.y >> goal.x >> goal.y;
-	//std::cout << dimension.x << "\n" << dimension.y << "\n" << goal.x << "\n" << goal.y << "\n";
+	char runnerChar;
+	in >> dimension.x >> dimension.y >> goal.x >> goal.y >> runnerChar;
+	//std::cout << dimension.x << "\n" << dimension.y << "\n" << goal.x << "\n" << goal.y << "\n" << runnerChar << '\n';
 	std::string line;
 	std::getline(in, line);
 	std::getline(in, line);
@@ -304,10 +307,10 @@ Puzzle scanText(std::istream& in) {
 		if ((' ' == objPair.first)) {
 			//forget blanc place
 
-		} else if ('^' == objPair.first) {
-			//orget goal
+		} else if (goalChar == objPair.first) {
+			//forget goal
 
-		} else if ('@' == objPair.first) {
+		} else if (runnerChar == objPair.first) {
 			runnerPointSet = objPair.second;
 			runnerId = toString(objPair.first);
 
