@@ -142,7 +142,7 @@ void printSvgAnimate(
 					" to='{to}'"
 					" dur='1s'"
 					" begin='{step}s'"
-					"fill='freeze'"
+					" fill='freeze'"
 					"/>\n",
 					std::regex("\\{id\\}"),
 					id
