@@ -1,121 +1,80 @@
 #pragma once
 
-#include <array>
-#include <cassert>
-#include <memory>
-
-
 #include "block.h"
 
-template <int BlockCount>
-struct BoardState
-{
-    constexpr static int blockCount = BlockCount;
+#include <vector>
+#include <memory>
 
-    // Numer of moves made since the start position
-    const int m_numberOfMovesFromStart;
+struct BoardState {
+	// Numer of moves made since the start position
+	const size_t moveNumber;
 
-    // Puzzle piece to be moved to the goal
-    const Block m_runner;
+	// Puzzle piece to be moved to the goal
+	const Block runner;
 
-    // all movable bystander blocks on the board
-    const std::array<Block, BlockCount> m_blocks;
+	// all movable bystander blocks on the board
+	const std::vector<Block> blocks;
 };
 
-template <int BlockCount>
-struct Move
-{
-    // State from which to move
-    std::shared_ptr<BoardState<BlockCount>> m_state;
+class Move {
+public:
+	// State from which to move
+	std::shared_ptr<BoardState> boardState;
 
-    // Block to be moved
-    const Block &m_block;
+	// Block to be moved
+	const Block& block;
 
-    // Direction in which to move block
-    Direction m_directionToMove;
+	// move effort
+	const size_t effort;
 
-    // Returns the BoardState after the move
-    BoardState<BlockCount> operator()();
+	// Direction in which to move block
+	const Direction directionToMove;
 
-    Move(std::shared_ptr<BoardState<BlockCount>> state, const Block &block, Direction dir)
-        : m_state{ state }
-        , m_block{ block }
-        , m_directionToMove{ dir }
-    {
-    }
+	// Returns the BoardState after the move
+	std::shared_ptr<BoardState> proceed() const;
+
+	Move(std::shared_ptr<BoardState> boardState, const Block& block, const size_t effort, const Direction dir);
 };
 
-template <int BlockCount>
-struct Puzzle
-{
-    // Dimensions of the puzzle:
-    // X: [ 0, width - 1]
-    // Y: [ 0, height - 1]
-    const Point m_dimensions;
-
-    // Position of the runner required in order to finish the puzzle
-    const Block m_goal;
-
-    // Positions (in addition to regular border) where blocks cannot be placed
-    const std::vector<Point> m_forbiddenSpots;
-
-    // Initial position of all blocks on the board
-    const BoardState<BlockCount> m_initialState;
+enum PuzzleValidation {
+	valid,
+	blocksOverlaps,
+	runnerOverlaps,
+	blocksWithSameId,
+	runnerWithSameId,
+	Number_of_validation
 };
 
-template <int BlockCount>
-bool valid(const Puzzle<BlockCount> &puzzle)
-{
-    const auto blockCount = puzzle.m_initialState.m_blocks.size();
-    const auto &blocks = puzzle.m_initialState.m_blocks;
-    bool valid = true;
+class Puzzle {
+public:
+	// Dimensions of the puzzle:
+	const Point dimensions;
 
-    for (auto i = 0u; i < blockCount; ++i)
-    {
-        for (auto j = 0u; j < blockCount; ++j)
-        {
-            if (i != j)
-            {
-                valid = valid && !overlaps(blocks[i], blocks[j]);
-                valid = valid && (blocks[i].id != blocks[j].id);
-            }
-        }
+	// Position of the runner required in order to finish the puzzle
+	const Point goal;
 
-        valid = valid && !overlaps(blocks[i], puzzle.m_initialState.m_runner);
-        valid = valid && (puzzle.m_goal.id != blocks[i].id);
-        valid = valid && (puzzle.m_initialState.m_runner.id != blocks[i].id);
-    }
+	// Positions (in addition to regular border) where blocks cannot be placed
+	const std::set<Point> forbiddenSpots;
 
-    return valid;
+	// Initial position of all blocks on the board
+	std::shared_ptr<BoardState> boardState;
+
+	PuzzleValidation validate() const;
+	static std::string validationString(const PuzzleValidation& validation);
+};
+
+inline bool operator==(const Puzzle p1, const Puzzle p2) {
+	return
+		(p1.boardState->runner == p2.boardState->runner)
+		&&
+		(p1.boardState->blocks == p2.boardState->blocks)
+		&&
+		(p1.goal == p2.goal)
+		&&
+		(p1.forbiddenSpots == p2.forbiddenSpots)
+		&&
+		(p1.dimensions == p2.dimensions)
+	;
 }
+inline bool operator!=(const Puzzle p1, const Puzzle p2) { return !(p1 == p2); }
 
-template <int BlockCount>
-BoardState<BlockCount> Move<BlockCount>::operator()()
-{
-    if (same(m_block, m_state->m_runner))
-    {
-        // Block to move is the runner
-        return BoardState<BlockCount>
-        {
-            m_state->m_numberOfMovesFromStart + 1,
-            move(m_state->m_runner, m_directionToMove),
-            m_state->m_blocks,
-        };
-    }
-    else
-    {
-        // Block to move is one of the other blocks
-        // Notes: assumes linear distance in storage container
-        const auto blockIndex = &m_block - &m_state->m_blocks[0];
-
-        auto newBlocks = m_state->m_blocks;
-        newBlocks[blockIndex] = move(m_block, m_directionToMove);
-
-        return BoardState<BlockCount>
-        {
-            m_state->m_numberOfMovesFromStart + 1,
-            m_state->m_runner,
-            std::move(newBlocks),
-        };
-    }
-}

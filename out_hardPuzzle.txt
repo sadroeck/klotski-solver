@@ -1,0 +1,2046 @@
+
+-------------- step:0 move:0
+6 5
+4 3 @
+########
+#@@ aab#
+#@@ acd#
+#kklmdd#
+#eefgij#
+#effhij#
+########
+
+-------------- step:1 move:1
+6 5
+4 3 @
+########
+#@@aa b#
+#@@a cd#
+#kklmdd#
+#eefgij#
+#effhij#
+########
+
+-------------- step:2 move:2
+6 5
+4 3 @
+########
+#@@aab #
+#@@a cd#
+#kklmdd#
+#eefgij#
+#effhij#
+########
+
+-------------- step:3 move:3
+6 5
+4 3 @
+########
+#@@aab #
+#@@ac d#
+#kklmdd#
+#eefgij#
+#effhij#
+########
+
+-------------- step:4 move:4
+6 5
+4 3 @
+########
+#@@aabd#
+#@@acdd#
+#kklm  #
+#eefgij#
+#effhij#
+########
+
+-------------- step:5 move:5
+6 5
+4 3 @
+########
+#@@aabd#
+#@@acdd#
+#kkl m #
+#eefgij#
+#effhij#
+########
+
+-------------- step:6 move:5
+6 5
+4 3 @
+########
+#@@aabd#
+#@@acdd#
+#kkl  m#
+#eefgij#
+#effhij#
+########
+
+-------------- step:7 move:6
+6 5
+4 3 @
+########
+#@@aabd#
+#@@acdd#
+#kklg m#
+#eef ij#
+#effhij#
+########
+
+-------------- step:8 move:6
+6 5
+4 3 @
+########
+#@@aabd#
+#@@acdd#
+#kkl gm#
+#eef ij#
+#effhij#
+########
+
+-------------- step:9 move:7
+6 5
+4 3 @
+########
+#@@aabd#
+#@@acdd#
+#kkl gm#
+#eefhij#
+#eff ij#
+########
+
+-------------- step:10 move:7
+6 5
+4 3 @
+########
+#@@aabd#
+#@@acdd#
+#kklhgm#
+#eef ij#
+#eff ij#
+########
+
+-------------- step:11 move:8
+6 5
+4 3 @
+########
+#@@aabd#
+#@@acdd#
+#kklhgm#
+#eefi^j#
+#effi^j#
+########
+
+-------------- step:12 move:9
+6 5
+4 3 @
+########
+#@@aabd#
+#@@acdd#
+#kklh m#
+#eefigj#
+#effi^j#
+########
+
+-------------- step:13 move:9
+6 5
+4 3 @
+########
+#@@aabd#
+#@@acdd#
+#kklh m#
+#eefi^j#
+#effigj#
+########
+
+-------------- step:14 move:10
+6 5
+4 3 @
+########
+#@@aabd#
+#@@acdd#
+#kkl hm#
+#eefi^j#
+#effigj#
+########
+
+-------------- step:15 move:10
+6 5
+4 3 @
+########
+#@@aabd#
+#@@acdd#
+#kkl  m#
+#eefihj#
+#effigj#
+########
+
+-------------- step:16 move:11
+6 5
+4 3 @
+########
+#@@aabd#
+#@@acdd#
+#kk l m#
+#eefihj#
+#effigj#
+########
+
+-------------- step:17 move:11
+6 5
+4 3 @
+########
+#@@aabd#
+#@@acdd#
+#kk  lm#
+#eefihj#
+#effigj#
+########
+
+-------------- step:18 move:12
+6 5
+4 3 @
+########
+#@@aabd#
+#@@acdd#
+# kk lm#
+#eefihj#
+#effigj#
+########
+
+-------------- step:19 move:12
+6 5
+4 3 @
+########
+#@@aabd#
+#@@acdd#
+#  kklm#
+#eefihj#
+#effigj#
+########
+
+-------------- step:20 move:13
+6 5
+4 3 @
+########
+#@@aabd#
+#@@acdd#
+#eekklm#
+#e fihj#
+# ffigj#
+########
+
+-------------- step:21 move:14
+6 5
+4 3 @
+########
+#@@aabd#
+#@@acdd#
+#eekklm#
+#ef ihj#
+#ff igj#
+########
+
+-------------- step:22 move:15
+6 5
+4 3 @
+########
+#@@aabd#
+#@@acdd#
+#eekklm#
+#efi hj#
+#ffi gj#
+########
+
+-------------- step:23 move:16
+6 5
+4 3 @
+########
+#@@aabd#
+#@@acdd#
+#eekklm#
+#efih^j#
+#ffi gj#
+########
+
+-------------- step:24 move:16
+6 5
+4 3 @
+########
+#@@aabd#
+#@@acdd#
+#eekklm#
+#efi ^j#
+#ffihgj#
+########
+
+-------------- step:25 move:17
+6 5
+4 3 @
+########
+#@@aabd#
+#@@acdd#
+#eekk m#
+#efi lj#
+#ffihgj#
+########
+
+-------------- step:26 move:17
+6 5
+4 3 @
+########
+#@@aabd#
+#@@acdd#
+#eekk m#
+#efil^j#
+#ffihgj#
+########
+
+-------------- step:27 move:18
+6 5
+4 3 @
+########
+#@@aabd#
+#@@acdd#
+#ee kkm#
+#efil^j#
+#ffihgj#
+########
+
+-------------- step:28 move:19
+6 5
+4 3 @
+########
+#@@aabd#
+#@@acdd#
+#eeikkm#
+#efil^j#
+#ff hgj#
+########
+
+-------------- step:29 move:20
+6 5
+4 3 @
+########
+#@@aabd#
+#@@acdd#
+#eeikkm#
+#efil^j#
+#ffh gj#
+########
+
+-------------- step:30 move:21
+6 5
+4 3 @
+########
+#@@aabd#
+#@@acdd#
+#eeikkm#
+#efi ^j#
+#ffhlgj#
+########
+
+-------------- step:31 move:22
+6 5
+4 3 @
+########
+#@@aabd#
+#@@acdd#
+#eei  m#
+#efikkj#
+#ffhlgj#
+########
+
+-------------- step:32 move:23
+6 5
+4 3 @
+########
+#@@aabd#
+#@@acdd#
+#eei m #
+#efikkj#
+#ffhlgj#
+########
+
+-------------- step:33 move:23
+6 5
+4 3 @
+########
+#@@aabd#
+#@@acdd#
+#eeim  #
+#efikkj#
+#ffhlgj#
+########
+
+-------------- step:34 move:24
+6 5
+4 3 @
+########
+#@@aab #
+#@@ac d#
+#eeimdd#
+#efikkj#
+#ffhlgj#
+########
+
+-------------- step:35 move:25
+6 5
+4 3 @
+########
+#@@aa b#
+#@@ac d#
+#eeimdd#
+#efikkj#
+#ffhlgj#
+########
+
+-------------- step:36 move:26
+6 5
+4 3 @
+########
+#@@aa b#
+#@@a cd#
+#eeimdd#
+#efikkj#
+#ffhlgj#
+########
+
+-------------- step:37 move:26
+6 5
+4 3 @
+########
+#@@aacb#
+#@@a  d#
+#eeimdd#
+#efikkj#
+#ffhlgj#
+########
+
+-------------- step:38 move:27
+6 5
+4 3 @
+########
+#@@aacb#
+#@@am d#
+#eei dd#
+#efikkj#
+#ffhlgj#
+########
+
+-------------- step:39 move:28
+6 5
+4 3 @
+########
+#@@aacb#
+#@@amd #
+#eeidd #
+#efikkj#
+#ffhlgj#
+########
+
+-------------- step:40 move:29
+6 5
+4 3 @
+########
+#@@aacb#
+#@@amd #
+#eeiddj#
+#efikkj#
+#ffhlg^#
+########
+
+-------------- step:41 move:29
+6 5
+4 3 @
+########
+#@@aacb#
+#@@amdj#
+#eeiddj#
+#efikk^#
+#ffhlg^#
+########
+
+-------------- step:42 move:30
+6 5
+4 3 @
+########
+#@@aacb#
+#@@amdj#
+#eeiddj#
+#efikk^#
+#ffhl^g#
+########
+
+-------------- step:43 move:30
+6 5
+4 3 @
+########
+#@@aacb#
+#@@amdj#
+#eeiddj#
+#efikkg#
+#ffhl^^#
+########
+
+-------------- step:44 move:31
+6 5
+4 3 @
+########
+#@@aacb#
+#@@amdj#
+#eeiddj#
+#efikkg#
+#ffh l^#
+########
+
+-------------- step:45 move:31
+6 5
+4 3 @
+########
+#@@aacb#
+#@@amdj#
+#eeiddj#
+#efikkg#
+#ffh ^l#
+########
+
+-------------- step:46 move:32
+6 5
+4 3 @
+########
+#@@aacb#
+#@@amdj#
+#eeiddj#
+#efi ^g#
+#ffhkkl#
+########
+
+-------------- step:47 move:33
+6 5
+4 3 @
+########
+#@@aacb#
+#@@am j#
+#eei dj#
+#efiddg#
+#ffhkkl#
+########
+
+-------------- step:48 move:34
+6 5
+4 3 @
+########
+#@@aa b#
+#@@amcj#
+#eei dj#
+#efiddg#
+#ffhkkl#
+########
+
+-------------- step:49 move:35
+6 5
+4 3 @
+########
+#@@aa b#
+#@@a cj#
+#eeimdj#
+#efiddg#
+#ffhkkl#
+########
+
+-------------- step:50 move:36
+6 5
+4 3 @
+########
+#@@ aab#
+#@@ acj#
+#eeimdj#
+#efiddg#
+#ffhkkl#
+########
+
+-------------- step:51 move:37
+6 5
+4 3 @
+########
+#@@ aab#
+#@@iacj#
+#eeimdj#
+#ef ddg#
+#ffhkkl#
+########
+
+-------------- step:52 move:37
+6 5
+4 3 @
+########
+#@@iaab#
+#@@iacj#
+#ee mdj#
+#ef ddg#
+#ffhkkl#
+########
+
+-------------- step:53 move:38
+6 5
+4 3 @
+########
+#@@iaab#
+#@@iacj#
+#ee mdj#
+#efhddg#
+#ff kkl#
+########
+
+-------------- step:54 move:39
+6 5
+4 3 @
+########
+#@@iaab#
+#@@iacj#
+#ee mdj#
+#efhddg#
+#ffkk^l#
+########
+
+-------------- step:55 move:40
+6 5
+4 3 @
+########
+#@@iaab#
+#@@iacj#
+#ee mdj#
+#efhddg#
+#ffkkl^#
+########
+
+-------------- step:56 move:41
+6 5
+4 3 @
+########
+#@@iaab#
+#@@iacj#
+#ee mdj#
+#efhdd^#
+#ffkklg#
+########
+
+-------------- step:57 move:42
+6 5
+4 3 @
+########
+#@@iaab#
+#@@iac #
+#ee mdj#
+#efhddj#
+#ffkklg#
+########
+
+-------------- step:58 move:43
+6 5
+4 3 @
+########
+#@@iaab#
+#@@ia c#
+#ee mdj#
+#efhddj#
+#ffkklg#
+########
+
+-------------- step:59 move:44
+6 5
+4 3 @
+########
+#@@iaab#
+#@@ia c#
+#eem dj#
+#efhddj#
+#ffkklg#
+########
+
+-------------- step:60 move:45
+6 5
+4 3 @
+########
+#@@iaab#
+#@@iadc#
+#eemddj#
+#efh ^j#
+#ffkklg#
+########
+
+-------------- step:61 move:46
+6 5
+4 3 @
+########
+#@@iaab#
+#@@iadc#
+#eemddj#
+#ef h^j#
+#ffkklg#
+########
+
+-------------- step:62 move:46
+6 5
+4 3 @
+########
+#@@iaab#
+#@@iadc#
+#eemddj#
+#ef  hj#
+#ffkklg#
+########
+
+-------------- step:63 move:47
+6 5
+4 3 @
+########
+#@@iaab#
+#@@iadc#
+#eemddj#
+#efkkhj#
+#ff  lg#
+########
+
+-------------- step:64 move:48
+6 5
+4 3 @
+########
+#@@iaab#
+#@@iadc#
+#eemddj#
+#efkkhj#
+#ff l^g#
+########
+
+-------------- step:65 move:49
+6 5
+4 3 @
+########
+#@@iaab#
+#@@iadc#
+#eemddj#
+#efkk^j#
+#ff lhg#
+########
+
+-------------- step:66 move:50
+6 5
+4 3 @
+########
+#@@iaab#
+#@@iadc#
+#eemddj#
+#ef kkj#
+#ff lhg#
+########
+
+-------------- step:67 move:51
+6 5
+4 3 @
+########
+#@@iaab#
+#@@iadc#
+#ee ddj#
+#efmkkj#
+#ff lhg#
+########
+
+-------------- step:68 move:51
+6 5
+4 3 @
+########
+#@@iaab#
+#@@iadc#
+#ee ddj#
+#ef kkj#
+#ffmlhg#
+########
+
+-------------- step:69 move:52
+6 5
+4 3 @
+########
+#@@ aab#
+#@@iadc#
+#eeiddj#
+#ef kkj#
+#ffmlhg#
+########
+
+-------------- step:70 move:52
+6 5
+4 3 @
+########
+#@@ aab#
+#@@ adc#
+#eeiddj#
+#efikkj#
+#ffmlhg#
+########
+
+-------------- step:71 move:53
+6 5
+4 3 @
+########
+#@@aa b#
+#@@a dc#
+#eeiddj#
+#efikkj#
+#ffmlhg#
+########
+
+-------------- step:72 move:54
+6 5
+4 3 @
+########
+#@@aadb#
+#@@addc#
+#eei  j#
+#efikkj#
+#ffmlhg#
+########
+
+-------------- step:73 move:55
+6 5
+4 3 @
+########
+#@@aadb#
+#@@addc#
+#eeikkj#
+#efi ^j#
+#ffmlhg#
+########
+
+-------------- step:74 move:56
+6 5
+4 3 @
+########
+#@@aadb#
+#@@addc#
+#eeikkj#
+#efi hj#
+#ffml^g#
+########
+
+-------------- step:75 move:57
+6 5
+4 3 @
+########
+#@@aadb#
+#@@addc#
+#eeikkj#
+#efi hj#
+#ffmlg^#
+########
+
+-------------- step:76 move:58
+6 5
+4 3 @
+########
+#@@aadb#
+#@@addc#
+#eeikk #
+#efi hj#
+#ffmlgj#
+########
+
+-------------- step:77 move:59
+6 5
+4 3 @
+########
+#@@aadb#
+#@@addc#
+#eei kk#
+#efi hj#
+#ffmlgj#
+########
+
+-------------- step:78 move:60
+6 5
+4 3 @
+########
+#@@aadb#
+#@@addc#
+#ee ikk#
+#ef ihj#
+#ffmlgj#
+########
+
+-------------- step:79 move:61
+6 5
+4 3 @
+########
+#@@aadb#
+#@@addc#
+#ee ikk#
+#efmihj#
+#ff lgj#
+########
+
+-------------- step:80 move:61
+6 5
+4 3 @
+########
+#@@aadb#
+#@@addc#
+#eemikk#
+#ef ihj#
+#ff lgj#
+########
+
+-------------- step:81 move:62
+6 5
+4 3 @
+########
+#@@aadb#
+#@@addc#
+#eemikk#
+#ef ihj#
+#ffl gj#
+########
+
+-------------- step:82 move:62
+6 5
+4 3 @
+########
+#@@aadb#
+#@@addc#
+#eemikk#
+#eflihj#
+#ff  gj#
+########
+
+-------------- step:83 move:63
+6 5
+4 3 @
+########
+#@@aadb#
+#@@addc#
+#eem kk#
+#eflihj#
+#ff igj#
+########
+
+-------------- step:84 move:64
+6 5
+4 3 @
+########
+#@@aadb#
+#@@addc#
+#ee mkk#
+#eflihj#
+#ff igj#
+########
+
+-------------- step:85 move:65
+6 5
+4 3 @
+########
+#@@aadb#
+#@@addc#
+#eelmkk#
+#ef ihj#
+#ff igj#
+########
+
+-------------- step:86 move:66
+6 5
+4 3 @
+########
+#@@aadb#
+#@@addc#
+#eelmkk#
+#e fihj#
+# ffigj#
+########
+
+-------------- step:87 move:67
+6 5
+4 3 @
+########
+#@@aadb#
+#@@addc#
+#  lmkk#
+#eefihj#
+#effigj#
+########
+
+-------------- step:88 move:68
+6 5
+4 3 @
+########
+#@@aadb#
+#@@addc#
+# l mkk#
+#eefihj#
+#effigj#
+########
+
+-------------- step:89 move:68
+6 5
+4 3 @
+########
+#@@aadb#
+#@@addc#
+#l  mkk#
+#eefihj#
+#effigj#
+########
+
+-------------- step:90 move:69
+6 5
+4 3 @
+########
+#@@aadb#
+#@@addc#
+#l m kk#
+#eefihj#
+#effigj#
+########
+
+-------------- step:91 move:69
+6 5
+4 3 @
+########
+#@@aadb#
+#@@addc#
+#lm  kk#
+#eefihj#
+#effigj#
+########
+
+-------------- step:92 move:70
+6 5
+4 3 @
+########
+#@@aadb#
+#@@addc#
+#lm kk #
+#eefihj#
+#effigj#
+########
+
+-------------- step:93 move:70
+6 5
+4 3 @
+########
+#@@aadb#
+#@@addc#
+#lmkk  #
+#eefihj#
+#effigj#
+########
+
+-------------- step:94 move:71
+6 5
+4 3 @
+########
+#@@aadb#
+#@@add #
+#lmkk c#
+#eefihj#
+#effigj#
+########
+
+-------------- step:95 move:71
+6 5
+4 3 @
+########
+#@@aadb#
+#@@add #
+#lmkkc #
+#eefihj#
+#effigj#
+########
+
+-------------- step:96 move:72
+6 5
+4 3 @
+########
+#@@aad #
+#@@addb#
+#lmkkc #
+#eefihj#
+#effigj#
+########
+
+-------------- step:97 move:72
+6 5
+4 3 @
+########
+#@@aad #
+#@@add #
+#lmkkcb#
+#eefihj#
+#effigj#
+########
+
+-------------- step:98 move:73
+6 5
+4 3 @
+########
+#@@aa d#
+#@@a dd#
+#lmkkcb#
+#eefihj#
+#effigj#
+########
+
+-------------- step:99 move:74
+6 5
+4 3 @
+########
+#@@ aad#
+#@@ add#
+#lmkkcb#
+#eefihj#
+#effigj#
+########
+
+-------------- step:100 move:75
+6 5
+4 3 @
+########
+# @@aad#
+# @@add#
+#lmkkcb#
+#eefihj#
+#effigj#
+########
+
+-------------- step:101 move:76
+6 5
+4 3 @
+########
+# @@aad#
+#l@@add#
+# mkkcb#
+#eefihj#
+#effigj#
+########
+
+-------------- step:102 move:76
+6 5
+4 3 @
+########
+#l@@aad#
+# @@add#
+# mkkcb#
+#eefihj#
+#effigj#
+########
+
+-------------- step:103 move:77
+6 5
+4 3 @
+########
+#l@@aad#
+# @@add#
+#m kkcb#
+#eefihj#
+#effigj#
+########
+
+-------------- step:104 move:77
+6 5
+4 3 @
+########
+#l@@aad#
+#m@@add#
+#  kkcb#
+#eefihj#
+#effigj#
+########
+
+-------------- step:105 move:78
+6 5
+4 3 @
+########
+#l@@aad#
+#m@@add#
+# kk cb#
+#eefihj#
+#effigj#
+########
+
+-------------- step:106 move:78
+6 5
+4 3 @
+########
+#l@@aad#
+#m@@add#
+#kk  cb#
+#eefihj#
+#effigj#
+########
+
+-------------- step:107 move:79
+6 5
+4 3 @
+########
+#l@@aad#
+#m@@add#
+#kk c b#
+#eefihj#
+#effigj#
+########
+
+-------------- step:108 move:79
+6 5
+4 3 @
+########
+#l@@aad#
+#m@@add#
+#kkc  b#
+#eefihj#
+#effigj#
+########
+
+-------------- step:109 move:80
+6 5
+4 3 @
+########
+#l@@aad#
+#m@@add#
+#kkc hb#
+#eefi^j#
+#effigj#
+########
+
+-------------- step:110 move:80
+6 5
+4 3 @
+########
+#l@@aad#
+#m@@add#
+#kkch b#
+#eefi^j#
+#effigj#
+########
+
+-------------- step:111 move:81
+6 5
+4 3 @
+########
+#l@@aad#
+#m@@add#
+#kkch b#
+#eefigj#
+#effi^j#
+########
+
+-------------- step:112 move:81
+6 5
+4 3 @
+########
+#l@@aad#
+#m@@add#
+#kkchgb#
+#eefi^j#
+#effi^j#
+########
+
+-------------- step:113 move:82
+6 5
+4 3 @
+########
+#l@@aad#
+#m@@add#
+#kkchgb#
+#eef ij#
+#eff ij#
+########
+
+-------------- step:114 move:83
+6 5
+4 3 @
+########
+#l@@aad#
+#m@@add#
+#kkc gb#
+#eefhij#
+#eff ij#
+########
+
+-------------- step:115 move:83
+6 5
+4 3 @
+########
+#l@@aad#
+#m@@add#
+#kkc gb#
+#eef ij#
+#effhij#
+########
+
+-------------- step:116 move:84
+6 5
+4 3 @
+########
+#l@@aad#
+#m@@add#
+#kkcg b#
+#eef ij#
+#effhij#
+########
+
+-------------- step:117 move:84
+6 5
+4 3 @
+########
+#l@@aad#
+#m@@add#
+#kkc  b#
+#eefgij#
+#effhij#
+########
+
+-------------- step:118 move:85
+6 5
+4 3 @
+########
+#l@@aad#
+#m@@add#
+#kkc b #
+#eefgij#
+#effhij#
+########
+
+-------------- step:119 move:85
+6 5
+4 3 @
+########
+#l@@aad#
+#m@@add#
+#kkcb  #
+#eefgij#
+#effhij#
+########
+
+-------------- step:120 move:86
+6 5
+4 3 @
+########
+#l@@aa #
+#m@@a d#
+#kkcbdd#
+#eefgij#
+#effhij#
+########
+
+-------------- step:121 move:87
+6 5
+4 3 @
+########
+#l@@ aa#
+#m@@ ad#
+#kkcbdd#
+#eefgij#
+#effhij#
+########
+
+-------------- step:122 move:88
+6 5
+4 3 @
+########
+#l @@aa#
+#m @@ad#
+#kkcbdd#
+#eefgij#
+#effhij#
+########
+
+-------------- step:123 move:89
+6 5
+4 3 @
+########
+#l @@aa#
+# m@@ad#
+#kkcbdd#
+#eefgij#
+#effhij#
+########
+
+-------------- step:124 move:89
+6 5
+4 3 @
+########
+#lm@@aa#
+#  @@ad#
+#kkcbdd#
+#eefgij#
+#effhij#
+########
+
+-------------- step:125 move:90
+6 5
+4 3 @
+########
+#lm@@aa#
+#kk@@ad#
+#  cbdd#
+#eefgij#
+#effhij#
+########
+
+-------------- step:126 move:91
+6 5
+4 3 @
+########
+#lm@@aa#
+#kk@@ad#
+# c bdd#
+#eefgij#
+#effhij#
+########
+
+-------------- step:127 move:91
+6 5
+4 3 @
+########
+#lm@@aa#
+#kk@@ad#
+#c  bdd#
+#eefgij#
+#effhij#
+########
+
+-------------- step:128 move:92
+6 5
+4 3 @
+########
+#lm@@aa#
+#kk@@ad#
+#c b dd#
+#eefgij#
+#effhij#
+########
+
+-------------- step:129 move:92
+6 5
+4 3 @
+########
+#lm@@aa#
+#kk@@ad#
+#cb  dd#
+#eefgij#
+#effhij#
+########
+
+-------------- step:130 move:93
+6 5
+4 3 @
+########
+#lm  aa#
+#kk@@ad#
+#cb@@dd#
+#eefgij#
+#effhij#
+########
+
+-------------- step:131 move:94
+6 5
+4 3 @
+########
+#l m aa#
+#kk@@ad#
+#cb@@dd#
+#eefgij#
+#effhij#
+########
+
+-------------- step:132 move:94
+6 5
+4 3 @
+########
+#l  maa#
+#kk@@ad#
+#cb@@dd#
+#eefgij#
+#effhij#
+########
+
+-------------- step:133 move:95
+6 5
+4 3 @
+########
+# l maa#
+#kk@@ad#
+#cb@@dd#
+#eefgij#
+#effhij#
+########
+
+-------------- step:134 move:95
+6 5
+4 3 @
+########
+#  lmaa#
+#kk@@ad#
+#cb@@dd#
+#eefgij#
+#effhij#
+########
+
+-------------- step:135 move:96
+6 5
+4 3 @
+########
+#kklmaa#
+#  @@ad#
+#cb@@dd#
+#eefgij#
+#effhij#
+########
+
+-------------- step:136 move:97
+6 5
+4 3 @
+########
+#kklmaa#
+# b@@ad#
+#c @@dd#
+#eefgij#
+#effhij#
+########
+
+-------------- step:137 move:98
+6 5
+4 3 @
+########
+#kklmaa#
+#cb@@ad#
+#  @@dd#
+#eefgij#
+#effhij#
+########
+
+-------------- step:138 move:99
+6 5
+4 3 @
+########
+#kklmaa#
+#cb@@ad#
+#ee@@dd#
+#e fgij#
+# ffhij#
+########
+
+-------------- step:139 move:100
+6 5
+4 3 @
+########
+#kklmaa#
+#cb@@ad#
+#ee@@dd#
+#ef gij#
+#ff hij#
+########
+
+-------------- step:140 move:101
+6 5
+4 3 @
+########
+#kklmaa#
+#cb@@ad#
+#ee@@dd#
+#efg ij#
+#ff hij#
+########
+
+-------------- step:141 move:101
+6 5
+4 3 @
+########
+#kklmaa#
+#cb@@ad#
+#ee@@dd#
+#ef  ij#
+#ffghij#
+########
+
+-------------- step:142 move:102
+6 5
+4 3 @
+########
+#kklmaa#
+#cb  ad#
+#ee@@dd#
+#ef@@ij#
+#ffghij#
+########
+
+-------------- step:143 move:103
+6 5
+4 3 @
+########
+#kkl aa#
+#cb mad#
+#ee@@dd#
+#ef@@ij#
+#ffghij#
+########
+
+-------------- step:144 move:103
+6 5
+4 3 @
+########
+#kkl aa#
+#cbm ad#
+#ee@@dd#
+#ef@@ij#
+#ffghij#
+########
+
+-------------- step:145 move:104
+6 5
+4 3 @
+########
+#kklaa #
+#cbma d#
+#ee@@dd#
+#ef@@ij#
+#ffghij#
+########
+
+-------------- step:146 move:105
+6 5
+4 3 @
+########
+#kklaad#
+#cbmadd#
+#ee@@  #
+#ef@@ij#
+#ffghij#
+########
+
+-------------- step:147 move:106
+6 5
+4 3 @
+########
+#kklaad#
+#cbmadd#
+#ee@@i #
+#ef@@ij#
+#ffgh^j#
+########
+
+-------------- step:148 move:107
+6 5
+4 3 @
+########
+#kklaad#
+#cbmadd#
+#ee@@i #
+#ef@@ij#
+#ffg hj#
+########
+
+-------------- step:149 move:108
+6 5
+4 3 @
+########
+#kklaad#
+#cbmadd#
+#ee@@i #
+#ef@@ij#
+#ff ghj#
+########
+
+-------------- step:150 move:109
+6 5
+4 3 @
+########
+#kklaad#
+#cbmadd#
+#ee@@ij#
+#ef@@ij#
+#ff gh^#
+########
+
+-------------- step:151 move:110
+6 5
+4 3 @
+########
+#kklaad#
+#cbmadd#
+#ee@@ij#
+#ef@@ij#
+#ff g^h#
+########
+
+-------------- step:152 move:111
+6 5
+4 3 @
+########
+#kklaad#
+#cbmadd#
+#ee@@ij#
+#ef@@ij#
+#ff  gh#
+########
+
+-------------- step:153 move:112
+6 5
+4 3 @
+########
+#kklaad#
+#cbmadd#
+#ee  ij#
+#ef@@ij#
+#ff@@gh#
+########
+
+-------------- step:154 move:113
+6 5
+4 3 @
+########
+#kklaad#
+#cb add#
+#eem ij#
+#ef@@ij#
+#ff@@gh#
+########
+
+-------------- step:155 move:113
+6 5
+4 3 @
+########
+#kklaad#
+#cb add#
+#ee mij#
+#ef@@ij#
+#ff@@gh#
+########
+
+-------------- step:156 move:114
+6 5
+4 3 @
+########
+#kklaad#
+#c badd#
+#ee mij#
+#ef@@ij#
+#ff@@gh#
+########
+
+-------------- step:157 move:114
+6 5
+4 3 @
+########
+#kklaad#
+#c  add#
+#eebmij#
+#ef@@ij#
+#ff@@gh#
+########
+
+-------------- step:158 move:115
+6 5
+4 3 @
+########
+#kklaad#
+# c add#
+#eebmij#
+#ef@@ij#
+#ff@@gh#
+########
+
+-------------- step:159 move:115
+6 5
+4 3 @
+########
+#kklaad#
+#  cadd#
+#eebmij#
+#ef@@ij#
+#ff@@gh#
+########
+
+-------------- step:160 move:116
+6 5
+4 3 @
+########
+#  laad#
+#kkcadd#
+#eebmij#
+#ef@@ij#
+#ff@@gh#
+########
+
+-------------- step:161 move:117
+6 5
+4 3 @
+########
+# l aad#
+#kkcadd#
+#eebmij#
+#ef@@ij#
+#ff@@gh#
+########
+
+-------------- step:162 move:117
+6 5
+4 3 @
+########
+#l  aad#
+#kkcadd#
+#eebmij#
+#ef@@ij#
+#ff@@gh#
+########
+
+-------------- step:163 move:118
+6 5
+4 3 @
+########
+#l caad#
+#kk add#
+#eebmij#
+#ef@@ij#
+#ff@@gh#
+########
+
+-------------- step:164 move:118
+6 5
+4 3 @
+########
+#lc aad#
+#kk add#
+#eebmij#
+#ef@@ij#
+#ff@@gh#
+########
+
+-------------- step:165 move:119
+6 5
+4 3 @
+########
+#lcaa d#
+#kka dd#
+#eebmij#
+#ef@@ij#
+#ff@@gh#
+########
+
+-------------- step:166 move:120
+6 5
+4 3 @
+########
+#lcaad #
+#kkadd #
+#eebmij#
+#ef@@ij#
+#ff@@gh#
+########
+
+-------------- step:167 move:121
+6 5
+4 3 @
+########
+#lcaad #
+#kkaddj#
+#eebmij#
+#ef@@i^#
+#ff@@gh#
+########
+
+-------------- step:168 move:121
+6 5
+4 3 @
+########
+#lcaadj#
+#kkaddj#
+#eebmi #
+#ef@@i^#
+#ff@@gh#
+########
+
+-------------- step:169 move:122
+6 5
+4 3 @
+########
+#lcaadj#
+#kkaddj#
+#eebm i#
+#ef@@^i#
+#ff@@gh#
+########
+
+-------------- step:170 move:123
+6 5
+4 3 @
+########
+#lcaadj#
+#kkaddj#
+#eebm i#
+#ef@@gi#
+#ff@@^h#
+########
+
+-------------- step:171 move:123
+6 5
+4 3 @
+########
+#lcaadj#
+#kkaddj#
+#eebmgi#
+#ef@@^i#
+#ff@@^h#
+########
+
+-------------- step:172 move:124
+6 5
+4 3 @
+########
+#lcaadj#
+#kkaddj#
+#eebmgi#
+#ef @@i#
+#ff @@h#
+########
+
+-------------- step:173 move:125
+6 5
+4 3 @
+########
+#lcaadj#
+#kkaddj#
+#eebmgi#
+#e f@@i#
+# ff@@h#
+########
+
+-------------- step:174 move:126
+6 5
+4 3 @
+########
+#lcaadj#
+#kkaddj#
+#  bmgi#
+#eef@@i#
+#eff@@h#
+########
+
+-------------- step:175 move:127
+6 5
+4 3 @
+########
+#lcaadj#
+#  addj#
+#kkbmgi#
+#eef@@i#
+#eff@@h#
+########
+
+-------------- step:176 move:128
+6 5
+4 3 @
+########
+#l aadj#
+# caddj#
+#kkbmgi#
+#eef@@i#
+#eff@@h#
+########
+
+-------------- step:177 move:128
+6 5
+4 3 @
+########
+#l aadj#
+#c addj#
+#kkbmgi#
+#eef@@i#
+#eff@@h#
+########
+
+-------------- step:178 move:129
+6 5
+4 3 @
+########
+#laa dj#
+#ca ddj#
+#kkbmgi#
+#eef@@i#
+#eff@@h#
+########
+
+-------------- step:179 move:130
+6 5
+4 3 @
+########
+#laad j#
+#cadd j#
+#kkbmgi#
+#eef@@i#
+#eff@@h#
+########
+
+-------------- step:180 move:131
+6 5
+4 3 @
+########
+#laadj #
+#caddj #
+#kkbmgi#
+#eef@@i#
+#eff@@h#
+########
+
+-------------- step:181 move:132
+6 5
+4 3 @
+########
+#laadj #
+#caddji#
+#kkbmgi#
+#eef@@^#
+#eff@@h#
+########
+
+-------------- step:182 move:132
+6 5
+4 3 @
+########
+#laadji#
+#caddji#
+#kkbmg #
+#eef@@^#
+#eff@@h#
+########
+
+-------------- step:183 move:133
+6 5
+4 3 @
+########
+#laadji#
+#caddji#
+#kkbmg #
+#eef@@h#
+#eff@@^#
+########
+
+-------------- step:184 move:133
+6 5
+4 3 @
+########
+#laadji#
+#caddji#
+#kkbmgh#
+#eef@@^#
+#eff@@^#
+########
+
+-------------- step:185 move:134
+6 5
+4 3 @
+########
+#laadji#
+#caddji#
+#kkbmgh#
+#eef @@#
+#eff @@#
+########

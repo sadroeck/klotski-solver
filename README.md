@@ -1,27 +1,42 @@
 # klotski-solver
 a klotski-solver written in C++
 No external libraries used. Not even for UTests.
+text input.
+text, svg, animated html output.
 
 # Build instructions
 ## Linux
-mkdir build && cd build && cmake .. && make -j<N>
+rm -frv "/tmp/build";
+mkdir -pv "/tmp/build" && cmake -B "/tmp/build" -S . && make -j --directory="/tmp/build" && echo done
 
 ## Windows
-mkdir build && cd build && cmake .. 
+mkdir build && cd build && cmake ..
 Build with Visual studio 2017
 
 # Run
 ## Tests
-run `run-test.exe` in debug build
+### Linux
+"/tmp/build/unit-tests" && echo done
+
+### Windows
+run `unit-tests.exe` in debug build
 
 ## Solve
-run `solve.exe`
-Puzzles are hardcoded in `main.cpp`
+### Linux
+"/tmp/build/solve" < "in_smallPuzzle.txt" 1> out_smallPuzzle.html
+"/tmp/build/solve" < "in_smallPuzzle.txt" 2> /dev/null
+"/tmp/build/solve" < "in_largePuzzle.txt"
+time "/tmp/build/solve" < "in_hardPuzzle.txt" 1> out_hardPuzzle.html 2> out_hardPuzzle.txt
+
+### Windows
+`solve.exe` < "in_smallPuzzle.txt" 1> out_smallPuzzle.html
+
+## Benchmark
+### Linux
+"/tmp/build/solve" benchmark < "in_hardPuzzle.txt" 1> /dev/null
 
 # Notes
-Solvers can be created using:   
-`auto solver = makeSolver( Puzzle{ ... });`
-See `puzzle.h` for how to construct Puzzles.
-
-Printing & debug information on the end-result can be obtained by solves' template parameter:   
-`solver.solve<true>()`
+`solve` is using :
+- standard input as puzzle to solve
+- standard output as html solution
+- error output as text solution and puzzle bug
